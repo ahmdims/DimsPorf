@@ -17,7 +17,6 @@
 * 14. Portfolio
 * 15. Preloader
 * 16. Utilities
-* 17. Custom
 *
 -------------------------------------------------*/
 
@@ -2241,62 +2240,4 @@ body.loaded:after {
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-/*------------------------------------------------
-  17. Custom
--------------------------------------------------*/
-
-/* Custom scrollbar for WebKit browsers */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #1c1c1c;
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #137bff;
-  border-radius: 5px;
-  border: 2px solid #1c1c1c;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #0d4064;
-}
-
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #137bff #1c1c1c;
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  scrollbar-color: #0d4064 #1c1c1c;
-}
-
-* {
-  -ms-overflow-style: none;
-}
-
-*::-ms-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-*::-ms-scrollbar-track {
-  background: #1c1c1c;
-  border-radius: 5px;
-}
-
-*::-ms-scrollbar-thumb {
-  background: #137bff;
-  border-radius: 5px;
-  border: 2px solid #1c1c1c;
-}
-
-*::-ms-scrollbar-thumb:hover {
-  background: #0d4064;
 }
