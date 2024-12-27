@@ -17,6 +17,7 @@
   <link href="assets/plugins/bootstrap/bootstrap.min.css" rel="stylesheet" />
   <link href="assets/plugins/magnific-popup/magnific-popup.min.css" rel="stylesheet" />
   <link href="assets/plugins/swiper/swiper-bundle.min.css" rel="stylesheet" />
+  <link href="assets/plugins/aos/aos.css" rel="stylesheet">
   <link href="assets/css/styles.css" rel="stylesheet" />
 
   <!-- Fonts/Icons -->
@@ -34,13 +35,13 @@
     <div class="container-fluid">
       <div class="header-wrapper">
         <!-- Header Logo -->
-        <div class="header-logo">
+        <div class="header-logo" data-aos="slide-right" data-aos-delay="100">
           <a href="index.html">
             <h2>Dims<span class="text-gradient">Porf</span></h2>
           </a>
         </div>
         <!-- Header Nav -->
-        <div class="header-nav">
+        <div class="header-nav" data-aos="slide-left" data-aos-delay="100">
           <a class="button button-sm button-dot me-2 me-lg-3" href="#">
             <span data-text="Let's Talk">Let's Talk</span>
           </a>
@@ -76,7 +77,7 @@
 
   <main data-bs-spy="scroll" data-bs-target=".nav-box">
     <!-- Hero section -->
-    <div id="about" class="hero-section">
+    <div id="about" class="hero-section" data-aos="zoom-in-down" data-aos-delay="100">
       <div class="container text-center">
         <div class="row">
           <div class="col-12">
@@ -94,14 +95,14 @@
     <!-- About section -->
     <div class="container">
       <div class="row g-4 g-md-5">
-        <div class="col-12 col-lg-4 order-lg-2 text-center">
+        <div class="col-12 col-lg-4 order-lg-2 text-center" data-aos="zoom-in" data-aos-delay="300">
           <!-- Hero Avatar -->
           <div class="hero-avatar">
             <img src="assets/images/index/profile.png" alt="DimsPorf" />
           </div>
           <!-- end Hero Avatar -->
         </div>
-        <div class="col-12 col-lg-4 order-lg-1">
+        <div class="col-12 col-lg-4 order-lg-1" data-aos="slide-right" data-aos-delay="400">
           <div class="row g-4 g-lg-5">
             <div class="col-12 col-md-4 col-lg-12">
               <h6 class="sm-heading">Biography</h6>
@@ -148,7 +149,7 @@
           <!-- end row(inner) -->
         </div>
 
-        <div class="col-12 col-md-12 col-lg-4 order-lg-3 text-lg-end">
+        <div class="col-12 col-md-12 col-lg-4 order-lg-3 text-lg-end" data-aos="slide-left" data-aos-delay="400">
           <div class="row g-4 g-lg-5">
             <div class="col-4 col-lg-12">
               <h6 class="sm-heading">Projects Done</h6>
@@ -171,13 +172,13 @@
     <div id="services" class="section">
       <div class="container">
         <div class="row g-4 g-xl-5">
-          <div class="col-12 col-xl-4">
+          <div class="col-12 col-xl-4" data-aos="fade-up" data-aos-delay="100">
             <span class="title-heading text-white-04">Services</span>
             <h1 class="display-3 fw-medium mb-0">
               What <span class="text-gradient">I Do</span>
             </h1>
           </div>
-          <div class="col-12 col-xl-8">
+          <div class="col-12 col-xl-8" data-aos="fade-up" data-aos-delay="200">
             <div class="row g-4">
               <!-- Service box 1 -->
               <div class="col-12">
@@ -263,6 +264,7 @@
       </div>
       <!-- end container -->
     </div>
+
     <!-- end Services section -->
 
     <!-- Portfolio section -->
@@ -270,7 +272,7 @@
       <div class="section-sm bg-dark border-radius-1">
         <div class="container">
           <div class="row">
-            <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+            <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2" data-aos="slide-down" data-aos-delay="100">
               <span class="title-heading text-white-04">Portfolio</span>
               <h1 class="display-3 fw-medium">Recent <span class="text-gradient">Project</span></h1>
               <p>Stay updated with our most recent projects that illustrate our innovative approach and technical
@@ -289,7 +291,7 @@
               <!-- end Slider Nav -->
             </div>
           </div><!-- end row -->
-          <div class="swiper portfolio-slider mt-4 mt-lg-5">
+          <div class="swiper portfolio-slider mt-4 mt-lg-5" data-aos="slide-up" data-aos-delay="200">
             <div class="swiper-wrapper">
 
               <!-- Slider Item 1 -->
@@ -393,11 +395,11 @@
     <div id="awards" class="section pb-0">
       <div class="container">
         <div class="row g-4 g-xl-5">
-          <div class="col-12 col-xl-4">
+          <div class="col-12 col-xl-4" data-aos="fade-up" data-aos-delay="100">
             <span class="title-heading text-white-04">Achievements</span>
             <h1 class="display-3 fw-medium mb-0">Awa<span class="text-gradient">rds</span></h1>
           </div>
-          <div class="col-12 col-xl-8">
+          <div class="col-12 col-xl-8" data-aos="fade-up" data-aos-delay="200">
             <div class="row g-4">
               <!-- Award box 6 -->
               <div class="col-12 col-md-6">
@@ -478,6 +480,7 @@
   <!-- JavaScripts -->
   <script src="assets/plugins/jquery.min.js"></script>
   <script src="assets/plugins/plugins.js"></script>
+  <script src="assets/plugins/aos/aos.js"></script>
   <script src="assets/js/functions.js"></script>
   <script src="assets/js/main.js"></script>
 
