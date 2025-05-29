@@ -17,7 +17,6 @@ function TotalYears() {
 
   document.getElementById("years").textContent = `${yearDifference}+`;
 }
-
 window.onload = TotalYears;
 
 /*===============================================
@@ -33,19 +32,3 @@ function aosInit() {
   });
 }
 window.addEventListener("load", aosInit);
-
-// Init swiper sliders
-function initSwiper() {
-  document.querySelectorAll(".init-swiper").forEach((swiper) => {
-    let config = JSON.parse(
-      swiper.querySelector(".swiper-config").innerHTML.trim()
-    );
-
-    if (swiper.classList.contains("swiper-tab")) {
-      initSwiperWithCustomPagination(swiper, config);
-    } else {
-      new Swiper(swiper, config);
-    }
-  });
-}
-window.addEventListener("load", initSwiper);
