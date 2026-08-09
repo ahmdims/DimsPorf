@@ -62,4 +62,12 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- pemberdayaan main index -->
+  <url>
+    <loc>https://dimsporf.vercel.app/pemberdayaan/</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
