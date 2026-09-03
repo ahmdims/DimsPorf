@@ -48,6 +48,43 @@
   }
   </script>
 
+  <!-- Structured Data: makes this page eligible for Google's Profile Page result
+       ("DimsPorf · Ahmad Dimas"), same rich result type LinkedIn profiles use -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "dateCreated": "2024-09-21",
+    "dateModified": "2026-09-03",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Ahmad Dimas",
+      "alternateName": "DimsPorf",
+      "url": "https://dimsporf.vercel.app/v1/",
+      "image": "https://dimsporf.vercel.app/v1/assets/images/index/profile.png",
+      "jobTitle": "Design & Engineering Enthusiast | UI/UX Strategist | Web & Graphic Designer",
+      "sameAs": [
+        "https://www.linkedin.com/in/ahmdims"
+      ]
+    }
+  }
+  </script>
+
+  <!-- Best-effort signal only: Google decides sitelinks algorithmically, this cannot force them to appear -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SiteNavigationElement",
+    "name": ["About", "Services", "Portfolio", "Awards"],
+    "url": [
+      "https://dimsporf.vercel.app/v1/#about",
+      "https://dimsporf.vercel.app/v1/#services",
+      "https://dimsporf.vercel.app/v1/#portfolio",
+      "https://dimsporf.vercel.app/v1/#awards"
+    ]
+  }
+  </script>
+
   <!-- CSS -->
   <link href="assets/plugins/bootstrap/bootstrap.min.css" rel="stylesheet" />
   <link href="assets/plugins/magnific-popup/magnific-popup.min.css" rel="stylesheet" />
