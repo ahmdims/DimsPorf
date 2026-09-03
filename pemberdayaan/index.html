@@ -18,7 +18,7 @@
 
   <!-- Open Graph / Facebook Start -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="DimsPorf">
+  <meta property="og:site_name" content="MBG × Pemberdayaan">
   <meta property="og:title" content="Bantu Cukup, Berdaya Terus — MBG vs Pemberdayaan Ekonomi">
   <meta property="og:description"
     content="Analisis persepsi masyarakat terhadap efektivitas Program Makan Bergizi Gratis (MBG) dibandingkan pemberdayaan ekonomi keluarga, disusun sebagai bagian dari Project-Based Learning Character Building Pancasila.">
@@ -32,13 +32,35 @@
     content="Analisis persepsi masyarakat terhadap efektivitas Program Makan Bergizi Gratis (MBG) dibandingkan pemberdayaan ekonomi keluarga, disusun sebagai bagian dari Project-Based Learning Character Building Pancasila.">
   <!-- Twitter End -->
 
-  <!-- Structured Data: tells Google the site's brand name is "DimsPorf", not the hosting domain -->
+  <!-- Structured Data: this piece carries its own brand name in search results,
+       while isPartOf keeps the attribution link to the DimsPorf portfolio -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "DimsPorf",
-    "url": "https://dimsporf.vercel.app/pemberdayaan/"
+    "name": "MBG × Pemberdayaan",
+    "url": "https://dimsporf.vercel.app/pemberdayaan/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "DimsPorf",
+      "url": "https://dimsporf.vercel.app/v1/"
+    }
+  }
+  </script>
+
+  <!-- Best-effort signal only: Google decides sitelinks algorithmically, this cannot force them to appear -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SiteNavigationElement",
+    "name": ["Ringkasan", "Metode", "Wawancara", "Temuan", "Tim"],
+    "url": [
+      "https://dimsporf.vercel.app/pemberdayaan/#ringkasan",
+      "https://dimsporf.vercel.app/pemberdayaan/#metode",
+      "https://dimsporf.vercel.app/pemberdayaan/#wawancara",
+      "https://dimsporf.vercel.app/pemberdayaan/#temuan",
+      "https://dimsporf.vercel.app/pemberdayaan/#tim"
+    ]
   }
   </script>
 

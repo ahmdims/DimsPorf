@@ -18,7 +18,7 @@
 
   <!-- Open Graph / Facebook Start -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="DimsPorf">
+  <meta property="og:site_name" content="JEJAK">
   <meta property="og:title" content="JEJAK - Pendamping Visual Esai">
   <meta property="og:description"
     content="Pendamping visual esai 'Jejak yang Tak Terlihat' - dua krisis dalam angka, kalkulator jejak air, dan gagasan JEJAK.">
@@ -32,13 +32,34 @@
     content="Pendamping visual esai 'Jejak yang Tak Terlihat' - dua krisis dalam angka, kalkulator jejak air, dan gagasan JEJAK.">
   <!-- Twitter End -->
 
-  <!-- Structured Data: tells Google the site's brand name is "DimsPorf", not the hosting domain -->
+  <!-- Structured Data: JEJAK carries its own brand name in search results,
+       while isPartOf keeps the attribution link to the DimsPorf portfolio -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "DimsPorf",
-    "url": "https://dimsporf.vercel.app/jejak/"
+    "name": "JEJAK",
+    "url": "https://dimsporf.vercel.app/jejak/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "DimsPorf",
+      "url": "https://dimsporf.vercel.app/v1/"
+    }
+  }
+  </script>
+
+  <!-- Best-effort signal only: Google decides sitelinks algorithmically, this cannot force them to appear -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SiteNavigationElement",
+    "name": ["Dua Krisis", "Kalkulator", "Gagasan JEJAK", "Sebelum/Sesudah"],
+    "url": [
+      "https://dimsporf.vercel.app/jejak/#krisis",
+      "https://dimsporf.vercel.app/jejak/#kalkulator",
+      "https://dimsporf.vercel.app/jejak/#jejak",
+      "https://dimsporf.vercel.app/jejak/#banding"
+    ]
   }
   </script>
 

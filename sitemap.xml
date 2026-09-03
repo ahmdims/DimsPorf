@@ -5,31 +5,31 @@
   <!-- v1 main index -->
   <url>
     <loc>https://dimsporf.vercel.app/v1/</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://dimsporf.vercel.app/v1/bem-dcc.html</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://dimsporf.vercel.app/v1/dreamjourney.html</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://dimsporf.vercel.app/v1/puspresnas.html</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://dimsporf.vercel.app/v1/terrago.html</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -51,7 +51,7 @@
   <!-- jejak main index -->
   <url>
     <loc>https://dimsporf.vercel.app/jejak/</loc>
-    <lastmod>2026-07-18</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -59,7 +59,15 @@
   <!-- pemberdayaan main index -->
   <url>
     <loc>https://dimsporf.vercel.app/pemberdayaan/</loc>
-    <lastmod>2026-08-09</lastmod>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- tanam-harapan main index -->
+  <url>
+    <loc>https://dimsporf.vercel.app/tanam-harapan/</loc>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
