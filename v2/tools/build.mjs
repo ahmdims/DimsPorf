@@ -2,6 +2,7 @@
 // from v2/data/projects.json. Run: node v2/tools/build.mjs
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
 const V2 = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -18,6 +19,78 @@ const esc = (s = '') =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const abs = (p) => (/^https?:/.test(p) ? p : site.url + p);
 const indent = (s, n) => s.split('\n').map((l) => (l ? ' '.repeat(n) + l : l)).join('\n');
+
+// ---- locked (password protected) projects ------------------------------------------
+// Private content is encrypted at build time (PBKDF2 -> AES-256-GCM) and decrypted in the browser by
+// js/unlock.js. The password is read from the environment and is never written to the repo.
+const ITER = 600000;
+const PRIVATE_SRC = path.join(V2, 'private-src');
+const MIME = { '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.pdf': 'application/pdf' };
+const passwordFor = (slug) =>
+  process.env['PORTFOLIO_PASSWORD_' + slug.toUpperCase().replace(/[^A-Z0-9]/g, '_')] || process.env.PORTFOLIO_PASSWORD || '';
+
+function sealProject(p, password) {
+  const salt = crypto.randomBytes(16);
+  const key = crypto.pbkdf2Sync(password, salt, ITER, 32, 'sha256');
+  const enc = (buf) => {
+    const iv = crypto.randomBytes(12);
+    const c = crypto.createCipheriv('aes-256-gcm', key, iv);
+    const ct = Buffer.concat([c.update(buf), c.final()]);
+    return Buffer.concat([iv, ct, c.getAuthTag()]); // iv | ciphertext | tag  (what WebCrypto expects)
+  };
+  const files = [];
+  const addFile = (rel) => {
+    const abs = path.join(PRIVATE_SRC, p.slug, rel);
+    if (!fs.existsSync(abs)) throw new Error(`private file missing: ${path.relative(ROOT, abs)}`);
+    const name = `f${files.length}.enc`;
+    files.push({ name, buf: enc(fs.readFileSync(abs)) });
+    return { file: name, mime: MIME[path.extname(rel).toLowerCase()] || 'application/octet-stream' };
+  };
+  const s = p.sections || {};
+  const data = {
+    overview: s.overview || '',
+    approach: s.approach || [],
+    video: p.video && p.video.youtube ? p.video : null,
+    prototype: p.prototype ? { title: p.prototype.title || 'Interactive prototype', ...embedFor(p.prototype.url) } : null,
+    decks: (p.decks || []).map((d) => ({
+      title: d.title || p.title,
+      label: d.label || 'Pitch deck',
+      ...(d.file ? { ...addFile(d.file), kind: 'PDF', pdf: true } : embedFor(d.url)),
+    })),
+    gallery: (p.gallery || []).map((g) => ({ ...addFile(g.file), w: g.w || 1920, h: g.h || 1080, caption: g.caption || '' })),
+  };
+  const body = enc(Buffer.from(JSON.stringify(data)));
+  return {
+    files,
+    payload: { v: 1, iter: ITER, salt: salt.toString('base64'), data: body.toString('base64'), base: `work/${p.slug}/private/` },
+  };
+}
+
+const lockIcon =
+  '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>';
+
+function lockBlock(p, payload) {
+  return `<div class="content__block case-block" id="private" data-private data-slug="${p.slug}">
+${indent(subtitle('Private case study'), 2)}
+  <div class="pv-lock animate-in-up">
+    <span class="pv-lock__icon">${lockIcon}</span>
+    <h3 class="pv-lock__title">The details are private</h3>
+    <p class="pv-lock__text type-basic-160lh">The research, pitch deck and screens for this project are internal work, shared with permission. Enter the password you were given to view them.</p>
+    <form class="pv-form" autocomplete="off">
+      <label class="pv-sr" for="pv-pass">Password</label>
+      <input id="pv-pass" class="pv-input" type="password" placeholder="Password" autocomplete="off" required>
+      <button class="btn btn-default hover-default" type="submit">
+        <em></em>
+        <span class="btn-caption">Unlock</span>
+      </button>
+    </form>
+    <p class="pv-error" role="alert" hidden></p>
+    <a class="link-small-underline" href="mailto:${EMAIL}?subject=${encodeURIComponent('Access request: ' + p.title)}">Request access</a>
+  </div>
+  <div class="pv-slot" hidden></div>
+  <script type="application/json" id="private-payload">${JSON.stringify(payload)}</script>
+</div>`;
+}
 
 // ---- slide deck / prototype embeds ------------------------------------------------
 // Accepts the normal "share" link and converts it to the embeddable form.
@@ -188,7 +261,7 @@ function subtitle(label) {
 <div class="resume-divider animate-in-up"></div>`;
 }
 
-function projectPage(p, i) {
+function projectPage(p, i, sealed) {
   const next = projects[(i + 1) % projects.length];
   const url = `${site.url}work/${p.slug}/`;
   const cats = p.categories.map((c) => catLabel[c]).join(' · ');
@@ -223,6 +296,9 @@ ${meta.map(([k, v]) => `    <div class="case-meta__item"><dt>${k}</dt><dd>${esc(
 </div>`);
   }
 
+  if (p.locked) {
+    blocks.push(lockBlock(p, sealed.payload));
+  } else {
   if (s.overview) {
     blocks.push(`<div class="content__block case-block">
 ${indent(subtitle('Overview'), 2)}
@@ -313,6 +389,8 @@ ${p.gallery
     </div>
   </div>
 </div>`);
+  }
+
   }
 
   const ld = [
@@ -433,7 +511,7 @@ ${PSWP}
   <script src="js/libs.min.js"></script>
   <script src="js/gallery-init.js"></script>
   <script src="js/app.js"></script>
-</body>
+${p.locked ? '  <script src="js/unlock.js"></script>\n' : ''}</body>
 
 </html>
 `;
@@ -569,7 +647,7 @@ function cards(list, withFilter) {
       return `<a class="work-card animate-in-up" href="work/${p.slug}/" data-cats="${p.categories.join(' ')}">
   <div class="work-card__media">
     <img src="${p.cover}" alt="${esc(p.title)}" width="1920" height="1080" loading="lazy">
-    ${hasDeck ? '<span class="work-card__badge"><i class="ph ph-presentation-chart"></i>Deck</span>' : ''}
+    ${p.locked ? '<span class="work-card__badge"><i class="ph ph-lock-simple"></i>Private</span>' : hasDeck ? '<span class="work-card__badge"><i class="ph ph-presentation-chart"></i>Deck</span>' : ''}
   </div>
   <div class="work-card__body">
     <div class="work-card__row">
@@ -605,7 +683,23 @@ function inject(file, name, html) {
 projects.forEach((p, i) => {
   const dir = path.join(V2, 'work', p.slug);
   fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(path.join(dir, 'index.html'), projectPage(p, i));
+  let sealed = null;
+  if (p.locked) {
+    const pw = passwordFor(p.slug);
+    if (!pw) {
+      if (fs.existsSync(path.join(dir, 'index.html'))) {
+        console.warn(`! ${p.slug}: locked, no password in env, keeping the existing page`);
+        return;
+      }
+      throw new Error(`${p.slug} is locked: set PORTFOLIO_PASSWORD (or PORTFOLIO_PASSWORD_${p.slug.toUpperCase().replace(/[^A-Z0-9]/g, '_')})`);
+    }
+    sealed = sealProject(p, pw);
+    const pdir = path.join(dir, 'private');
+    fs.rmSync(pdir, { recursive: true, force: true });
+    fs.mkdirSync(pdir, { recursive: true });
+    sealed.files.forEach((f) => fs.writeFileSync(path.join(pdir, f.name), f.buf));
+  }
+  fs.writeFileSync(path.join(dir, 'index.html'), projectPage(p, i, sealed));
 });
 fs.writeFileSync(path.join(V2, 'work/index.html'), workIndexPage());
 inject(path.join(V2, 'index.html'), 'work-cards', indent(cards(projects.filter((p) => p.featured), false), 14));

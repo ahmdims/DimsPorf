@@ -390,3 +390,146 @@
   gap: 2.4rem 3rem;
   margin-top: 6rem;
 }
+
+/* ---------- Private (password protected) case studies ---------- */
+.pv-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.pv-lock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  margin-top: 2.4rem;
+  padding: 5rem 2.4rem;
+  text-align: center;
+  background: var(--base-tint);
+  border: 1px solid var(--stroke-elements);
+  border-radius: var(--_radius-s);
+}
+.pv-lock[hidden],
+.pv-slot[hidden],
+.pv-error[hidden] {
+  display: none;
+}
+.pv-lock__icon svg {
+  display: block;
+  width: 4.8rem;
+  height: 4.8rem;
+  color: var(--t-bright);
+}
+.pv-lock__title {
+  margin: 0;
+  font: normal var(--font-weight-base) 3rem/1.2 var(--_font-default);
+  color: var(--t-bright);
+}
+.pv-lock__text {
+  max-width: 52rem;
+  margin: 0;
+  color: var(--t-medium);
+}
+.pv-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+.pv-input {
+  width: 100%;
+  max-width: 30rem;
+  padding: 1.3rem 2.2rem;
+  font: normal var(--font-weight-base) 1.6rem/1.2 var(--_font-default);
+  color: var(--t-bright);
+  background: transparent;
+  border: 1px solid var(--stroke-elements);
+  border-radius: 5rem;
+  outline: none;
+  text-align: center;
+  transition: border-color var(--_animspeed-medium) ease;
+}
+.pv-input:focus {
+  border-color: var(--stroke-controls);
+}
+.pv-error {
+  margin: 0;
+  font: normal var(--font-weight-medium) 1.5rem/1.3 var(--_font-default);
+  color: #e5484d;
+}
+.pv-fade {
+  animation: pv-fade 0.6s ease both;
+}
+@keyframes pv-fade {
+  from { opacity: 0; transform: translateY(2rem); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Unlocked content: make casual saving harder, mark it as confidential */
+.pv-protected {
+  position: relative;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.pv-protected::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='360' height='220'><text x='50%' y='50%' text-anchor='middle' transform='rotate(-24 180 110)' font-family='sans-serif' font-size='18' fill='%23808080' fill-opacity='0.16'>Confidential · DimsPorf</text></svg>");
+}
+.pv-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.4rem;
+  margin-top: 2.4rem;
+}
+@media only screen and (min-width: 768px) {
+  .pv-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.pv-gallery__item {
+  margin: 0;
+}
+.pv-gallery__item figcaption {
+  margin-top: 1rem;
+  font: normal var(--font-weight-base) 1.5rem/1.3 var(--_font-default);
+  color: var(--t-medium);
+}
+.pv-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: zoom-in;
+  border: 1px solid var(--stroke-elements);
+  border-radius: var(--_radius-s);
+  -webkit-user-drag: none;
+}
+.pv-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 20, 20, 0.94);
+  cursor: zoom-out;
+}
+.pv-lightbox canvas {
+  border-radius: var(--_radius-s);
+}
+@media print {
+  .pv-slot,
+  .pv-lightbox {
+    display: none !important;
+  }
+}
