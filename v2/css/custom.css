@@ -744,3 +744,11 @@
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
+
+.pv-lock__text {
+  max-width: 44rem;
+  text-wrap: pretty;
+}
+.pv-lock__text .pv-mail {
+  white-space: nowrap;
+}
