@@ -50,7 +50,6 @@ function sealProject(p, password) {
   const data = {
     overview: s.overview || '',
     approach: s.approach || [],
-    video: p.video && p.video.youtube ? p.video : null,
     prototype: p.prototype ? { title: p.prototype.title || 'Interactive prototype', ...embedFor(p.prototype.url) } : null,
     decks: (p.decks || []).map((d) => ({
       title: d.title || p.title,
@@ -296,7 +295,19 @@ ${meta.map(([k, v]) => `    <div class="case-meta__item"><dt>${k}</dt><dd>${esc(
 </div>`);
   }
 
+  // A YouTube link is already public, so the video stays visible even on locked projects.
+  const hasVideo = !!(p.video && p.video.youtube);
+  const videoBlock = () => `<div class="content__block case-block">
+${indent(subtitle('Video'), 2)}
+  <div class="deck animate-in-up">
+    <div class="deck__frame">
+      <iframe src="https://www.youtube-nocookie.com/embed/${p.video.youtube}" title="${esc(p.video.title || p.title)}" loading="lazy" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>`;
+
   if (p.locked) {
+    if (hasVideo) blocks.push(videoBlock());
     blocks.push(lockBlock(p, sealed.payload));
   } else {
   if (s.overview) {
@@ -356,16 +367,7 @@ ${indent(subtitle('Prototype'), 2)}
 </div>`);
   }
 
-  if (p.video && p.video.youtube) {
-    blocks.push(`<div class="content__block case-block">
-${indent(subtitle('Video'), 2)}
-  <div class="deck animate-in-up">
-    <div class="deck__frame">
-      <iframe src="https://www.youtube-nocookie.com/embed/${p.video.youtube}" title="${esc(p.video.title || p.title)}" loading="lazy" allowfullscreen></iframe>
-    </div>
-  </div>
-</div>`);
-  }
+  if (hasVideo) blocks.push(videoBlock());
 
   if (p.gallery && p.gallery.length) {
     blocks.push(`<div class="content__block case-block">
@@ -643,11 +645,9 @@ function cards(list, withFilter) {
     .join('\n');
   const items = list
     .map((p) => {
-      const hasDeck = (p.decks || []).length > 0;
       return `<a class="work-card animate-in-up" href="work/${p.slug}/" data-cats="${p.categories.join(' ')}">
   <div class="work-card__media">
     <img src="${p.cover}" alt="${esc(p.title)}" width="1920" height="1080" loading="lazy">
-    ${p.locked ? '<span class="work-card__badge"><i class="ph ph-lock-simple"></i>Private</span>' : hasDeck ? '<span class="work-card__badge"><i class="ph ph-presentation-chart"></i>Deck</span>' : ''}
   </div>
   <div class="work-card__body">
     <div class="work-card__row">

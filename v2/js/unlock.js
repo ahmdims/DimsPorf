@@ -83,7 +83,6 @@
     var ifr = document.createElement('iframe');
     ifr.title = title;
     ifr.allowFullscreen = true;
-    ifr.referrerPolicy = 'no-referrer';
     ifr.src = src;
     f.appendChild(ifr);
     deck.appendChild(f);
@@ -165,11 +164,6 @@
       var bp = block('Prototype');
       bp.appendChild(frame(data.prototype.title, data.prototype.kind, link(data.prototype.open, 'Open in new tab'), data.prototype.src));
       frag.appendChild(bp);
-    }
-    if (data.video) {
-      var bv = block('Video');
-      bv.appendChild(frame(data.video.title || 'Video', 'YouTube', null, 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(data.video.youtube)));
-      frag.appendChild(bv);
     }
     if (data.gallery && data.gallery.length) {
       var bg = block('Screens & artefacts');

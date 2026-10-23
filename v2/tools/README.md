@@ -40,8 +40,8 @@ Satu project boleh punya beberapa deck (mis. research deck dan UI deck).
 ## Project private (dikunci password)
 
 Untuk project yang berisi research / pitch deck internal. Set `"locked": true` pada project.
-Yang tetap publik: judul, ringkasan, meta (type, role, tools) dan cover. Semua yang lain
-(`sections`, `decks`, `prototype`, `video`, `gallery`) dienkripsi dan baru terbuka setelah password benar.
+Yang tetap publik: judul, ringkasan, meta (type, role, tools), cover, dan video YouTube (link YouTube memang publik). Semua yang lain
+(`sections`, `decks`, `prototype`, `gallery`) dienkripsi dan baru terbuka setelah password benar.
 
 1. Taruh file privat di `v2/private-src/<slug>/` (folder ini di-gitignore, tidak ikut ter-deploy).
    Di `gallery` dan `decks` pakai `file` (bukan `src`), mis. `{ "file": "01.webp", "w": 1920, "h": 1080, "caption": "..." }`
