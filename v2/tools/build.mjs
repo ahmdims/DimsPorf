@@ -457,10 +457,11 @@ function cards() {
     ${hasDeck ? '<span class="work-card__badge"><i class="ph ph-presentation-chart"></i>Deck</span>' : ''}
   </div>
   <div class="work-card__body">
-    <p class="work-card__cats">${p.categories.map((c) => catLabel[c]).join(' · ')}</p>
-    <h3 class="work-card__title">${esc(p.title)}</h3>
-    <p class="work-card__text small type-basic-160lh">${esc(p.short)}</p>
-    <span class="work-card__go">View case study <i class="ph ph-arrow-up-right"></i></span>
+    <div class="work-card__row">
+      <h3 class="work-card__title">${esc(p.title)}</h3>
+      <i class="ph ph-arrow-up-right"></i>
+    </div>
+    <p class="work-card__cats">${p.categories.map((c) => catLabel[c]).join(' · ')}${p.year ? ' · ' + p.year : ''}</p>
   </div>
 </a>`;
     })
@@ -468,8 +469,11 @@ function cards() {
   return `<div class="work-filter animate-in-up" role="group" aria-label="Filter projects">
 ${indent(chips, 2)}
 </div>
-<div class="work-grid">
+<div class="work-grid" data-limit="6">
 ${indent(items, 2)}
+</div>
+<div class="work-more animate-in-up" hidden>
+  <button class="work-more__btn" type="button">Show all projects <i class="ph ph-arrow-down"></i></button>
 </div>`;
 }
 
