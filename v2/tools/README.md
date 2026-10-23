@@ -12,6 +12,7 @@ Script ini membuat ulang `v2/work/<slug>/index.html`, kartu di bagian Work pada 
 | Field | Keterangan |
 |---|---|
 | `slug`, `title`, `short` | URL, judul, ringkasan (dipakai juga untuk meta description) |
+| `featured` | `true` = tampil di home; semua project tetap ada di halaman `work/` |
 | `categories` | `research`, `ux`, `ui`, `web` (untuk filter) |
 | `type`, `role`, `year`, `tools` | Baris meta di atas halaman (kosong = tidak tampil) |
 | `cover` | Gambar kartu + OG image (16:9, simpan sebagai .webp di `v2/img/works/<slug>/`) |

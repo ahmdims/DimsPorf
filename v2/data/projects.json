@@ -80,7 +80,8 @@
           "h": 1359
         }
       ],
-      "decks": []
+      "decks": [],
+      "featured": true
     },
     {
       "slug": "dreamjourney",
@@ -140,7 +141,8 @@
           "h": 1080
         }
       ],
-      "decks": []
+      "decks": [],
+      "featured": true
     },
     {
       "slug": "bem-dcc",
@@ -162,7 +164,8 @@
         "overview": "The website of BEM DCC, the student executive board of ITBA Dian Cipta Cendikia. It presents the organisation's profile, programmes and media in one place."
       },
       "gallery": [],
-      "decks": []
+      "decks": [],
+      "featured": true
     },
     {
       "slug": "pemberdayaan",
@@ -200,7 +203,8 @@
         ]
       },
       "gallery": [],
-      "decks": []
+      "decks": [],
+      "featured": true
     },
     {
       "slug": "jejak",
@@ -234,7 +238,8 @@
         ]
       },
       "gallery": [],
-      "decks": []
+      "decks": [],
+      "featured": false
     },
     {
       "slug": "tanam-harapan",
@@ -258,7 +263,8 @@
         "overview": "\"Tanam Harapan, Rawat Kehidupan\" is a visual narrative that moves readers from learning about environmental issues to taking real action, ending with tree planting."
       },
       "gallery": [],
-      "decks": []
+      "decks": [],
+      "featured": false
     }
   ]
 }

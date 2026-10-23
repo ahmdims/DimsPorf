@@ -381,7 +381,7 @@ ${chrome('./')}
             <div class="col-12 col-xl-2">
               <div class="inner__name">
                 <div class="content__block name-block">
-                  <a class="section-name icon-left animate-in-up" href="./#portfolio">
+                  <a class="section-name icon-left animate-in-up" href="work/">
                     <i class="ph ph-arrow-left"></i>
                     <span class="section-name-caption">All work</span>
                   </a>
@@ -439,8 +439,123 @@ ${PSWP}
 `;
 }
 
+// ---- all-work page ------------------------------------------------------------------
+function workIndexPage() {
+  const url = `${site.url}work/`;
+  const title = `All Work — UX, UI & Research Case Studies | ${site.name}`;
+  const desc =
+    'All case studies by Ahmad Dimas: UX research, UI design and web projects, with pitch decks, prototypes and process.';
+  const ld = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: site.name, item: site.url },
+        { '@type': 'ListItem', position: 2, name: 'Work', item: url },
+      ],
+    },
+  ];
+  return `<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <base href="/v2/">
+  <meta charset="UTF-8">
+  <title>${esc(title)}</title>
+  <meta name="description" content="${esc(desc)}">
+  <meta name="author" content="${site.author}">
+  <link rel="canonical" href="${url}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" href="img/favicon/favicon.ico" sizes="any">
+  <link rel="icon" href="img/favicon/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="img/favicon/manifest.webmanifest">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="${site.name}">
+  <meta property="og:title" content="${esc(title)}">
+  <meta property="og:description" content="${esc(desc)}">
+  <meta property="og:image" content="${abs('img/og-image.jpg')}">
+  <meta property="og:url" content="${url}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${esc(title)}">
+  <meta name="twitter:description" content="${esc(desc)}">
+  <meta name="twitter:image" content="${abs('img/og-image.jpg')}">
+
+  <script type="application/ld+json">
+${JSON.stringify(ld, null, 2)}
+  </script>
+
+  <link rel="stylesheet" href="css/loaders/loader.css">
+  <link rel="stylesheet" href="css/plugins.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/custom.css">
+
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#BABEC8">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141414">
+</head>
+
+<body>
+${chrome('./')}
+
+  <main id="page-content" class="page-content">
+    <section id="case" class="inner inner-grid-bottom case">
+      <div class="inner__wrapper">
+        <div class="container-fluid p-0">
+          <div class="row g-0">
+
+            <div class="col-12 col-xl-2">
+              <div class="inner__name">
+                <div class="content__block name-block">
+                  <a class="section-name icon-left animate-in-up" href="./#portfolio">
+                    <i class="ph ph-arrow-left"></i>
+                    <span class="section-name-caption">Home</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-xl-8">
+              <div class="inner__content">
+                <div class="content__block case-head loading-wrap">
+                  <p class="tagline-chapter loading__item">${projects.length} projects</p>
+                  <h1 class="case-head__title loading__item">All work</h1>
+                  <p class="case-head__lead type-basic-160lh loading__item">Research, UX, UI and web projects. Open any of them for the full case study.</p>
+                </div>
+
+                <div class="content__block case-block">
+${indent(cards(projects, true), 18)}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-xl-2"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+${footer}
+  </main>
+
+  <div class="header-offset"></div>
+
+  <a href="#0" id="to-top" class="btn btn-to-top slide-up">
+    <i class="ph ph-arrow-up"></i>
+  </a>
+
+  <script src="js/libs.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/work-filter.js"></script>
+</body>
+
+</html>
+`;
+}
+
 // ---- home page cards ---------------------------------------------------------------
-function cards() {
+function cards(list, withFilter) {
   const filters = [{ id: 'all', label: 'All' }, ...categories];
   const chips = filters
     .map(
@@ -448,7 +563,7 @@ function cards() {
         `<button class="work-filter__btn${i ? '' : ' is-active'}" type="button" data-filter="${f.id}" aria-pressed="${i ? 'false' : 'true'}">${f.label}</button>`
     )
     .join('\n');
-  const items = projects
+  const items = list
     .map((p) => {
       const hasDeck = (p.decks || []).length > 0;
       return `<a class="work-card animate-in-up" href="work/${p.slug}/" data-cats="${p.categories.join(' ')}">
@@ -466,14 +581,14 @@ function cards() {
 </a>`;
     })
     .join('\n');
-  return `<div class="work-filter animate-in-up" role="group" aria-label="Filter projects">
+  const filterHtml = withFilter
+    ? `<div class="work-filter animate-in-up" role="group" aria-label="Filter projects">
 ${indent(chips, 2)}
 </div>
-<div class="work-grid" data-limit="6">
+`
+    : '';
+  return `${filterHtml}<div class="work-grid">
 ${indent(items, 2)}
-</div>
-<div class="work-more animate-in-up" hidden>
-  <button class="work-more__btn" type="button">Show all projects <i class="ph ph-arrow-down"></i></button>
 </div>`;
 }
 
@@ -491,13 +606,15 @@ projects.forEach((p, i) => {
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, 'index.html'), projectPage(p, i));
 });
-inject(path.join(V2, 'index.html'), 'work-cards', indent(cards(), 14));
+fs.writeFileSync(path.join(V2, 'work/index.html'), workIndexPage());
+inject(path.join(V2, 'index.html'), 'work-cards', indent(cards(projects.filter((p) => p.featured), false), 14));
 
 // sitemap: keep everything outside the v2-work markers untouched
 const smap = path.join(ROOT, 'sitemap.xml');
 const today = new Date().toISOString().slice(0, 10);
 const urls = [
   `  <url>\n    <loc>${site.url}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.9</priority>\n  </url>`,
+  `  <url>\n    <loc>${site.url}work/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>`,
   ...projects.map(
     (p) => `  <url>\n    <loc>${site.url}work/${p.slug}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>`
   ),

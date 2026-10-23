@@ -367,3 +367,13 @@
 .case-block + .grid-block {
   margin-top: 2.4rem;
 }
+
+/* ---------- Home: actions under the featured work ---------- */
+.work-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.4rem 3rem;
+  margin-top: 6rem;
+}
