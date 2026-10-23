@@ -34,19 +34,50 @@
     <priority>0.7</priority>
   </url>
 
-  <!-- v2 main index -->
+  <!-- build:v2 -->
   <url>
     <loc>https://dimsporf.vercel.app/v2/</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://dimsporf.vercel.app/v2/index.html</loc>
-    <lastmod>2026-04-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://dimsporf.vercel.app/v2/work/puspresnas/</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://dimsporf.vercel.app/v2/work/dreamjourney/</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dimsporf.vercel.app/v2/work/bem-dcc/</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dimsporf.vercel.app/v2/work/pemberdayaan/</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dimsporf.vercel.app/v2/work/jejak/</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dimsporf.vercel.app/v2/work/tanam-harapan/</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- /build:v2 -->
 
   <!-- jejak main index -->
   <url>
