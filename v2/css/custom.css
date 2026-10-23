@@ -3,14 +3,17 @@
  * Built only on the tokens defined in main.css so it follows the light/dark switch.
  * ------------------------------------------------ */
 
-/* ---------- Work tabs (category filter) ---------- */
+/* ---------- Work tabs (category filter): centred segmented control ---------- */
 .work-tabs {
   position: relative;
   display: flex;
-  gap: 3.2rem;
-  margin: 0 0 4rem 0;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto 5rem auto;
+  padding: 0.5rem;
   overflow-x: auto;
-  border-bottom: 1px solid var(--stroke-elements);
+  border: 1px solid var(--stroke-elements);
+  border-radius: 5rem;
   scrollbar-width: none;
 }
 .work-tabs::-webkit-scrollbar {
@@ -18,42 +21,59 @@
 }
 .work-tabs__tab {
   position: relative;
+  z-index: 1;
   display: inline-flex;
-  align-items: flex-start;
-  gap: 0.4rem;
-  flex: none;
-  padding: 0 0 1.6rem 0;
-  font: normal var(--font-weight-medium) 1.8rem/1.2 var(--_font-default);
-  color: var(--t-muted);
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-width: 9.6rem;
+  padding: 1.1rem 2.2rem;
+  font: normal var(--font-weight-medium) 1.6rem/1.2 var(--_font-default);
+  white-space: nowrap;
+  color: var(--t-medium);
   background: transparent;
   border: 0;
+  border-radius: 5rem;
   cursor: pointer;
   transition: color var(--_animspeed-medium) ease;
 }
 .work-tabs__tab sup {
-  top: 0;
+  position: static;
   font-size: 1.2rem;
   font-weight: var(--font-weight-base);
+  line-height: 1;
   color: inherit;
-  opacity: 0.8;
+  opacity: 0.65;
 }
-.work-tabs__tab:hover,
-.work-tabs__tab.is-active {
+.work-tabs__tab:hover {
   color: var(--t-bright);
+}
+.work-tabs__tab.is-active {
+  color: var(--t-opp-bright);
 }
 .work-tabs__tab:focus-visible {
   outline: 2px solid var(--stroke-controls);
-  outline-offset: 4px;
-  border-radius: 4px;
+  outline-offset: 2px;
 }
 .work-tabs__bar {
   position: absolute;
-  bottom: 0;
+  top: 0.5rem;
+  bottom: 0.5rem;
   left: 0;
-  height: 2px;
+  z-index: 0;
   width: 0;
   background: var(--stroke-controls);
+  border-radius: 5rem;
   transition: transform 0.45s var(--_animbezier), width 0.45s var(--_animbezier);
+}
+@media only screen and (max-width: 575px) {
+  .work-tabs__tab {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 1rem 1.2rem;
+    font-size: 1.4rem;
+  }
 }
 .work-grid {
   transition: opacity 0.18s ease, transform 0.18s ease;
