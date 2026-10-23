@@ -687,3 +687,47 @@
     flex: 1 1 100%;
   }
 }
+
+/* Lock card: medium size (between the first and the compact version) */
+.pv-lock {
+  max-width: 50rem;
+  margin-top: 11rem;
+  padding: 4.4rem 3.6rem 4rem;
+  gap: 1.8rem;
+}
+.pv-lock__icon svg {
+  width: 5.2rem;
+  height: 5.2rem;
+}
+.pv-lock__title {
+  font-size: 3.2rem;
+}
+.pv-lock__text {
+  max-width: 40rem;
+  font-size: 1.7rem;
+}
+.pv-form {
+  max-width: 40rem;
+  gap: 1rem;
+}
+.pv-input,
+.pv-unlock {
+  height: 5.2rem;
+}
+.pv-input {
+  padding: 0 2.4rem;
+  font-size: 1.6rem;
+}
+.pv-unlock {
+  padding: 0 3.2rem;
+  font-size: 1.6rem;
+}
+@media only screen and (max-width: 767px) {
+  .pv-lock {
+    margin-top: 4rem;
+    padding: 3.4rem 2.4rem 3rem;
+  }
+  .pv-lock__title {
+    font-size: 2.8rem;
+  }
+}
