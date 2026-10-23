@@ -519,7 +519,6 @@ ${chrome('./')}
             <div class="col-12 col-xl-8">
               <div class="inner__content">
                 <div class="content__block case-head loading-wrap">
-                  <p class="tagline-chapter loading__item">${projects.length} projects</p>
                   <h1 class="case-head__title loading__item">All work</h1>
                   <p class="case-head__lead type-basic-160lh loading__item">Research, UX, UI and web projects. Open any of them for the full case study.</p>
                 </div>
@@ -561,7 +560,7 @@ function cards(list, withFilter) {
   const tabs = filters
     .map(
       (f, i) =>
-        `<button class="work-tabs__tab${i ? '' : ' is-active'}" type="button" role="tab" id="tab-${f.id}" aria-selected="${i ? 'false' : 'true'}" tabindex="${i ? '-1' : '0'}" data-filter="${f.id}"><span>${f.label}</span><sup>${count(f.id)}</sup></button>`
+        `<button class="work-tabs__tab${i ? '' : ' is-active'}" type="button" role="tab" id="tab-${f.id}" aria-selected="${i ? 'false' : 'true'}" tabindex="${i ? '-1' : '0'}" data-filter="${f.id}"><span>${f.label}</span></button>`
     )
     .join('\n');
   const items = list
