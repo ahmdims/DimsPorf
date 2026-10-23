@@ -71,7 +71,21 @@ const lockIcon =
 function lockBlock(p, payload) {
   return `<div class="content__block case-block" id="private" data-private data-slug="${p.slug}">
 ${indent(subtitle('Private case study'), 2)}
-  <div class="pv-lock animate-in-up">
+  <div class="pv-gate animate-in-up">
+  <div class="pv-ghost" aria-hidden="true">
+    <span class="pv-sk pv-sk--label"></span>
+    <span class="pv-sk pv-sk--rule"></span>
+    <span class="pv-sk pv-sk--line" style="width:100%"></span>
+    <span class="pv-sk pv-sk--line" style="width:94%"></span>
+    <span class="pv-sk pv-sk--line" style="width:62%"></span>
+    <span class="pv-sk pv-sk--label pv-sk--gap"></span>
+    <span class="pv-sk pv-sk--rule"></span>
+    <div class="pv-ghost__row"><span class="pv-sk pv-sk--num"></span><span class="pv-sk pv-sk--title"></span><span class="pv-sk pv-sk--para"></span></div>
+    <div class="pv-ghost__row"><span class="pv-sk pv-sk--num"></span><span class="pv-sk pv-sk--title"></span><span class="pv-sk pv-sk--para"></span></div>
+    <div class="pv-ghost__row"><span class="pv-sk pv-sk--num"></span><span class="pv-sk pv-sk--title"></span><span class="pv-sk pv-sk--para"></span></div>
+    <div class="pv-ghost__imgs"><span class="pv-sk pv-sk--img"></span><span class="pv-sk pv-sk--img"></span></div>
+  </div>
+  <div class="pv-lock">
     <span class="pv-lock__icon">${lockIcon}</span>
     <h3 class="pv-lock__title">The details are private</h3>
     <p class="pv-lock__text type-basic-160lh">The research, pitch deck and screens for this project are internal work, shared with permission. Enter the password you were given to view them.</p>
@@ -85,6 +99,7 @@ ${indent(subtitle('Private case study'), 2)}
     </form>
     <p class="pv-error" role="alert" hidden></p>
     <a class="link-small-underline" href="mailto:${EMAIL}?subject=${encodeURIComponent('Access request: ' + p.title)}">Request access</a>
+  </div>
   </div>
   <div class="pv-slot" hidden></div>
   <script type="application/json" id="private-payload">${JSON.stringify(payload)}</script>

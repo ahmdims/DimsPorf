@@ -10,7 +10,7 @@
   var form = root.querySelector('.pv-form');
   var input = root.querySelector('.pv-input');
   var errorEl = root.querySelector('.pv-error');
-  var lockEl = root.querySelector('.pv-lock');
+  var lockEl = root.querySelector('.pv-gate');
   var slot = root.querySelector('.pv-slot');
   var STORE = 'dimsporf.pv';
   var fails = 0;
