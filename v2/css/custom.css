@@ -603,3 +603,33 @@
     display: none !important;
   }
 }
+
+/* Lock again button (shown after unlocking) */
+[data-private] > .block__subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+}
+.pv-relock {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.6rem;
+  font: normal var(--font-weight-medium) 1.4rem/1.2 var(--_font-default);
+  color: var(--t-bright);
+  background: transparent;
+  border: 1px solid var(--stroke-elements);
+  border-radius: 5rem;
+  cursor: pointer;
+  transition: border-color var(--_animspeed-medium) ease, background-color var(--_animspeed-medium) ease, color var(--_animspeed-medium) ease;
+}
+.pv-relock svg {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+.pv-relock:hover {
+  color: var(--t-opp-bright);
+  background: var(--stroke-controls);
+  border-color: var(--stroke-controls);
+}
