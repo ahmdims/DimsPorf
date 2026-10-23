@@ -92,10 +92,7 @@ ${indent(subtitle('Private case study'), 2)}
     <form class="pv-form" autocomplete="off">
       <label class="pv-sr" for="pv-pass">Password</label>
       <input id="pv-pass" class="pv-input" type="password" placeholder="Password" autocomplete="off" required>
-      <button class="btn btn-default hover-default" type="submit">
-        <em></em>
-        <span class="btn-caption">Unlock</span>
-      </button>
+      <button class="pv-unlock" type="submit">Unlock</button>
     </form>
     <p class="pv-error" role="alert" hidden></p>
     <a class="link-small-underline" href="mailto:${EMAIL}?subject=${encodeURIComponent('Access request: ' + p.title)}">Request access</a>
