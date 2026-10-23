@@ -556,11 +556,12 @@ ${footer}
 
 // ---- home page cards ---------------------------------------------------------------
 function cards(list, withFilter) {
-  const filters = [{ id: 'all', label: 'All' }, ...categories];
-  const chips = filters
+  const count = (id) => (id === 'all' ? list.length : list.filter((p) => p.categories.includes(id)).length);
+  const filters = [{ id: 'all', label: 'All' }, ...categories].filter((f) => count(f.id) > 0);
+  const tabs = filters
     .map(
       (f, i) =>
-        `<button class="work-filter__btn${i ? '' : ' is-active'}" type="button" data-filter="${f.id}" aria-pressed="${i ? 'false' : 'true'}">${f.label}</button>`
+        `<button class="work-tabs__tab${i ? '' : ' is-active'}" type="button" role="tab" id="tab-${f.id}" aria-selected="${i ? 'false' : 'true'}" tabindex="${i ? '-1' : '0'}" data-filter="${f.id}"><span>${f.label}</span><sup>${count(f.id)}</sup></button>`
     )
     .join('\n');
   const items = list
@@ -582,12 +583,13 @@ function cards(list, withFilter) {
     })
     .join('\n');
   const filterHtml = withFilter
-    ? `<div class="work-filter animate-in-up" role="group" aria-label="Filter projects">
-${indent(chips, 2)}
+    ? `<div class="work-tabs animate-in-up" role="tablist" aria-label="Filter projects by category">
+${indent(tabs, 2)}
+  <span class="work-tabs__bar" aria-hidden="true"></span>
 </div>
 `
     : '';
-  return `${filterHtml}<div class="work-grid">
+  return `${filterHtml}<div class="work-grid" role="tabpanel">
 ${indent(items, 2)}
 </div>`;
 }

@@ -1,45 +1,73 @@
-// Portfolio category filter + "show all" (home page). Cards come from tools/build.mjs.
+// Category tabs for the work grid (all-work page). Cards come from tools/build.mjs.
 (function () {
+  var tabsEl = document.querySelector('.work-tabs');
   var grid = document.querySelector('.work-grid');
-  if (!grid) return;
-  var buttons = document.querySelectorAll('.work-filter__btn');
+  if (!tabsEl || !grid) return;
+  var tabs = Array.prototype.slice.call(tabsEl.querySelectorAll('.work-tabs__tab'));
+  var bar = tabsEl.querySelector('.work-tabs__bar');
   var cards = Array.prototype.slice.call(grid.querySelectorAll('.work-card'));
-  var more = document.querySelector('.work-more');
-  var limit = parseInt(grid.getAttribute('data-limit'), 10) || cards.length;
-  var filter = 'all';
-  var expanded = false;
+  var current = tabs[0];
 
-  function render() {
-    var shown = 0;
-    var total = 0;
+  function moveBar() {
+    bar.style.width = current.offsetWidth + 'px';
+    bar.style.transform = 'translateX(' + current.offsetLeft + 'px)';
+  }
+
+  function apply(filter) {
     cards.forEach(function (card) {
-      var match = filter === 'all' || card.getAttribute('data-cats').split(' ').indexOf(filter) !== -1;
-      if (match) total++;
-      var visible = match && (expanded || shown < limit);
-      if (visible) shown++;
-      card.hidden = !visible;
+      card.hidden = !(filter === 'all' || card.getAttribute('data-cats').split(' ').indexOf(filter) !== -1);
     });
-    if (more) more.hidden = expanded || total <= limit;
     if (window.ScrollTrigger) ScrollTrigger.refresh();
   }
 
-  buttons.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      filter = btn.getAttribute('data-filter');
-      buttons.forEach(function (b) {
-        var on = b === btn;
-        b.classList.toggle('is-active', on);
-        b.setAttribute('aria-pressed', on ? 'true' : 'false');
-      });
-      render();
+  function select(tab, opts) {
+    opts = opts || {};
+    if (tab === current && !opts.force) return;
+    current = tab;
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+    });
+    moveBar();
+    var filter = tab.getAttribute('data-filter');
+    if (opts.instant) {
+      apply(filter);
+    } else {
+      grid.classList.add('is-switching');
+      setTimeout(function () {
+        apply(filter);
+        grid.classList.remove('is-switching');
+      }, 180);
+    }
+    try {
+      var url = new URL(window.location.href);
+      if (filter === 'all') url.searchParams.delete('cat');
+      else url.searchParams.set('cat', filter);
+      history.replaceState(null, '', url);
+    } catch (e) {}
+    if (opts.focus) tab.focus();
+  }
+
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener('click', function () { select(tab); });
+    tab.addEventListener('keydown', function (ev) {
+      var next = null;
+      if (ev.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+      if (ev.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
+      if (ev.key === 'Home') next = tabs[0];
+      if (ev.key === 'End') next = tabs[tabs.length - 1];
+      if (next) { ev.preventDefault(); select(next, { focus: true }); }
     });
   });
 
-  if (more) {
-    more.querySelector('button').addEventListener('click', function () {
-      expanded = true;
-      render();
-    });
-  }
-  render();
+  // open a category directly: /v2/work/?cat=ux
+  var initial = new URLSearchParams(window.location.search).get('cat');
+  var start = tabs.filter(function (t) { return t.getAttribute('data-filter') === initial; })[0] || tabs[0];
+  select(start, { force: true, instant: true });
+
+  window.addEventListener('resize', moveBar);
+  window.addEventListener('load', moveBar);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveBar);
 })();

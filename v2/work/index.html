@@ -203,14 +203,15 @@
                 </div>
 
                 <div class="content__block case-block">
-                  <div class="work-filter animate-in-up" role="group" aria-label="Filter projects">
-                    <button class="work-filter__btn is-active" type="button" data-filter="all" aria-pressed="true">All</button>
-                    <button class="work-filter__btn" type="button" data-filter="research" aria-pressed="false">Research</button>
-                    <button class="work-filter__btn" type="button" data-filter="ux" aria-pressed="false">UX</button>
-                    <button class="work-filter__btn" type="button" data-filter="ui" aria-pressed="false">UI</button>
-                    <button class="work-filter__btn" type="button" data-filter="web" aria-pressed="false">Web</button>
+                  <div class="work-tabs animate-in-up" role="tablist" aria-label="Filter projects by category">
+                    <button class="work-tabs__tab is-active" type="button" role="tab" id="tab-all" aria-selected="true" tabindex="0" data-filter="all"><span>All</span><sup>6</sup></button>
+                    <button class="work-tabs__tab" type="button" role="tab" id="tab-research" aria-selected="false" tabindex="-1" data-filter="research"><span>Research</span><sup>2</sup></button>
+                    <button class="work-tabs__tab" type="button" role="tab" id="tab-ux" aria-selected="false" tabindex="-1" data-filter="ux"><span>UX</span><sup>2</sup></button>
+                    <button class="work-tabs__tab" type="button" role="tab" id="tab-ui" aria-selected="false" tabindex="-1" data-filter="ui"><span>UI</span><sup>4</sup></button>
+                    <button class="work-tabs__tab" type="button" role="tab" id="tab-web" aria-selected="false" tabindex="-1" data-filter="web"><span>Web</span><sup>5</sup></button>
+                    <span class="work-tabs__bar" aria-hidden="true"></span>
                   </div>
-                  <div class="work-grid">
+                  <div class="work-grid" role="tabpanel">
                     <a class="work-card animate-in-up" href="work/puspresnas/" data-cats="ux ui">
                       <div class="work-card__media">
                         <img src="img/works/puspresnas/banner.webp" alt="Puspresnas Redesign" width="1920" height="1080" loading="lazy">
