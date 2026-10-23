@@ -737,3 +737,10 @@
   padding-left: 0;
   padding-right: 0;
 }
+
+.pv-lock__text .pv-mail {
+  font: inherit;
+  color: var(--t-bright);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}

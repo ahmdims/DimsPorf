@@ -87,15 +87,15 @@ ${indent(subtitle('Private case study'), 2)}
   </div>
   <div class="pv-lock">
     <span class="pv-lock__icon">${lockIcon}</span>
-    <h3 class="pv-lock__title">The details are private</h3>
-    <p class="pv-lock__text type-basic-160lh">The research, pitch deck and screens for this project are internal work, shared with permission. Enter the password you were given to view them.</p>
+    <h3 class="pv-lock__title">This case study is confidential</h3>
+    <p class="pv-lock__text type-basic-160lh">This case study contains confidential project details. To request access, email <a class="pv-mail" href="mailto:${EMAIL}?subject=${encodeURIComponent('Access request: ' + p.title)}">${EMAIL}</a> or use the access credentials provided in my CV, if available.</p>
     <form class="pv-form" autocomplete="off">
       <label class="pv-sr" for="pv-pass">Password</label>
       <input id="pv-pass" class="pv-input" type="password" placeholder="Password" autocomplete="off" required>
       <button class="pv-unlock" type="submit">Unlock</button>
     </form>
     <p class="pv-error" role="alert" hidden></p>
-    <a class="link-small-underline" href="mailto:${EMAIL}?subject=${encodeURIComponent('Access request: ' + p.title)}">Request access</a>
+    <a class="link-small-underline" href="mailto:${EMAIL}?subject=${encodeURIComponent('Access request: ' + p.title)}">Request access via email</a>
   </div>
   </div>
   <div class="pv-slot" hidden></div>
