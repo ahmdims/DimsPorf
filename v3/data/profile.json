@@ -1,0 +1,43 @@
+{
+  "name": "Ahmad Dimas",
+  "email": "ahmaddimas1945@gmail.com",
+  "phone": "+62 823-3454-3975",
+  "phoneHref": "+6282334543975",
+  "location": "East Java, Indonesia",
+  "locationHref": "https://maps.app.goo.gl/aN3v6VRmUuGEWTUCA",
+  "cv": "https://drive.google.com/drive/folders/156WWiqjhqKWuWNOwbVn8ekyOD-bArk_G",
+  "socials": [
+    { "label": "LinkedIn", "href": "https://linkedin.com/in/ahmdims" },
+    { "label": "Dribbble", "href": "https://dribbble.com/ahmdims" },
+    { "label": "Behance", "href": "https://www.behance.net/ahmdims" },
+    { "label": "Medium", "href": "https://medium.com/@ahmdims" },
+    { "label": "Instagram", "href": "https://instagram.com/dimsporf" }
+  ],
+  "about": "I'm a UX researcher, UI designer and software engineer from East Java. By day I build web applications as a software engineer at SEVIMA; alongside that I take on UI/UX and full-stack work with DigitalDream, and I'm studying Information Systems at BINUS University. I like projects where I can follow an idea from the first interview to the shipped screen.",
+  "capabilities": [
+    { "id": "research", "title": "UX research", "text": "Interviews, surveys and usability tests to learn what people actually need, before anything is drawn." },
+    { "id": "ux", "title": "UX design", "text": "User flows, information architecture and prototypes that turn research findings into clear journeys." },
+    { "id": "ui", "title": "UI design", "text": "Visual systems and polished interfaces, presented in decks and design files a team can build from." },
+    { "id": "web", "title": "Web engineering", "text": "Front-end and back-end with Laravel, JavaScript and PostgreSQL, so designs get built the way they were intended." }
+  ],
+  "experience": [
+    { "year": "2025 - Present", "role": "Software Engineer", "org": "SEVIMA", "href": "https://www.linkedin.com/company/sevima", "note": "Edtech" },
+    { "year": "2025 - Present", "role": "UI/UX Designer & Full Stack Developer", "org": "DigitalDream", "href": "https://www.linkedin.com/company/digitalndream", "note": "Startup" },
+    { "year": "2025", "role": "UI/UX Designer", "org": "Jobnation", "href": "https://www.linkedin.com/company/jobnation-id", "note": "Outsource" },
+    { "year": "2023 - 2024", "role": "UI/UX Designer & Game Artist", "org": "Unimasoft", "href": "https://www.linkedin.com/company/unimasoft-id", "note": "Agency" },
+    { "year": "2023 - 2024", "role": "Graphic Designer & Illustrator", "org": "Tiga Pilar Garuda", "href": "https://www.linkedin.com/company/3-pilar", "note": "Agency" }
+  ],
+  "education": [
+    { "year": "2025 - Present", "role": "Information Systems", "org": "BINUS University", "href": "https://binus.ac.id", "note": "" },
+    { "year": "2022 - 2025", "role": "Software Engineering", "org": "State Vocational High School 4 Malang", "href": "https://smkn4malang.sch.id", "note": "" }
+  ],
+  "awards": [
+    { "year": "2024", "role": "3rd Place, Website Developing", "org": "Play IT POLINEMA", "note": "" },
+    { "year": "2024", "role": "2nd Place, Website Design", "org": "ITBA DCC", "note": "" },
+    { "year": "2024", "role": "1st Place, Poster Design", "org": "SSC STIKI", "note": "" },
+    { "year": "2023", "role": "1st Place, Poster Design", "org": "SSC STIKI", "note": "" },
+    { "year": "2023", "role": "2nd Place, Short Film", "org": "Psyphoria UNTAR", "note": "" },
+    { "year": "2022", "role": "2nd Place, Short Film", "org": "HMD PJKR UM", "note": "" }
+  ],
+  "tools": ["Figma", "Illustrator", "Photoshop", "Affinity", "Miro", "Notion", "Jira", "PHP", "Laravel", "JavaScript", "HTML5", "CSS3", "Bootstrap", "MySQL", "PostgreSQL"]
+}

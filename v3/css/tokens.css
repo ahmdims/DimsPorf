@@ -1,0 +1,124 @@
+/* ==========================================================================
+   DimsPorf v3 design system: tokens
+   Built on the v2 look (Outfit, blue-grey / near-black palette, big rounded
+   shapes, pill and circle controls), reworked: fluid layout, staggered rhythm.
+   Flat: no shadows. Change a value here and every component follows.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&display=swap");
+
+:root {
+  --font: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Type scale (fluid) */
+  --fs-display: clamp(4rem, 11.5vw, 12rem);
+  --fs-h1: clamp(3.25rem, 8vw, 8rem);
+  --fs-h2: clamp(2.5rem, 5.5vw, 5.5rem);
+  --fs-h3: clamp(1.75rem, 2.6vw, 2.5rem);
+  --fs-lead: clamp(1.25rem, 1.9vw, 1.75rem);
+  --fs-body: 1.125rem;
+  --fs-small: 1rem;
+  --fs-tag: 0.9375rem;
+
+  /* Spacing */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4.5rem;
+  --s-9: 7rem;
+  --s-10: 10rem;
+
+  /* Layout */
+  --container: 1320px;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+
+  /* Shape */
+  --r-s: 1rem;
+  --r: 2rem;
+  --r-l: 3rem;
+  --pill: 5rem;
+
+  /* Motion */
+  --ease: cubic-bezier(0.23, 0.65, 0.74, 1.09);
+  --dur: 0.3s;
+}
+
+/* Light (v2 light palette) */
+:root,
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #babec8;
+  --surface: #d8dde7;
+  --shade: #989ba3;
+  --stroke: #8f93a1;
+  --stroke-strong: #2c2e34;
+  --ink: #151617;
+  --ink-2: #44474a;
+  --ink-3: #5f636a;
+  --on-ink: #f2f5fc;
+  --weight: 400;
+  --weight-medium: 600;
+
+  --cat-research: #b93c0a;
+  --cat-ux: #1c4fd1;
+  --cat-ui: #127a3a;
+  --cat-web: #6a2fd6;
+  --danger: #b42318;
+
+  /* names used by the logo svg */
+  --neutral-bright: #000;
+  --t-opp-bright: #f2f5fc;
+}
+
+/* Dark (v2 dark palette) */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #141414;
+  --surface: #1f1f1f;
+  --shade: #000;
+  --stroke: #3b3e46;
+  --stroke-strong: #f2f5fc;
+  --ink: #f2f5fc;
+  --ink-2: #aeb5c5;
+  --ink-3: #7c8190;
+  --on-ink: #151617;
+  --weight: 300;
+  --weight-medium: 500;
+
+  --cat-research: #fb923c;
+  --cat-ux: #60a5fa;
+  --cat-ui: #4ade80;
+  --cat-web: #a78bfa;
+  --danger: #f97066;
+
+  --neutral-bright: #fff;
+  --t-opp-bright: #151617;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --bg: #141414;
+    --surface: #1f1f1f;
+    --shade: #000;
+    --stroke: #3b3e46;
+    --stroke-strong: #f2f5fc;
+    --ink: #f2f5fc;
+    --ink-2: #aeb5c5;
+    --ink-3: #7c8190;
+    --on-ink: #151617;
+    --weight: 300;
+    --weight-medium: 500;
+    --cat-research: #fb923c;
+    --cat-ux: #60a5fa;
+    --cat-ui: #4ade80;
+    --cat-web: #a78bfa;
+    --danger: #f97066;
+    --neutral-bright: #fff;
+    --t-opp-bright: #151617;
+  }
+}
