@@ -51,11 +51,14 @@ function sealProject(p, password) {
     overview: s.overview || '',
     approach: s.approach || [],
     prototype: p.prototype ? { title: p.prototype.title || 'Interactive prototype', ...embedFor(p.prototype.url) } : null,
-    decks: (p.decks || []).map((d) => ({
+    decks: (p.decks || []).map((d) => {
+      if (d.slides) throw new Error(`${p.slug}: slide-image decks are not supported on locked projects yet`);
+      return {
       title: d.title || p.title,
       label: d.label || 'Pitch deck',
       ...(d.file ? { ...addFile(d.file), kind: 'PDF', pdf: true } : embedFor(d.url)),
-    })),
+    };
+    }),
     gallery: (p.gallery || []).map((g) => ({ ...addFile(g.file), w: g.w || 1920, h: g.h || 1080, caption: g.caption || '' })),
   };
   const body = enc(Buffer.from(JSON.stringify(data)));
@@ -348,6 +351,31 @@ ${s.approach
 
   // Slides / pitch decks (Google Slides, Canva, Figma, PDF)
   (p.decks || []).forEach((d, n) => {
+    if (d.slides) {
+      const total = d.slides.length;
+      blocks.push(`<div class="content__block case-block" id="deck${n ? n + 1 : ''}">
+${indent(subtitle(d.label || 'Pitch deck'), 2)}
+  <div class="deck-viewer animate-in-up" data-deck data-total="${total}">
+    <div class="deck__bar">
+      <span class="deck__title"><i class="ph ph-presentation-chart"></i>${esc(d.title || p.title)} <small>Slides</small></span>
+      <button class="deck-viewer__fs link-small-underline" type="button">Fullscreen</button>
+    </div>
+    <div class="deck-viewer__stage">
+${d.slides.map((s, i) => `      <img class="deck-viewer__slide${i ? '' : ' is-active'}" src="${s.src}" alt="${esc(s.caption || 'Slide ' + (i + 1))}" width="1600" height="900"${i ? ' loading="lazy"' : ''}>`).join('\n')}
+      <button class="deck-viewer__nav deck-viewer__prev" type="button" aria-label="Previous slide"><i class="ph ph-arrow-left"></i></button>
+      <button class="deck-viewer__nav deck-viewer__next" type="button" aria-label="Next slide"><i class="ph ph-arrow-right"></i></button>
+    </div>
+    <div class="deck-viewer__foot">
+      <span class="deck-viewer__cap">${esc(d.slides[0].caption || '')}</span>
+      <span class="deck-viewer__count"><b>01</b> / ${String(total).padStart(2, '0')}</span>
+    </div>
+    <div class="deck-viewer__thumbs" role="tablist" aria-label="Slides">
+${d.slides.map((s, i) => `      <button class="deck-viewer__thumb${i ? '' : ' is-active'}" type="button" role="tab" aria-label="Slide ${i + 1}: ${esc(s.caption || '')}" data-caption="${esc(s.caption || '')}"><img src="${s.src}" alt="" width="160" height="90" loading="lazy"></button>`).join('\n')}
+    </div>
+  </div>
+</div>`);
+      return;
+    }
     const e = embedFor(d.url);
     blocks.push(`<div class="content__block case-block" id="deck${n ? n + 1 : ''}">
 ${indent(subtitle(d.label || 'Pitch deck'), 2)}
@@ -485,7 +513,7 @@ ${chrome('./')}
 
 ${indent(blocks.join('\n\n'), 16)}
 
-                <div class="content__block case-block">
+${projects.length > 1 ? `                <div class="content__block case-block">
                   <a class="case-next animate-in-up" href="work/${next.slug}/">
                     <span class="tagline-chapter">Next project</span>
                     <span class="case-next__row">
@@ -494,7 +522,7 @@ ${indent(blocks.join('\n\n'), 16)}
                     </span>
                   </a>
                 </div>
-
+` : ''}
                 <div class="content__block case-block case-back">
                   <a class="btn btn-line-small icon-left animate-in-up" href="work/">
                     <i class="ph ph-arrow-left"></i>
@@ -525,7 +553,7 @@ ${PSWP}
   <script src="js/libs.min.js"></script>
   <script src="js/gallery-init.js"></script>
   <script src="js/app.js"></script>
-${p.locked ? '  <script src="js/unlock.js"></script>\n' : ''}</body>
+${p.locked ? '  <script src="js/unlock.js"></script>\n' : ''}${(p.decks || []).some((d) => d.slides) ? '  <script src="js/deck-viewer.js"></script>\n' : ''}</body>
 
 </html>
 `;

@@ -24,247 +24,95 @@
   ],
   "projects": [
     {
-      "slug": "puspresnas",
-      "title": "Puspresnas Redesign",
-      "short": "Website and mobile redesign for Indonesia's national achievement center, built around its news and achievement content.",
+      "slug": "litabmas",
+      "title": "Redesign LITABMAS",
+      "short": "Redesigning LITABMAS's home page so an LPPM admin can read funding, proposal pipeline and outcomes on one screen.",
       "categories": [
         "ux",
         "ui"
       ],
-      "type": "Website & app redesign",
-      "role": "UI/UX Designer, Graphic Designer",
-      "tools": [
-        "Figma"
-      ],
-      "cover": "img/works/puspresnas/banner.webp",
+      "featured": true,
+      "type": "Dashboard redesign",
+      "role": "Product Designer",
+      "cover": "img/works/litabmas/01.webp",
       "sections": {
-        "overview": "A redesign concept for the Puspresnas (Pusat Prestasi Nasional) website, the portal that publishes news and records of national student achievement. The goal was to make achievement stories easier to browse and to carry the same visual language over to a mobile app.",
+        "overview": "LITABMAS is the research and community service module of SEVIMA Platform, where universities manage research grants from application to publication. Its home page is the first screen an LPPM admin opens every time they start work, yet answering simple questions meant opening several menus and calculating the numbers by hand. This redesign puts funding status, the proposal pipeline and outcomes on a single screen, with a clear state for every condition: full data, empty, zero and filtered results.",
         "approach": [
           {
-            "title": "Content first",
-            "text": "Structured the portal around what visitors come for: top topics, achievement news, posters and an achievement gallery."
+            "title": "Follow the money",
+            "text": "Funds move from source to cluster to researcher. The screen mirrors that journey instead of showing a single total."
           },
           {
-            "title": "Consistent system",
-            "text": "Built one visual language, with colour, cards and typography, that works on both the website and the mobile app."
+            "title": "Numbers must be trustworthy",
+            "text": "Every number has a clear, consistent formula: remaining funds are the total minus what has been given, and percentages come from the same figures."
           },
           {
-            "title": "App mockups",
-            "text": "Extended the website into a set of mobile screens so the two products feel like one."
+            "title": "Design for the non-ideal day",
+            "text": "Empty data, zero totals and filters without results each get a clear display, not a confusing screen."
           }
         ]
       },
-      "gallery": [
+      "decks": [
         {
-          "src": "img/works/puspresnas/1.webp",
-          "caption": "Website redesign",
-          "w": 1920,
-          "h": 1358
-        },
-        {
-          "src": "img/works/puspresnas/2.webp",
-          "caption": "Mobile app mockups",
-          "w": 1920,
-          "h": 1359
-        },
-        {
-          "src": "img/works/puspresnas/3.webp",
-          "caption": "App screens",
-          "w": 1920,
-          "h": 1359
-        },
-        {
-          "src": "img/works/puspresnas/4.webp",
-          "caption": "App screens",
-          "w": 1920,
-          "h": 1359
+          "title": "LITABMAS portfolio deck",
+          "label": "Pitch deck",
+          "slides": [
+            {
+              "src": "img/works/litabmas/01.webp",
+              "caption": "Cover"
+            },
+            {
+              "src": "img/works/litabmas/02.webp",
+              "caption": "Sekilas Proyek"
+            },
+            {
+              "src": "img/works/litabmas/03.webp",
+              "caption": "Konteks & Pengguna"
+            },
+            {
+              "src": "img/works/litabmas/04.webp",
+              "caption": "Masalah"
+            },
+            {
+              "src": "img/works/litabmas/05.webp",
+              "caption": "Titik Awal (Before)"
+            },
+            {
+              "src": "img/works/litabmas/06.webp",
+              "caption": "Prinsip"
+            },
+            {
+              "src": "img/works/litabmas/07.webp",
+              "caption": "Keputusan 01: Alur Dana"
+            },
+            {
+              "src": "img/works/litabmas/08.webp",
+              "caption": "Keputusan 02: Alokasi per Sumber"
+            },
+            {
+              "src": "img/works/litabmas/09.webp",
+              "caption": "Keputusan 03: Pipeline Proposal"
+            },
+            {
+              "src": "img/works/litabmas/10.webp",
+              "caption": "Keputusan 04: Filter"
+            },
+            {
+              "src": "img/works/litabmas/11.webp",
+              "caption": "Keputusan 05: Kondisi Tepi"
+            },
+            {
+              "src": "img/works/litabmas/12.webp",
+              "caption": "Hasil: Before vs After"
+            },
+            {
+              "src": "img/works/litabmas/13.webp",
+              "caption": "Refleksi & Penutup"
+            }
+          ]
         }
       ],
-      "decks": [],
-      "featured": true
-    },
-    {
-      "slug": "dreamjourney",
-      "title": "DreamJourney",
-      "short": "A travel discovery website and app concept for exploring destinations around Malang, with its own mascot.",
-      "categories": [
-        "ux",
-        "ui",
-        "web"
-      ],
-      "type": "Website & app design",
-      "role": "UI/UX Designer, Web Developer, Graphic Designer",
-      "tools": [
-        "Figma",
-        "HTML/CSS",
-        "JavaScript"
-      ],
-      "cover": "img/works/dreamjourney/banner.webp",
-      "sections": {
-        "overview": "DreamJourney helps travellers find where to go in and around Malang. The concept covers a website and a mobile app with destination search, popular places, destination details with maps, and a friendly tiger mascot, Rimbo.",
-        "approach": [
-          {
-            "title": "Destination discovery",
-            "text": "A search-first home page with popular destinations, then detail pages with descriptions and a map."
-          },
-          {
-            "title": "Brand character",
-            "text": "Graphic work included the DreamJourney brand and the Rimbo mascot, which give the product a recognisable voice."
-          },
-          {
-            "title": "From design to code",
-            "text": "Designed the interface and built the website, so design decisions were checked in the browser."
-          }
-        ]
-      },
-      "video": {
-        "youtube": "cfkrB1GUTHE",
-        "title": "DreamJourney walkthrough"
-      },
-      "gallery": [
-        {
-          "src": "img/works/dreamjourney/1.webp",
-          "caption": "Website pages",
-          "w": 1920,
-          "h": 1080
-        },
-        {
-          "src": "img/works/dreamjourney/2.webp",
-          "caption": "App design",
-          "w": 1920,
-          "h": 1080
-        },
-        {
-          "src": "img/works/dreamjourney/thumbnail.webp",
-          "caption": "Rimbo, the mascot",
-          "w": 1920,
-          "h": 1080
-        }
-      ],
-      "decks": [],
-      "featured": true
-    },
-    {
-      "slug": "bem-dcc",
-      "title": "BEM DCC Website",
-      "short": "Official website for the student executive board of ITBA Dian Cipta Cendikia.",
-      "categories": [
-        "ui",
-        "web"
-      ],
-      "type": "Website",
-      "role": "Website Designer, Frontend Designer, UI/UX Designer, Graphic Designer",
-      "tools": [
-        "Figma",
-        "HTML/CSS",
-        "JavaScript"
-      ],
-      "cover": "img/works/bem-dcc/banner.webp",
-      "sections": {
-        "overview": "The website of BEM DCC, the student executive board of ITBA Dian Cipta Cendikia. It presents the organisation's profile, programmes and media in one place."
-      },
-      "gallery": [],
-      "decks": [],
-      "featured": true
-    },
-    {
-      "slug": "pemberdayaan",
-      "title": "MBG vs Pemberdayaan",
-      "short": "A research study on public perception of the free nutritious meal programme compared with family economic empowerment, presented as an interactive page.",
-      "categories": [
-        "research",
-        "web"
-      ],
-      "type": "Research & visual story",
-      "role": "Designer & Developer",
-      "year": "2026",
-      "tools": [
-        "HTML/CSS",
-        "JavaScript"
-      ],
-      "cover": "img/works/pemberdayaan/banner.webp",
-      "liveUrl": "https://dimsporf.vercel.app/pemberdayaan/",
-      "liveLabel": "Open the full page",
-      "sections": {
-        "overview": "A Project-Based Learning study for Character Building Pancasila. It analyses how people perceive the effectiveness of the Makan Bergizi Gratis (MBG) programme compared with family economic empowerment for tackling malnutrition and poverty, and presents the method, interviews and findings as one interactive page.",
-        "approach": [
-          {
-            "title": "Frame",
-            "text": "Set the two policies side by side with national figures on poverty and stunting."
-          },
-          {
-            "title": "Ask",
-            "text": "Collected perceptions through interviews with community members."
-          },
-          {
-            "title": "Show",
-            "text": "Turned the findings and recommendations into a page anyone can read in minutes."
-          }
-        ]
-      },
-      "gallery": [],
-      "decks": [],
-      "featured": true
-    },
-    {
-      "slug": "jejak",
-      "title": "JEJAK",
-      "short": "A visual companion to an essay on the hidden footprints of AI prompts, with a water-footprint calculator.",
-      "categories": [
-        "research",
-        "web"
-      ],
-      "type": "Visual essay",
-      "role": "Designer & Developer",
-      "year": "2026",
-      "tools": [
-        "HTML/CSS",
-        "JavaScript"
-      ],
-      "cover": "img/works/jejak/banner.webp",
-      "liveUrl": "https://dimsporf.vercel.app/jejak/",
-      "liveLabel": "Open the full page",
-      "sections": {
-        "overview": "Every AI prompt leaves two footprints: one on academic honesty and one on the environment. JEJAK is the visual companion to the essay \"Jejak yang Tak Terlihat\". It shows the two crises in numbers, lets readers estimate their own water footprint with a calculator, and introduces the JEJAK idea.",
-        "approach": [
-          {
-            "title": "Numbers first",
-            "text": "Opened with the two crises as figures so the argument is visible before it is read."
-          },
-          {
-            "title": "Make it personal",
-            "text": "Added a water-footprint calculator so readers can see their own impact."
-          }
-        ]
-      },
-      "gallery": [],
-      "decks": [],
-      "featured": false
-    },
-    {
-      "slug": "tanam-harapan",
-      "title": "Tanam Harapan",
-      "short": "A visual narrative that invites young people to act for a greener earth, from digital education to planting trees.",
-      "categories": [
-        "ui",
-        "web"
-      ],
-      "type": "Visual story",
-      "role": "Designer & Developer",
-      "year": "2026",
-      "tools": [
-        "HTML/CSS",
-        "JavaScript"
-      ],
-      "cover": "img/works/tanam-harapan/banner.webp",
-      "liveUrl": "https://dimsporf.vercel.app/tanam-harapan/",
-      "liveLabel": "Open the full page",
-      "sections": {
-        "overview": "\"Tanam Harapan, Rawat Kehidupan\" is a visual narrative that moves readers from learning about environmental issues to taking real action, ending with tree planting."
-      },
-      "gallery": [],
-      "decks": [],
-      "featured": false
+      "gallery": []
     }
   ]
 }
