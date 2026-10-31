@@ -1,0 +1,13 @@
+#!/bin/sh
+# Pushing release triggers a Vercel deploy: the SEO audit must pass first.
+# See .claude/skills/git-flow-portfolio/SKILL.md
+
+while read local_ref local_sha remote_ref remote_sha; do
+  if [ "$remote_ref" = "refs/heads/release" ]; then
+    if [ -f v2/tools/seo-audit.mjs ]; then
+      echo "Push ke release: menjalankan audit SEO..."
+      node v2/tools/seo-audit.mjs || { echo "Push ke release dibatalkan: audit SEO gagal."; exit 1; }
+    fi
+  fi
+done
+exit 0
