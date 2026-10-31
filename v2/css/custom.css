@@ -116,7 +116,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 0.7rem;
-  font: 400 1.1rem/1.2 "DM Mono", ui-monospace, monospace;
+  font: 400 1.2rem/1.2 "DM Mono", ui-monospace, monospace;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--t-muted);
@@ -132,7 +132,7 @@
 }
 .work-card__title {
   margin: 1.2rem 0 0.8rem 0;
-  font: 400 clamp(2.6rem, 3.2vw, 3.4rem)/1.1 "DM Serif Display", Georgia, serif;
+  font: 400 clamp(2.8rem, 3.5vw, 3.8rem)/1.1 "DM Serif Display", Georgia, serif;
   letter-spacing: -0.01em;
   color: var(--t-bright);
 }
@@ -144,7 +144,7 @@
 .work-card__text {
   max-width: 68rem;
   margin: 0;
-  font: var(--font-weight-base) 1.6rem/1.55 var(--_font-default);
+  font: var(--font-weight-base) 1.8rem/1.55 var(--_font-default);
   color: var(--t-medium);
 }
 @media only screen and (max-width: 767px) {
@@ -753,7 +753,7 @@
 /* ---------- Footer: smaller headline and button ---------- */
 .footer__text,
 .footer__text.reveal-type {
-  font-size: clamp(3.2rem, 4.4vw, 6rem);
+  font-size: clamp(3.6rem, 5vw, 7rem);
   line-height: 1.1;
 }
 
@@ -796,47 +796,91 @@
 
 /* ---------- Type scale: compact headings and text ---------- */
 .headline__title {
-  font-size: clamp(3.8rem, 5.2vw, 7.2rem);
+  font-size: clamp(4.2rem, 6vw, 8.8rem);
   line-height: 1.04;
 }
 h2,
 h2.reveal-type {
-  font-size: clamp(3rem, 3.6vw, 5rem);
+  font-size: clamp(3.4rem, 4.4vw, 6.2rem);
   line-height: 1.1;
 }
 blockquote {
-  font-size: clamp(2.2rem, 2.3vw, 3.2rem);
+  font-size: clamp(2.6rem, 2.8vw, 3.8rem);
 }
 .services-stack__title h3 {
-  font-size: clamp(2.8rem, 3vw, 4.2rem);
+  font-size: clamp(3.2rem, 3.6vw, 5rem);
 }
 .type-basic-160lh,
 .headline__subtitle,
 .about-info__item h6,
 .tools-cards__caption {
-  font-size: 1.7rem;
+  font-size: 1.9rem;
 }
 .section-name-caption,
 .tagline-chapter,
 .section-name i {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
 }
 .logo-text {
-  font-size: 1.8rem;
+  font-size: 2rem;
 }
 .resume-lines-number__title,
 .socials-lines__link h4 {
-  font-size: 2.4rem;
+  font-size: 2.8rem;
 }
 .case-head__title {
-  font-size: clamp(3.6rem, 5vw, 6.4rem);
+  font-size: clamp(4rem, 5.6vw, 7.4rem);
 }
 .case-next__title {
-  font-size: clamp(3rem, 4vw, 5rem);
+  font-size: clamp(3.4rem, 4.6vw, 5.8rem);
 }
 .case-steps__title {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
 }
 .case-text {
-  font-size: 1.8rem;
+  font-size: 2rem;
+}
+
+/* ---------- Wider content, symmetric: 1.5 / 9 / 1.5 columns instead of 2 / 8 / 2 ---------- */
+@media only screen and (min-width: 1200px) {
+  .main .row > .col-xl-8,
+  .inner .row > .col-xl-8 {
+    width: 75%;
+  }
+  .main .row > .col-xl-2,
+  .inner .row > .col-xl-2 {
+    width: 12.5%;
+  }
+}
+
+/* section labels stay on one line in the narrower side column */
+.section-name,
+.section-name .section-name-caption {
+  white-space: nowrap;
+}
+.content__block.name-block {
+  padding-right: 0;
+}
+
+/* ---------- Uniform spacing between sections ---------- */
+.inner,
+.inner.inner-grid-bottom,
+.inner.inner-stack-bottom {
+  padding-top: 12rem;
+  padding-bottom: 0;
+}
+.main__media.media-grid-bottom {
+  padding-bottom: 0;
+}
+.inner__content > .content__block:last-child,
+.inner__content .content__block.pre-offcanvas-grid-block,
+.inner__content .content__block.pre-text-items:last-child {
+  margin-bottom: 0;
+}
+@media only screen and (max-width: 767px) {
+  .inner,
+  .inner.inner-grid-bottom,
+  .inner.inner-stack-bottom {
+    padding-top: 8rem;
+  }
 }
