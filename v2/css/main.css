@@ -39,7 +39,6 @@
 /* Fonts Start */
 /* ------------------------------------------------*/
 /* Outfit font */
-@import url("https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,100..900;1,100..900&display=swap");
 /* ------------------------------------------------*/
 /* Fonts End */
 /* ------------------------------------------------*/
@@ -187,7 +186,7 @@
 /* Template Backgrounds Start */
 /* ------------------------------------------------*/
 .main-image-1 {
-  background-image: url("../img/backgrounds/digital-designer-experiences.webp");
+  background-image: url("../img/backgrounds/ahmad-dimas-ux-researcher-ui-designer-portrait.webp");
 }
 
 .main-image-2 {

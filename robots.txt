@@ -1,1 +1,4 @@
+User-agent: *
+Allow: /
+
 Sitemap: https://dimsporf.vercel.app/sitemap.xml

@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Serif+Display&display=swap");
 /* ------------------------------------------------
  * DimsPorf custom styles: work grid + case study pages.
  * Built only on the tokens defined in main.css so it follows the light/dark switch.
@@ -996,4 +995,40 @@ blockquote {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* ---------- Touch targets: at least 44px on small screens ---------- */
+.color-switcher {
+  position: relative;
+}
+.color-switcher::after {
+  content: "";
+  position: absolute;
+  inset: -1.4rem;
+}
+@media only screen and (max-width: 991px) {
+  .link-inline,
+  .link-small-underline,
+  .link-small-160lh,
+  .btn-line-small,
+  .section-name,
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    min-height: 4.4rem;
+  }
+  .work-tabs__tab {
+    min-height: 4.4rem;
+  }
+  .contact-data__text a {
+    display: inline-block;
+    padding: 0.9rem 0;
+  }
+}
+
+.slide-stack__item figcaption {
+  padding: 1.2rem 2rem 1.4rem;
+  font: normal var(--font-weight-base) 1.5rem/1.3 var(--_font-default);
+  color: var(--t-medium);
+  border-top: 1px solid var(--stroke-elements);
 }

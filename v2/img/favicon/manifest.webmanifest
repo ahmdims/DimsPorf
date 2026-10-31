@@ -1,11 +1,22 @@
 {
-  "name": "DimsPorf",
+  "name": "Ahmad Dimas | DimsPorf",
   "short_name": "DimsPorf",
+  "description": "Portfolio of Ahmad Dimas, a UX researcher, UI designer and web developer.",
+  "start_url": "/v2/",
+  "scope": "/v2/",
+  "display": "standalone",
+  "theme_color": "#141414",
+  "background_color": "#141414",
   "icons": [
-    { "src": "/img/favicon/android-icon-192.png", "type": "image/png", "sizes": "192x192" },
-    { "src": "/img/favicon/android-icon-512.png", "type": "image/png", "sizes": "512x512" }
-  ],
-  "theme_color": "#efefef",
-  "background_color": "#efefef",
-  "display": "standalone"
+    {
+      "src": "/v2/img/favicon/android-icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/v2/img/favicon/android-icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
 }

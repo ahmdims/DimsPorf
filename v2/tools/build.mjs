@@ -275,6 +275,29 @@ function subtitle(label) {
 <div class="resume-divider animate-in-up"></div>`;
 }
 
+// ---- image helpers ----------------------------------------------------------------------
+const imgExists = (rel) => fs.existsSync(path.join(V2, rel));
+const small = (rel) => rel.replace(/\.webp$/, '-800.webp');
+const imgAbs = (rel) => (/^https?:/.test(rel) ? rel : site.url + rel);
+const slideAlt = (p, s, i) => `${p.title} case study, slide ${String(i + 1).padStart(2, '0')}: ${s.caption || ''}`.trim();
+
+function slideFigure(p, s, i) {
+  const srcset = imgExists(small(s.src)) ? ` srcset="${small(s.src)} 800w, ${s.src} 1600w" sizes="(min-width: 1200px) 70vw, 100vw"` : '';
+  return `    <figure class="slide-stack__item animate-in-up">
+      <img src="${s.src}"${srcset} alt="${esc(slideAlt(p, s, i))}" width="1600" height="900"${i > 1 ? ' loading="lazy" decoding="async"' : ''}>
+      ${s.caption ? `<figcaption>${esc(s.caption)}</figcaption>` : ''}
+    </figure>`;
+}
+
+// every content image of a project, for structured data and the image sitemap
+function projectImages(p) {
+  const list = [{ src: p.cover, name: `${p.title} cover` }];
+  (p.decks || []).forEach((d) => (d.slides || []).forEach((s, i) => list.push({ src: s.src, name: slideAlt(p, s, i), caption: s.caption })));
+  (p.gallery || []).forEach((g) => { if (g.src) list.push({ src: g.src, name: g.caption || p.title, caption: g.caption }); });
+  const seen = new Set();
+  return list.filter((x) => x.src && !seen.has(x.src) && seen.add(x.src));
+}
+
 function projectPage(p, i, sealed) {
   const next = projects[(i + 1) % projects.length];
   const url = `${site.url}work/${p.slug}/`;
@@ -355,7 +378,7 @@ ${s.approach
       blocks.push(`<div class="content__block case-block" id="deck${n ? n + 1 : ''}">
 ${indent(subtitle(d.label || 'Case study'), 2)}
   <div class="slide-stack">
-${d.slides.map((s, i) => `    <figure class="slide-stack__item animate-in-up"><img src="${s.src}" alt="${esc(s.caption || 'Slide ' + (i + 1))}" width="1600" height="900"${i > 1 ? ' loading="lazy"' : ''}></figure>`).join('\n')}
+${d.slides.map((s, i) => slideFigure(p, s, i)).join('\n')}
   </div>
 </div>`);
       return;
@@ -419,15 +442,39 @@ ${p.gallery
 
   }
 
+  const person = { '@type': 'Person', name: site.author || 'Ahmad Dimas', url: site.url };
   const ld = [
     {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: site.name, item: site.url },
-        { '@type': 'ListItem', position: 2, name: 'Work', item: site.url + '#portfolio' },
+        { '@type': 'ListItem', position: 2, name: 'Work', item: site.url + 'work/' },
         { '@type': 'ListItem', position: 3, name: p.title, item: url },
       ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      '@id': url + '#work',
+      name: p.title,
+      headline: p.title,
+      description: p.short,
+      url,
+      inLanguage: 'en',
+      genre: p.categories.map((c) => catLabel[c]),
+      creator: person,
+      author: person,
+      isPartOf: { '@type': 'WebSite', name: site.name, url: site.url },
+      image: projectImages(p).map((im) => ({
+        '@type': 'ImageObject',
+        contentUrl: imgAbs(im.src),
+        url: imgAbs(im.src),
+        name: im.name,
+        caption: im.caption || im.name,
+        creator: person,
+        representativeOfPage: im.src === p.cover,
+      })),
     },
   ];
 
@@ -441,6 +488,7 @@ ${p.gallery
   <meta name="description" content="${esc(p.short)}">
   <meta name="author" content="${site.author}">
   <link rel="canonical" href="${url}">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="icon" href="img/favicon/favicon.ico" sizes="any">
@@ -454,6 +502,7 @@ ${p.gallery
   <meta property="og:description" content="${esc(p.short)}">
   <meta property="og:image" content="${abs(p.cover)}">
   <meta property="og:url" content="${url}">
+  <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(title)}">
   <meta name="twitter:description" content="${esc(p.short)}">
@@ -463,6 +512,10 @@ ${p.gallery
 ${JSON.stringify(ld, null, 2)}
   </script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400&family=DM+Serif+Display&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400&family=DM+Serif+Display&display=swap"></noscript>
   <link rel="stylesheet" href="css/loaders/loader.css">
   <link rel="stylesheet" href="css/plugins.css">
   <link rel="stylesheet" href="css/main.css">
@@ -528,7 +581,7 @@ ${footer}
 
   <div class="header-offset"></div>
 
-  <a href="#0" id="to-top" class="btn btn-to-top slide-up">
+  <a href="#0" id="to-top" class="btn btn-to-top slide-up" aria-label="Back to top">
     <i class="ph ph-arrow-up"></i>
   </a>
 
@@ -569,6 +622,7 @@ function workIndexPage() {
   <meta name="description" content="${esc(desc)}">
   <meta name="author" content="${site.author}">
   <link rel="canonical" href="${url}">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="icon" href="img/favicon/favicon.ico" sizes="any">
@@ -580,17 +634,22 @@ function workIndexPage() {
   <meta property="og:site_name" content="${site.name}">
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(desc)}">
-  <meta property="og:image" content="${abs('img/og-image.jpg')}">
+  <meta property="og:image" content="${abs('img/ahmad-dimas-ux-researcher-ui-designer-og.jpg')}">
   <meta property="og:url" content="${url}">
+  <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(title)}">
   <meta name="twitter:description" content="${esc(desc)}">
-  <meta name="twitter:image" content="${abs('img/og-image.jpg')}">
+  <meta name="twitter:image" content="${abs('img/ahmad-dimas-ux-researcher-ui-designer-og.jpg')}">
 
   <script type="application/ld+json">
 ${JSON.stringify(ld, null, 2)}
   </script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400&family=DM+Serif+Display&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400&family=DM+Serif+Display&display=swap"></noscript>
   <link rel="stylesheet" href="css/loaders/loader.css">
   <link rel="stylesheet" href="css/plugins.css">
   <link rel="stylesheet" href="css/main.css">
@@ -644,7 +703,7 @@ ${footer}
 
   <div class="header-offset"></div>
 
-  <a href="#0" id="to-top" class="btn btn-to-top slide-up">
+  <a href="#0" id="to-top" class="btn btn-to-top slide-up" aria-label="Back to top">
     <i class="ph ph-arrow-up"></i>
   </a>
 
@@ -729,20 +788,27 @@ projects.forEach((p, i) => {
 fs.writeFileSync(path.join(V2, 'work/index.html'), workIndexPage());
 inject(path.join(V2, 'index.html'), 'work-cards', indent(cards(projects.filter((p) => p.featured), false), 14));
 
-// sitemap: keep everything outside the v2-work markers untouched
+// sitemap: keep everything outside the v2 markers untouched. Pages carry their images (image sitemap).
 const smap = path.join(ROOT, 'sitemap.xml');
 const today = new Date().toISOString().slice(0, 10);
+const imgXml = (list) => list.map((src) => `\n    <image:image>\n      <image:loc>${imgAbs(src)}</image:loc>\n    </image:image>`).join('');
+const entry = (loc, freq, prio, images = []) => `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${prio}</priority>${imgXml(images)}\n  </url>`;
 const urls = [
-  `  <url>\n    <loc>${site.url}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.9</priority>\n  </url>`,
-  `  <url>\n    <loc>${site.url}work/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>`,
-  ...projects.map(
-    (p) => `  <url>\n    <loc>${site.url}work/${p.slug}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>`
-  ),
+  entry(site.url, 'weekly', '0.9', ['img/backgrounds/ahmad-dimas-ux-researcher-ui-designer-portrait.webp', ...projects.map((p) => p.cover)]),
+  entry(site.url + 'work/', 'weekly', '0.8', projects.map((p) => p.cover)),
+  ...projects.map((p) => entry(site.url + 'work/' + p.slug + '/', 'monthly', '0.7', projectImages(p).map((x) => x.src))),
 ].join('\n');
 let sm = fs.readFileSync(smap, 'utf8');
+if (!sm.includes('xmlns:image')) sm = sm.replace('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"');
 const block = `  <!-- build:v2 -->\n${urls}\n  <!-- /build:v2 -->`;
 sm = /<!-- build:v2 -->/.test(sm)
   ? sm.replace(/ *<!-- build:v2 -->[\s\S]*?<!-- \/build:v2 -->/, block)
   : sm.replace('</urlset>', `${block}\n</urlset>`);
 fs.writeFileSync(smap, sm);
 console.log(`built ${projects.length} project pages`);
+
+// SEO guardrail: fail the build when a page breaks the portfolio SEO rules
+import('node:child_process').then(({ spawnSync }) => {
+  const r = spawnSync(process.execPath, [path.join(V2, 'tools/seo-audit.mjs')], { stdio: 'inherit' });
+  if (r.status) process.exitCode = r.status;
+});

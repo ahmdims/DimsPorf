@@ -2,7 +2,10 @@
   "site": {
     "url": "https://dimsporf.vercel.app/v2/",
     "name": "DimsPorf",
-    "author": "Ahmad Dimas"
+    "author": "Ahmad Dimas",
+    "aliases": [
+      "ahmdims.vercel.app"
+    ]
   },
   "categories": [
     {
@@ -34,7 +37,7 @@
       "featured": true,
       "type": "Dashboard redesign",
       "role": "Product Designer",
-      "cover": "img/works/litabmas/01.webp",
+      "cover": "img/works/litabmas/redesign-litabmas-01-cover.webp",
       "sections": {
         "overview": "LITABMAS is the research and community service module of SEVIMA Platform, where universities manage research grants from application to publication. Its home page is the first screen an LPPM admin opens every time they start work, yet answering simple questions meant opening several menus and calculating the numbers by hand. This redesign puts funding status, the proposal pipeline and outcomes on a single screen, with a clear state for every condition: full data, empty, zero and filtered results.",
         "approach": [
@@ -58,55 +61,55 @@
           "label": "Case study",
           "slides": [
             {
-              "src": "img/works/litabmas/01.webp",
+              "src": "img/works/litabmas/redesign-litabmas-01-cover.webp",
               "caption": "Cover"
             },
             {
-              "src": "img/works/litabmas/02.webp",
+              "src": "img/works/litabmas/redesign-litabmas-02-sekilas-proyek.webp",
               "caption": "Sekilas Proyek"
             },
             {
-              "src": "img/works/litabmas/03.webp",
+              "src": "img/works/litabmas/redesign-litabmas-03-konteks-pengguna.webp",
               "caption": "Konteks & Pengguna"
             },
             {
-              "src": "img/works/litabmas/04.webp",
+              "src": "img/works/litabmas/redesign-litabmas-04-masalah.webp",
               "caption": "Masalah"
             },
             {
-              "src": "img/works/litabmas/05.webp",
+              "src": "img/works/litabmas/redesign-litabmas-05-titik-awal-before.webp",
               "caption": "Titik Awal (Before)"
             },
             {
-              "src": "img/works/litabmas/06.webp",
+              "src": "img/works/litabmas/redesign-litabmas-06-prinsip.webp",
               "caption": "Prinsip"
             },
             {
-              "src": "img/works/litabmas/07.webp",
+              "src": "img/works/litabmas/redesign-litabmas-07-keputusan-01-alur-dana.webp",
               "caption": "Keputusan 01: Alur Dana"
             },
             {
-              "src": "img/works/litabmas/08.webp",
+              "src": "img/works/litabmas/redesign-litabmas-08-keputusan-02-alokasi-per-sumber.webp",
               "caption": "Keputusan 02: Alokasi per Sumber"
             },
             {
-              "src": "img/works/litabmas/09.webp",
+              "src": "img/works/litabmas/redesign-litabmas-09-keputusan-03-pipeline-proposal.webp",
               "caption": "Keputusan 03: Pipeline Proposal"
             },
             {
-              "src": "img/works/litabmas/10.webp",
+              "src": "img/works/litabmas/redesign-litabmas-10-keputusan-04-filter.webp",
               "caption": "Keputusan 04: Filter"
             },
             {
-              "src": "img/works/litabmas/11.webp",
+              "src": "img/works/litabmas/redesign-litabmas-11-keputusan-05-kondisi-tepi.webp",
               "caption": "Keputusan 05: Kondisi Tepi"
             },
             {
-              "src": "img/works/litabmas/12.webp",
+              "src": "img/works/litabmas/redesign-litabmas-12-hasil-before-vs-after.webp",
               "caption": "Hasil: Before vs After"
             },
             {
-              "src": "img/works/litabmas/13.webp",
+              "src": "img/works/litabmas/redesign-litabmas-13-refleksi-penutup.webp",
               "caption": "Refleksi & Penutup"
             }
           ]
