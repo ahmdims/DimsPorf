@@ -30,6 +30,7 @@ Satu URL = satu halaman. Tidak ada URL yang menyebut `ahmdims.vercel.app` di can
 3. Perbaiki semua **ERROR** sampai `SEO audit passed`. Warning dibaca dan diperbaiki kalau masuk akal.
 4. Jangan pernah menonaktifkan atau melonggarkan audit untuk meloloskan perubahan. Perbaiki penyebabnya.
 5. Setelah deploy: lihat bagian 8.
+6. Commit, push, merge, dan rilis ke Vercel mengikuti skill `git-flow-portfolio` (develop/[perbaikan] -> develop/[project] -> release).
 
 Halaman v2 yang dibuat tangan hanya `v2/index.html`. Semua halaman lain dihasilkan oleh `build.mjs`, jadi **perbaiki di template `build.mjs`, bukan di file HTML hasilnya**.
 

@@ -1,0 +1,25 @@
+#!/bin/sh
+# Keeps the three-level flow: develop/[perbaikan] -> develop/[project] -> release.
+# See .claude/skills/git-flow-portfolio/SKILL.md
+
+branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+dir=$(dirname "$0")
+
+blocked=0
+[ "$branch" = "release" ] && blocked=1
+if [ -f "$dir/project-branches" ] && grep -qxF "$branch" "$dir/project-branches"; then blocked=1; fi
+
+if [ "$blocked" = "1" ]; then
+  echo "Commit langsung di '$branch' ditolak."
+  echo "Buat branch perbaikan dulu:  git checkout -b develop/<perbaikan>"
+  echo "Alur: develop/<perbaikan> -> develop/<project> -> release (lihat .claude/skills/git-flow-portfolio)."
+  exit 1
+fi
+
+# run the SEO audit when pages, sitemap or redirects are part of the commit
+if git diff --cached --name-only | grep -qE '^(v2/|v1/|jejak/|pemberdayaan/|tanam-harapan/|sitemap\.xml|robots\.txt|vercel\.json)'; then
+  if [ -f v2/tools/seo-audit.mjs ]; then
+    node v2/tools/seo-audit.mjs || { echo "Audit SEO gagal. Perbaiki dulu (node v2/tools/build.mjs)."; exit 1; }
+  fi
+fi
+exit 0
