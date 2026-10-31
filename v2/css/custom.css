@@ -1032,3 +1032,11 @@ blockquote {
   color: var(--t-medium);
   border-top: 1px solid var(--stroke-elements);
 }
+
+/* Hero marquee (D-I-M-A-S strip) is hidden for now. Remove this block to bring it back. */
+.media__fullwidth {
+  display: none;
+}
+.hero2 {
+  margin-bottom: 0;
+}
