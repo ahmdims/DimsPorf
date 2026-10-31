@@ -84,7 +84,7 @@
 }
 .work-card {
   display: grid;
-  grid-template-columns: clamp(16rem, 24vw, 24rem) minmax(0, 1fr);
+  grid-template-columns: clamp(18rem, 26vw, 30rem) minmax(0, 1fr);
   column-gap: 2.6rem;
   align-items: center;
   color: var(--t-bright);
