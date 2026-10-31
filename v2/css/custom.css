@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Serif+Display&display=swap");
 /* ------------------------------------------------
  * DimsPorf custom styles: work grid + case study pages.
  * Built only on the tokens defined in main.css so it follows the light/dark switch.
@@ -75,19 +76,17 @@
   transform: translateY(1.2rem);
 }
 
-/* ---------- Work grid / cards ---------- */
-.work-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 4rem 2.4rem;
-}
-@media only screen and (min-width: 768px) {
-  .work-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* ---------- Work list: thumbnail, meta, serif title, text ---------- */
+.work-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4.4rem;
 }
 .work-card {
-  display: block;
+  display: grid;
+  grid-template-columns: clamp(16rem, 24vw, 24rem) minmax(0, 1fr);
+  column-gap: 2.6rem;
+  align-items: center;
   color: var(--t-bright);
 }
 .work-card[hidden] {
@@ -97,12 +96,11 @@
   color: var(--t-bright);
 }
 .work-card__media {
-  position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   background: var(--base-shade);
   border: 1px solid var(--stroke-elements);
-  border-radius: var(--_radius-s);
+  border-radius: 0.8rem;
 }
 .work-card__media img {
   width: 100%;
@@ -111,46 +109,49 @@
   transition: transform 0.6s var(--_animbezier);
 }
 .work-card:hover .work-card__media img {
-  transform: scale(1.04);
+  transform: scale(1.05);
 }
-.work-card__badge {
-  position: absolute;
-  top: 1.2rem;
-  left: 1.2rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.5rem 1.2rem;
-  font: normal var(--font-weight-medium) 1.3rem/1 var(--_font-default);
-  color: #F2F5FC;
-  background: rgba(20, 20, 20, 0.78);
-  border-radius: 5rem;
-}
-.work-card__body {
-  padding: 1.6rem 0.2rem 0;
-}
-.work-card__row {
+.work-card__meta {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 1.6rem;
+  gap: 0.7rem;
+  font: 400 1.1rem/1.2 "DM Mono", ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--t-muted);
+}
+.work-card__type::after {
+  content: "\00b7";
+  margin-left: 0.9rem;
+}
+.work-card__chip {
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--stroke-elements);
+  border-radius: 0.4rem;
 }
 .work-card__title {
-  margin: 0;
-  font: normal var(--font-weight-base) 2.6rem/1.2 var(--_font-default);
+  margin: 1.2rem 0 0.8rem 0;
+  font: 400 clamp(2.6rem, 3.2vw, 3.4rem)/1.1 "DM Serif Display", Georgia, serif;
+  letter-spacing: -0.01em;
   color: var(--t-bright);
 }
-.work-card__row i {
-  font-size: 2.4rem;
-  transition: transform var(--_animspeed-medium) ease;
+.work-card:hover .work-card__title {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
 }
-.work-card:hover .work-card__row i {
-  transform: translate(0.3rem, -0.3rem);
-}
-.work-card__cats {
-  margin: 0.8rem 0 0 0;
-  font: normal var(--font-weight-base) 1.5rem/1.3 var(--_font-default);
+.work-card__text {
+  max-width: 68rem;
+  margin: 0;
+  font: var(--font-weight-base) 1.6rem/1.55 var(--_font-default);
   color: var(--t-medium);
+}
+@media only screen and (max-width: 767px) {
+  .work-card {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.6rem;
+  }
 }
 /* ---------- Case study page ---------- */
 .case.inner-grid-bottom {
@@ -315,10 +316,6 @@
   transform: translateX(0.8rem);
 }
 
-/* Space between the work grid and the external profile link */
-.work-grid + .gallery__btn {
-  margin-top: 4rem;
-}
 
 /* ---------- Case gallery: zoom only on hover ---------- */
 .inner__gallery .gallery__link .picture {
@@ -751,4 +748,95 @@
 }
 .pv-lock__text .pv-mail {
   white-space: nowrap;
+}
+
+/* ---------- Footer: smaller headline and button ---------- */
+.footer__text,
+.footer__text.reveal-type {
+  font-size: clamp(3.2rem, 4.4vw, 6rem);
+  line-height: 1.1;
+}
+
+/* ---------- No brackets around chapter labels ---------- */
+.tagline-chapter::before,
+.tagline-chapter::after {
+  content: none;
+}
+
+/* ---------- Buttons: compact sizes everywhere ---------- */
+.btn-default {
+  height: 5.6rem;
+  padding: 0 3.2rem;
+  border-radius: 5rem;
+  font-size: 1.6rem;
+  line-height: 5.6rem;
+}
+.btn-line-circle-icon {
+  font-size: 1.8rem;
+}
+.btn-line-circle-icon .circle {
+  width: 6.4rem;
+  height: 6.4rem;
+}
+.btn-line-circle-icon .circle i {
+  font-size: 2rem;
+}
+.btn-circle-icon {
+  width: 6.4rem;
+  height: 6.4rem;
+  font-size: 2rem;
+}
+.btn-circle-icon i {
+  font-size: 2rem;
+}
+.btn-line-small,
+.btn-line-small .btn-caption {
+  font-size: 1.6rem;
+}
+
+/* ---------- Type scale: compact headings and text ---------- */
+.headline__title {
+  font-size: clamp(3.8rem, 5.2vw, 7.2rem);
+  line-height: 1.04;
+}
+h2,
+h2.reveal-type {
+  font-size: clamp(3rem, 3.6vw, 5rem);
+  line-height: 1.1;
+}
+blockquote {
+  font-size: clamp(2.2rem, 2.3vw, 3.2rem);
+}
+.services-stack__title h3 {
+  font-size: clamp(2.8rem, 3vw, 4.2rem);
+}
+.type-basic-160lh,
+.headline__subtitle,
+.about-info__item h6,
+.tools-cards__caption {
+  font-size: 1.7rem;
+}
+.section-name-caption,
+.tagline-chapter,
+.section-name i {
+  font-size: 1.5rem;
+}
+.logo-text {
+  font-size: 1.8rem;
+}
+.resume-lines-number__title,
+.socials-lines__link h4 {
+  font-size: 2.4rem;
+}
+.case-head__title {
+  font-size: clamp(3.6rem, 5vw, 6.4rem);
+}
+.case-next__title {
+  font-size: clamp(3rem, 4vw, 5rem);
+}
+.case-steps__title {
+  font-size: 2.2rem;
+}
+.case-text {
+  font-size: 1.8rem;
 }

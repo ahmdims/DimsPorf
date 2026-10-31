@@ -471,14 +471,7 @@ ${chrome('./')}
           <div class="row g-0">
 
             <div class="col-12 col-xl-2">
-              <div class="inner__name">
-                <div class="content__block name-block">
-                  <a class="section-name icon-left animate-in-up" href="work/">
-                    <i class="ph ph-arrow-left"></i>
-                    <span class="section-name-caption">All work</span>
-                  </a>
-                </div>
-              </div>
+              <div class="inner__name"></div>
             </div>
 
             <div class="col-12 col-xl-8">
@@ -499,6 +492,13 @@ ${indent(blocks.join('\n\n'), 16)}
                       <span class="case-next__title">${esc(next.title)}</span>
                       <i class="ph ph-arrow-right"></i>
                     </span>
+                  </a>
+                </div>
+
+                <div class="content__block case-block case-back">
+                  <a class="btn btn-line-small icon-left animate-in-up" href="work/">
+                    <i class="ph ph-arrow-left"></i>
+                    <span class="btn-caption">All work</span>
                   </a>
                 </div>
 
@@ -662,11 +662,12 @@ function cards(list, withFilter) {
     <img src="${p.cover}" alt="${esc(p.title)}" width="1920" height="1080" loading="lazy">
   </div>
   <div class="work-card__body">
-    <div class="work-card__row">
-      <h3 class="work-card__title">${esc(p.title)}</h3>
-      <i class="ph ph-arrow-up-right"></i>
+    <div class="work-card__meta">
+      <span class="work-card__type">${esc(p.type)}</span>
+      ${p.categories.map((c) => `<span class="work-card__chip">${catLabel[c]}</span>`).join('\n      ')}
     </div>
-    <p class="work-card__cats">${p.categories.map((c) => catLabel[c]).join(' · ')}${p.year ? ' · ' + p.year : ''}</p>
+    <h3 class="work-card__title">${esc(p.title)}</h3>
+    <p class="work-card__text">${esc(p.short)}</p>
   </div>
 </a>`;
     })
@@ -678,7 +679,7 @@ ${indent(tabs, 2)}
 </div>
 `
     : '';
-  return `${filterHtml}<div class="work-grid" role="tabpanel">
+  return `${filterHtml}<div class="work-grid work-list" role="tabpanel">
 ${indent(items, 2)}
 </div>`;
 }
