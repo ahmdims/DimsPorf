@@ -70,28 +70,87 @@
   </url>
   <!-- /build:v2 -->
 
-  <!-- jejak main index -->
+  <!-- build:standalone -->
   <url>
     <loc>https://dimsporf.vercel.app/jejak/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-10-31</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/jejak/assets/images/jejak-pendamping-visual-esai-og.jpg</image:loc>
+    </image:image>
   </url>
-
-  <!-- pemberdayaan main index -->
   <url>
     <loc>https://dimsporf.vercel.app/pemberdayaan/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-10-31</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/pemberdayaan/assets/images/mbg-vs-pemberdayaan-ekonomi-og.jpg</image:loc>
+    </image:image>
   </url>
-
-  <!-- tanam-harapan main index -->
   <url>
     <loc>https://dimsporf.vercel.app/tanam-harapan/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-10-31</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/tanam-harapan/assets/images/tanam-harapan-narasi-visual-og.jpg</image:loc>
+    </image:image>
   </url>
-
+  <url>
+    <loc>https://dimsporf.vercel.app/v1/bem-dcc.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/v1/assets/images/bem_dcc/bem-dcc-website-homepage-design.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/v1/assets/images/bem_dcc/bem-dcc-website-homepage-design-og.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://dimsporf.vercel.app/v1/dreamjourney.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/v1/assets/images/dreamjourney/dreamjourney-website-app-design-banner.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/v1/assets/images/dreamjourney/dreamjourney-website-pages-destination-search.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/v1/assets/images/dreamjourney/dreamjourney-app-design-mobile-screens.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/v1/assets/images/dreamjourney/dreamjourney-rimbo-tiger-mascot-illustration.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/v1/assets/images/dreamjourney/dreamjourney-website-app-design-banner-og.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://dimsporf.vercel.app/v1/puspresnas.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/v1/assets/images/puspresnas/puspresnas-redesign-website-news-layout.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/v1/assets/images/puspresnas/puspresnas-redesign-pattern-and-photography.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/v1/assets/images/puspresnas/puspresnas-mobile-app-mockups.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/v1/assets/images/puspresnas/puspresnas-redesign-colors-and-typography.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/v1/assets/images/puspresnas/puspresnas-website-redesign-homepage-og.jpg</image:loc>
+    </image:image>
+  </url>
+  <!-- /build:standalone -->
 </urlset>

@@ -13,7 +13,10 @@ Tujuan: setiap halaman, project, dan gambar di portfolio bisa ditemukan di Googl
 |---|---|
 | Domain utama (canonical) | `https://dimsporf.vercel.app` |
 | Domain alias | `ahmdims.vercel.app`, selalu 301 ke domain utama (`vercel.json`) |
-| Situs yang aktif | `/v2/` (root `/` di-301 ke `/v2/`). v1 dan v3 tidak boleh bersaing di indeks |
+| Situs utama | `/v2/` (root `/` di-301 ke `/v2/`). Brand pribadi: "Ahmad Dimas" |
+| Sub-brand mandiri | `/jejak/`, `/pemberdayaan/`, `/tanam-harapan/` (diindeks, berdiri sendiri) |
+| Arsip | `/v1/bem-dcc.html`, `/v1/dreamjourney.html`, `/v1/puspresnas.html` diindeks. `/v1/` dan `/v1/terrago.html` `noindex`. v3 selalu `noindex` |
+| Daftar halaman mandiri | `site.standalone` di `v2/data/projects.json` (sumber sitemap dan audit) |
 | Sumber data project | `v2/data/projects.json` (+ `site.url`, `site.aliases`) |
 | Pembuat halaman | `node v2/tools/build.mjs` (otomatis menjalankan audit) |
 | Penjaga aturan | `node v2/tools/seo-audit.mjs` (exit code 1 = ada error) |
@@ -98,7 +101,7 @@ Lalu jalankan `node v2/tools/build.mjs` dan pastikan audit lulus. Project baru o
 - `sitemap.xml` hanya berisi URL kanonik (200, indexable) di domain utama: home, daftar, tiap project, dan halaman mandiri yang memang ingin diindeks. Tidak ada URL yang di-redirect atau `noindex`.
 - `robots.txt`: `User-agent: *`, `Allow: /`, dan baris `Sitemap:` ke domain utama.
 - Jangan memakai redirect JavaScript atau meta refresh sebagai satu-satunya cara memindahkan halaman. Pakai 301 di `vercel.json`.
-- Halaman versi lama (v1, v3) tidak masuk sitemap. v3 harus tetap `noindex` sampai resmi menggantikan v2.
+- Halaman `noindex` (v1 home, TerraGo, v3) tidak boleh ada di sitemap. v3 tetap `noindex` sampai resmi menggantikan v2.
 
 ## 7. Performa (Core Web Vitals ikut menentukan peringkat)
 
@@ -125,5 +128,17 @@ Lalu jalankan `node v2/tools/build.mjs` dan pastikan audit lulus. Project baru o
 - `noindex` pada halaman yang seharusnya tampil. Menaruh halaman `noindex` di sitemap.
 - Menyebut penghargaan, angka, atau klaim yang tidak ada di sumber data.
 - Menyimpan password, token, atau data internal di HTML publik.
+
+## 10. Sub-brand dan halaman mandiri (`/jejak/`, `/pemberdayaan/`, `/tanam-harapan/`, arsip `/v1/`)
+
+Tujuan: tiap project muncul di Google sebagai dirinya sendiri, tanpa menyaingi atau dipengaruhi v2.
+
+1. **Berdiri sendiri.** v2 tidak boleh menautkan ke sub-brand atau arsip (tidak ada "More projects"). Sub-brand tidak menautkan balik ke v2 dan JSON-LD-nya tidak boleh menunjuk ke `/v1/` atau `/v2/` (tidak ada `isPartOf`). Audit menggagalkan build kalau dilanggar.
+2. **Topik dipisah.** v2 memegang kata kunci pribadi (Ahmad Dimas, UX researcher, UI designer). Setiap sub-brand memegang topiknya sendiri (mis. "MBG vs pemberdayaan ekonomi"). Jangan memakai kata kunci pribadi di title sub-brand.
+3. **Setiap halaman mandiri wajib memiliki**: title dan description unik (aturan bagian 2), canonical ke dirinya sendiri, `robots` `index, follow, max-image-preview:large`, Open Graph lengkap dengan `og:image` 1200x630 milik halaman itu sendiri (nama file slug deskriptif) beserta `og:image:alt`, `twitter:card=summary_large_image`, `og:locale` sesuai bahasa halaman, dan JSON-LD `CreativeWork` dengan `ImageObject`. Halaman arsip v1 memakai `BreadcrumbList` (breadcrumb root: "DimsPorf Archive").
+4. **Gambar** mengikuti bagian 3: webp bernama deskriptif, alt jelas, `width`/`height`, gambar pertama tanpa lazy. Gambar PNG besar tidak dipakai di halaman yang diindeks.
+5. **`noindex, follow`** untuk halaman yang tetap online tapi tidak boleh bersaing: `/v1/` (beranda lama, merek sama dengan v2), `/v1/terrago.html` (gambarnya salah), dan v3. `noindex` diperiksa audit, dan halaman itu tidak boleh ada di sitemap.
+6. **Menambah halaman mandiri baru**: buat halamannya, tambahkan ke `site.standalone` (`file`, `url`, `index`), buat gambar OG, jalankan `node v2/tools/build.mjs`. Sitemap dan image sitemap terisi otomatis dari isi halaman, dan audit memeriksanya.
+7. **Batas yang perlu dijelaskan ke pemilik**: Google tidak mendukung nama situs (site name) per subfolder, jadi nama sub-brand tampil lewat title hasil pencarian, bukan sebagai site name. Semua halaman memakai host yang sama sehingga otoritas domain dibagi. "Muncul di atas" tidak bisa dijamin, hanya kelayakannya yang bisa dijaga.
 
 Skill pelengkap: `seo-head-architect` (metodologi diagnosa meta tag dan structured data secara umum).
