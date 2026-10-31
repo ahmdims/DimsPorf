@@ -884,3 +884,97 @@ blockquote {
     padding-top: 8rem;
   }
 }
+
+/* ---------- Hero: text + portrait, then marquee ---------- */
+.hero2 {
+  padding-top: 13rem;
+  margin-bottom: 7rem;
+}
+.hero2__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 6rem;
+  align-items: center;
+  padding: 0 5rem;
+}
+.hero2__roles {
+  margin: 0 0 2.4rem 0;
+  font: normal var(--font-weight-medium) 1.6rem/1.4 var(--_font-default);
+  color: var(--t-muted);
+}
+.hero2__lead {
+  max-width: 46rem;
+  margin: 3.2rem 0 0 0;
+  font: normal var(--font-weight-base) 2rem/1.55 var(--_font-default);
+  color: var(--t-medium);
+}
+.hero2__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.6rem 3rem;
+  margin-top: 4.4rem;
+}
+.hero2__photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 2rem;
+  background: var(--base-shade);
+}
+.hero2__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 22%;
+}
+@media only screen and (max-width: 991px) {
+  .hero2 {
+    padding-top: 10rem;
+    margin-bottom: 5rem;
+  }
+  .hero2__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4rem;
+    padding: 0 2rem;
+  }
+  .hero2__photo {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* hero: keep decorative rocks behind the content and out of the headline's way */
+.hero2 .intro__background {
+  z-index: 0;
+}
+.hero2__grid {
+  position: relative;
+  z-index: 2;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+}
+.hero2 .headline__title {
+  font-size: clamp(3.6rem, 4.9vw, 7rem);
+}
+.hero2 .intro-bg-01__01 {
+  top: -14rem;
+  right: -14rem;
+  width: 42rem;
+  height: 42rem;
+}
+@media only screen and (max-width: 767px) {
+  .hero2 .intro-bg-01__01 {
+    top: -10rem;
+    right: -16rem;
+    width: 32rem;
+    height: 32rem;
+    opacity: 0.45;
+  }
+  .hero2 .intro-bg-01__02 {
+    display: none;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .hero2__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
