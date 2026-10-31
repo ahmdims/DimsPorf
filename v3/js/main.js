@@ -14,6 +14,14 @@
     toggle.setAttribute('aria-pressed', root.getAttribute('data-theme') === 'dark' ? 'true' : 'false');
   }
 
+  // ---- header shrinks into a compact pill on scroll ----
+  var siteHeader = document.querySelector('.site-header');
+  if (siteHeader) {
+    var onScroll = function () { siteHeader.classList.toggle('is-scrolled', window.scrollY > 24); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
   // ---- mobile menu ----
   var menuBtn = document.querySelector('.menu-toggle');
   var nav = document.querySelector('.nav');

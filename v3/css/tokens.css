@@ -11,14 +11,14 @@
   --font: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   /* Type scale (fluid) */
-  --fs-display: clamp(4rem, 11.5vw, 12rem);
-  --fs-h1: clamp(3.25rem, 8vw, 8rem);
-  --fs-h2: clamp(2.5rem, 5.5vw, 5.5rem);
-  --fs-h3: clamp(1.75rem, 2.6vw, 2.5rem);
-  --fs-lead: clamp(1.25rem, 1.9vw, 1.75rem);
-  --fs-body: 1.125rem;
-  --fs-small: 1rem;
-  --fs-tag: 0.9375rem;
+  --fs-display: clamp(2.25rem, 4.6vw, 4.25rem);
+  --fs-h1: clamp(2.25rem, 4.4vw, 3.75rem);
+  --fs-h2: clamp(1.875rem, 3.2vw, 2.75rem);
+  --fs-h3: clamp(1.25rem, 1.7vw, 1.625rem);
+  --fs-lead: clamp(1.0625rem, 1.3vw, 1.25rem);
+  --fs-body: 1rem;
+  --fs-small: 0.9375rem;
+  --fs-tag: 0.875rem;
 
   /* Spacing */
   --s-1: 0.25rem;
@@ -47,19 +47,19 @@
   --dur: 0.3s;
 }
 
-/* Light (v2 light palette) */
+/* Light (clean white) */
 :root,
 :root[data-theme="light"] {
   color-scheme: light;
-  --bg: #babec8;
-  --surface: #d8dde7;
-  --shade: #989ba3;
-  --stroke: #8f93a1;
-  --stroke-strong: #2c2e34;
-  --ink: #151617;
-  --ink-2: #44474a;
-  --ink-3: #5f636a;
-  --on-ink: #f2f5fc;
+  --bg: #ffffff;
+  --surface: #f4f5f7;
+  --shade: #e6e8ec;
+  --stroke: #d5d8de;
+  --stroke-strong: #111317;
+  --ink: #111317;
+  --ink-2: #474c55;
+  --ink-3: #6b717b;
+  --on-ink: #ffffff;
   --weight: 400;
   --weight-medium: 600;
 

@@ -99,8 +99,8 @@ function sealProject(p, password) {
 // ---- shared page chrome ---------------------------------------------------------------
 const NAV = [
   ['work/', 'Work', 'work'],
-  ['#about', 'About', 'about'],
-  ['#experience', 'Experience', 'experience'],
+  ['about/', 'About', 'about'],
+  ['resume/', 'Resume', 'resume'],
   ['#contact', 'Contact', 'contact'],
 ];
 
@@ -114,7 +114,7 @@ function head({ title, desc, url, image, type = 'website', ld = [] }) {
   <meta name="author" content="${me.name}">
   <meta name="robots" content="noindex, nofollow">
   <link rel="canonical" href="${url}">
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#babec8">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141414">
 
   <link rel="icon" href="img/favicon/favicon.ico" sizes="any">
@@ -148,8 +148,8 @@ ${ld.map((o) => `  <script type="application/ld+json">\n${JSON.stringify(o, null
 </head>`;
 }
 
-function header(active) {
-  const links = NAV.map(([href, label, id]) => `<a href="${href}"${active === id ? ' aria-current="page"' : ''}>${label}</a>`).join('\n          ');
+function header(active, self) {
+  const links = NAV.map(([href, label, id]) => `<a href="${id === 'contact' ? self + '#contact' : href}"${active === id ? ' aria-current="page"' : ''}>${label}</a>`).join('\n          ');
   return `<a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="container site-header__bar">
@@ -194,14 +194,14 @@ function footer() {
   </footer>`;
 }
 
-function page({ headHtml, active, body, scripts = [] }) {
+function page({ headHtml, active, body, scripts = [], self = '/v3/' }) {
   return `<!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 ${headHtml}
 
 <body id="top">
-  ${header(active)}
+  ${header(active, self)}
 
   <main id="main">
 ${indent(body, 4)}
@@ -220,24 +220,21 @@ ${scripts.map((s) => `  <script src="${s}"></script>`).join('\n')}
 // ---- pieces ----------------------------------------------------------------------------
 const tag = (c) => `<span class="tag" data-cat="${c}">${catLabel[c]}</span>`;
 
-function card(p) {
+function card(p, i = 0) {
   return `<a class="card reveal" href="work/${p.slug}/" data-cats="${p.categories.join(' ')}">
-  <div class="card__media">
-    <img src="${p.cover}" alt="${esc(p.title)}" width="1920" height="1080" loading="lazy">
-    <span class="card__go">${I.upRight()}</span>
-  </div>
+  <div class="card__media"><img src="${p.cover}" alt="${esc(p.title)}" width="1920" height="1080" loading="lazy"></div>
   <div class="card__body">
-    <div class="tags">${p.categories.map(tag).join('')}</div>
+    <div class="card__meta"><span class="card__type">${esc(p.type)}</span><div class="tags">${p.categories.map(tag).join('')}</div></div>
     <h3 class="card__title">${esc(p.title)}</h3>
     <p class="card__text muted">${esc(p.short)}</p>
   </div>
+  <span class="card__go" aria-hidden="true">${I.upRight()}</span>
 </a>`;
 }
 
-// first, third... plain; second, fourth... pushed down (staggered rhythm). JS redoes this when filtering.
 const cardsHtml = (list, attrs = '') =>
   `<div class="cards"${attrs}>
-${indent(list.map((p, i) => card(p).replace('class="card reveal"', i % 2 ? 'class="card reveal is-even"' : 'class="card reveal"')).join('\n'), 2)}
+${indent(list.map((p, i) => card(p, i)).join('\n'), 2)}
 </div>`;
 
 const secHead = (label, title, right = '') => `<div class="sec-head">
@@ -252,8 +249,7 @@ const rows = (list) =>
   `<ul class="rows">
 ${list
   .map(
-    (r, i) => `  <li>
-    <span class="rows__num mono">${String(i + 1).padStart(2, '0')}.</span>
+    (r) => `  <li>
     <span class="rows__year">${esc(r.year)}</span>
     <span class="rows__role">${esc(r.role)}</span>
     <span class="rows__org">${r.href ? `<a href="${r.href}" target="_blank" rel="noopener">${esc(r.org)}</a>` : esc(r.org)}</span>
@@ -275,23 +271,6 @@ const tool = (t) => {
     : `<li class="tool tool--text">${esc(t)}</li>`;
 };
 
-function marquee() {
-  const tiles = [
-    ['letter', 'd'], ['img', 'dreamjourney'], ['letter', 'i'], ['img', 'puspresnas'], ['letter', 'm'],
-    ['img', 'bem-dcc'], ['letter', 'a'], ['img', 'pemberdayaan'], ['letter', 's'],
-  ].map(([k, n]) =>
-    k === 'letter'
-      ? `<div class="m-item m-item--letter"><img src="img/icons/dimas/${n}.svg" alt="" loading="lazy"></div>`
-      : `<div class="m-item m-item--img"><img src="img/marquee/${n}.webp" alt="" loading="lazy"></div>`
-  );
-  const set = tiles.join('\n');
-  return `<div class="marquee" aria-hidden="true">
-  <div class="marquee__track">
-${indent(set + '\n' + set, 4)}
-  </div>
-</div>`;
-}
-
 // ---- home --------------------------------------------------------------------------------
 function homePage() {
   const featured = projects.filter((p) => p.featured);
@@ -299,80 +278,22 @@ function homePage() {
   const desc = 'Portfolio of Ahmad Dimas: UX research, UI design and web development case studies, with pitch decks, prototypes and the process behind each project.';
   const body = `<section class="hero">
   <div class="hero__decor" aria-hidden="true">
-    <img class="d1" data-speed="0.18" src="img/backgrounds/1200x1200_bg01.webp" alt="" width="600" height="600">
-    <img class="d2" data-speed="-0.12" src="img/backgrounds/1200x1200_bg02.webp" alt="" width="300" height="300">
+    <img class="d1" data-speed="0.16" src="img/backgrounds/1200x1200_bg01.webp" alt="" width="600" height="600">
   </div>
   <div class="container">
-    <span class="eyebrow">Hello! I am Ahmad Dimas</span>
-    <h1 class="display">Research-led<br><em>product design</em></h1>
-    <p class="lead">I research how people actually behave, design the experience around what I learn, and build it in code.</p>
+    <span class="eyebrow">Hello, I'm Ahmad Dimas</span>
+    <h1 class="display">Research-led product design, <em>from the first interview to the shipped screen.</em></h1>
+    <p class="lead">UX researcher, UI designer and web developer from East Java. I like understanding people first, then designing and building something that fits them.</p>
     <div class="hero__cta">
       <a class="btn btn--solid" href="work/">View case studies ${I.right()}</a>
       <a class="btn" href="${me.cv}" target="_blank" rel="noopener">Download CV ${I.upRight()}</a>
     </div>
-    <div class="facts">
-      <span>${me.location}</span>
-      <span>Software Engineer at SEVIMA</span>
-      <span>Research, UX, UI, Web</span>
-    </div>
   </div>
 </section>
-
-${marquee()}
 
 <section class="section container" id="work">
-${indent(secHead('Selected work', 'Case studies, <em>not screenshots</em>', '<a class="btn" href="work/">Show all projects ' + I.right() + '</a>'), 2)}
+${indent(secHead('Case studies', 'Selected <em>work</em>', '<a class="btn" href="work/">View all ' + I.right() + '</a>'), 2)}
 ${indent(cardsHtml(featured), 2)}
-</section>
-
-<section class="section container" id="about">
-${indent(secHead('About me', 'Curious first,<br><em>designer second</em>'), 2)}
-  <div class="about">
-    <div class="about__photo reveal"><img src="img/profile.webp" alt="Portrait of ${me.name}" width="1000" height="999" loading="lazy"></div>
-    <div class="about__text reveal">
-      <p>${esc(me.about)}</p>
-      <div class="about__links">
-        <a class="btn btn--solid" href="${me.cv}" target="_blank" rel="noopener">Download CV ${I.upRight()}</a>
-        <a class="btn" href="mailto:${me.email}?subject=Message%20from%20DimsPorf">Email me</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section container" id="approach">
-${indent(secHead('Approach', 'From question<br><em>to shipped screen</em>'), 2)}
-  <ul class="caps">
-${me.capabilities
-  .map(
-    (c, i) => `    <li class="cap reveal">
-      <img class="cap__art" src="img/services/800x1000_s0${i + 1}.webp" alt="" width="400" height="500" loading="lazy">
-      <div class="cap__top"><span class="tag" data-cat="${c.id}">${String(i + 1).padStart(2, '0')}</span></div>
-      <div class="cap__body">
-        <h3 class="h3">${esc(c.title)}</h3>
-        <p>${esc(c.text)}</p>
-      </div>
-    </li>`
-  )
-  .join('\n')}
-  </ul>
-</section>
-
-<section class="section container" id="experience">
-${indent(secHead('Resume', 'The digital<br><em>journey</em>'), 2)}
-  <div class="rows-group reveal"><span class="eyebrow">Work experience</span>
-${indent(rows(me.experience), 4)}
-  </div>
-  <div class="rows-group reveal"><span class="eyebrow">Education</span>
-${indent(rows(me.education), 4)}
-  </div>
-  <div class="rows-group reveal"><span class="eyebrow">Recognition</span>
-${indent(rows(me.awards), 4)}
-  </div>
-  <div class="rows-group reveal"><span class="eyebrow">My favourite tools</span>
-    <ul class="tool-grid">
-${indent(me.tools.map(tool).join('\n'), 6)}
-    </ul>
-  </div>
 </section>`;
   const ld = [
     { '@context': 'https://schema.org', '@type': 'WebSite', name: site.name, url: SITE_URL },
@@ -389,7 +310,81 @@ ${indent(me.tools.map(tool).join('\n'), 6)}
       },
     },
   ];
-  return page({ headHtml: head({ title, desc, url: SITE_URL, image: 'img/og-image.jpg', ld }), active: '', body });
+  return page({ headHtml: head({ title, desc, url: SITE_URL, image: 'img/og-image.jpg', ld }), active: '', body, self: '/v3/' });
+}
+
+const crumbs = (items) => [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [{ name: site.name, item: SITE_URL }, ...items].map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, item: it.item })),
+  },
+];
+
+function aboutPage() {
+  const url = `${SITE_URL}about/`;
+  const title = `About | ${site.name}`;
+  const desc = 'About Ahmad Dimas: UX researcher, UI designer and software engineer from East Java.';
+  const body = `<section class="page-head container">
+  <span class="eyebrow">About me</span>
+  <h1 class="h1">Curious first,<br><em>designer second</em></h1>
+</section>
+<section class="container about reveal">
+  <p class="about__lead">${esc(me.about)}</p>
+  <div class="about__links">
+    <a class="btn btn--solid" href="${me.cv}" target="_blank" rel="noopener">Download CV ${I.upRight()}</a>
+    <a class="btn" href="resume/">Resume ${I.right()}</a>
+    <a class="btn" href="mailto:${me.email}?subject=Message%20from%20DimsPorf">Email me</a>
+  </div>
+</section>
+<section class="section container" id="approach">
+${indent(secHead('Approach', 'From question<br><em>to shipped screen</em>'), 2)}
+  <ul class="caps">
+${me.capabilities
+  .map(
+    (c, i) => `    <li class="cap reveal">
+      <img class="cap__art" src="img/services/800x1000_s0${i + 1}.webp" alt="" width="400" height="500" loading="lazy">
+      <div class="cap__top"><span class="tag" data-cat="${c.id}">${catLabel[c.id]}</span></div>
+      <div class="cap__body">
+        <h3 class="h3">${esc(c.title)}</h3>
+        <p>${esc(c.text)}</p>
+      </div>
+    </li>`
+  )
+  .join('\n')}
+  </ul>
+</section>
+<section class="container" style="padding-bottom: var(--s-9)">
+  <div class="rows-group reveal"><span class="eyebrow">My favourite tools</span>
+    <ul class="tool-grid">
+${indent(me.tools.map(tool).join('\n'), 6)}
+    </ul>
+  </div>
+</section>`;
+  return page({ headHtml: head({ title, desc, url, image: 'img/og-image.jpg', ld: crumbs([{ name: 'About', item: url }]) }), active: 'about', body, self: '/v3/about/' });
+}
+
+function resumePage() {
+  const url = `${SITE_URL}resume/`;
+  const title = `Resume | ${site.name}`;
+  const desc = 'Resume of Ahmad Dimas: work experience, education and recognition.';
+  const body = `<section class="page-head container">
+  <span class="eyebrow">Resume</span>
+  <h1 class="h1">The digital<br><em>journey</em></h1>
+  <div class="hero__cta"><a class="btn btn--solid" href="${me.cv}" target="_blank" rel="noopener">Download CV ${I.upRight()}</a></div>
+</section>
+<section class="container" style="padding-bottom: var(--s-9)">
+  <div class="rows-group reveal"><span class="eyebrow">Work experience</span>
+${indent(rows(me.experience), 4)}
+  </div>
+  <div class="rows-group reveal"><span class="eyebrow">Education</span>
+${indent(rows(me.education), 4)}
+  </div>
+  <div class="rows-group reveal"><span class="eyebrow">Recognition</span>
+${indent(rows(me.awards), 4)}
+  </div>
+</section>`;
+  return page({ headHtml: head({ title, desc, url, image: 'img/og-image.jpg', ld: crumbs([{ name: 'Resume', item: url }]) }), active: 'resume', body, self: '/v3/resume/' });
 }
 
 // ---- all work ------------------------------------------------------------------------------
@@ -425,7 +420,7 @@ ${indent(cardsHtml(projects, ' data-filterable role="tabpanel"'), 2)}
       ],
     },
   ];
-  return page({ headHtml: head({ title, desc, url, image: 'img/og-image.jpg', ld }), active: 'work', body });
+  return page({ headHtml: head({ title, desc, url, image: 'img/og-image.jpg', ld }), active: 'work', body, self: '/v3/work/' });
 }
 
 // ---- project -------------------------------------------------------------------------------
@@ -505,6 +500,14 @@ ${meta.map(([k, v]) => `    <div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('\
   }
 </section>`);
 
+  if (p.stats && p.stats.length) {
+    parts.push(`<section class="container">
+  <ul class="stats">
+${p.stats.map((s) => `    <li><strong>${esc(s.value)}</strong><span>${esc(s.label)}</span></li>`).join('\n')}
+  </ul>
+</section>`);
+  }
+
   const videoBlock = () =>
     block('Video', `<div class="frame"><div class="frame__view"><iframe src="https://www.youtube-nocookie.com/embed/${p.video.youtube}" title="${esc(p.video.title || p.title)}" loading="lazy" allowfullscreen></iframe></div></div>`);
   const hasVideo = !!(p.video && p.video.youtube);
@@ -519,7 +522,7 @@ ${meta.map(([k, v]) => `    <div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('\
         block(
           'Approach',
           `<ol class="steps">
-${s.approach.map((a, n) => `  <li><span class="steps__num mono">${String(n + 1).padStart(2, '0')}</span><h3 class="steps__title">${esc(a.title)}</h3><p class="steps__text">${esc(a.text)}</p></li>`).join('\n')}
+${s.approach.map((a) => `  <li><h3 class="steps__title">${esc(a.title)}</h3><p class="steps__text">${esc(a.text)}</p></li>`).join('\n')}
 </ol>`
         )
       );
@@ -577,6 +580,7 @@ ${p.gallery
     headHtml: head({ title, desc: p.short, url, image: p.cover, type: 'article', ld }),
     active: 'work',
     body: parts.join('\n\n'),
+    self: `/v3/work/${p.slug}/`,
     scripts: p.locked ? ['js/unlock.js'] : [],
   });
 }
@@ -584,6 +588,8 @@ ${p.gallery
 // ---- run -------------------------------------------------------------------------------------
 write('index.html', homePage());
 write('work/index.html', workIndexPage());
+write('about/index.html', aboutPage());
+write('resume/index.html', resumePage());
 projects.forEach((p, i) => {
   const dir = path.join(V3, 'work', p.slug);
   fs.mkdirSync(dir, { recursive: true });

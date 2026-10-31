@@ -119,9 +119,8 @@
     if (data.approach && data.approach.length) {
       var a = block('Approach');
       var ol = el('ol', 'steps');
-      data.approach.forEach(function (s, i) {
+      data.approach.forEach(function (s) {
         var li = el('li');
-        li.appendChild(el('span', 'steps__num mono', String(i + 1).padStart(2, '0')));
         li.appendChild(el('h3', 'steps__title', s.title));
         li.appendChild(el('p', 'steps__text', s.text));
         ol.appendChild(li);

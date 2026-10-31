@@ -122,20 +122,12 @@ ul, ol {
 .muted {
   color: var(--ink-2);
 }
-/* "[ Label ]": the v2 chapter tag */
+/* small section label */
 .eyebrow {
   font-size: var(--fs-tag);
   font-weight: var(--weight-medium);
   line-height: 1.4;
-  color: var(--ink);
-}
-.eyebrow::before {
-  content: "[";
-  padding-right: 0.45em;
-}
-.eyebrow::after {
-  content: "]";
-  padding-left: 0.45em;
+  color: var(--ink-3);
 }
 .mono {
   font-size: var(--fs-small);

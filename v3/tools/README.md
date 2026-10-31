@@ -2,7 +2,7 @@
 
 Desain: turunan design system v2 (Outfit, palet abu-biru dan hitam, bentuk besar yang rounded, tombol pill dan lingkaran,
 tag "[ Label ]", gambar dekoratif, marquee), tapi layout dirombak: hero besar dengan parallax, kartu project
-berselang-seling (staggered), kartu Approach bergambar, tabs pill dengan thumb geser. Flat tanpa shadow.
+daftar project berbaris bernomor (thumbnail, tag, judul, deskripsi), kartu Approach bergambar, tabs pill dengan thumb geser. Flat tanpa shadow.
 Aksen kecil per kategori (Research, UX, UI, Web), terang dan gelap.
 
 ## Struktur
@@ -15,7 +15,7 @@ Aksen kecil per kategori (Research, UX, UI, Web), terang dan gelap.
 ## Build
     node v3/tools/build.mjs
 
-Menghasilkan `v3/index.html`, `v3/work/index.html`, dan `v3/work/<slug>/index.html`.
+Menghasilkan `v3/index.html`, `v3/work/`, `v3/about/`, `v3/resume/`, dan `v3/work/<slug>/index.html`.
 Field project sama seperti v2 (`featured`, `categories`, `decks`, `prototype`, `video`, `gallery`, `locked`, `liveUrl`).
 
 ## Project private
