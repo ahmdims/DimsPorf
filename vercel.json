@@ -1,0 +1,79 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "ahmdims.vercel.app"
+        }
+      ],
+      "destination": "https://dimsporf.vercel.app/v2/",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "ahmdims.vercel.app"
+        }
+      ],
+      "destination": "https://dimsporf.vercel.app/$1",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "destination": "/v2/",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/v2/",
+      "permanent": true
+    },
+    {
+      "source": "/v2",
+      "destination": "/v2/",
+      "permanent": true
+    },
+    {
+      "source": "/v2/index.html",
+      "destination": "/v2/",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/v2/fonts/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/v2/img/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800"
+        }
+      ]
+    }
+  ]
+}
