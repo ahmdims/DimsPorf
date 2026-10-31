@@ -5,6 +5,48 @@
     "author": "Ahmad Dimas",
     "aliases": [
       "ahmdims.vercel.app"
+    ],
+    "standalone": [
+      {
+        "file": "jejak/index.html",
+        "url": "jejak/",
+        "index": true
+      },
+      {
+        "file": "pemberdayaan/index.html",
+        "url": "pemberdayaan/",
+        "index": true
+      },
+      {
+        "file": "tanam-harapan/index.html",
+        "url": "tanam-harapan/",
+        "index": true
+      },
+      {
+        "file": "v1/bem-dcc.html",
+        "url": "v1/bem-dcc.html",
+        "index": true
+      },
+      {
+        "file": "v1/dreamjourney.html",
+        "url": "v1/dreamjourney.html",
+        "index": true
+      },
+      {
+        "file": "v1/puspresnas.html",
+        "url": "v1/puspresnas.html",
+        "index": true
+      },
+      {
+        "file": "v1/index.html",
+        "url": "v1/",
+        "index": false
+      },
+      {
+        "file": "v1/terrago.html",
+        "url": "v1/terrago.html",
+        "index": false
+      }
     ]
   },
   "categories": [

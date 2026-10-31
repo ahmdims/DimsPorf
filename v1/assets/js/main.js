@@ -15,7 +15,8 @@ function TotalYears() {
   const currentYear = new Date().getFullYear();
   const yearDifference = currentYear - startYear + 1;
 
-  document.getElementById("years").textContent = `${yearDifference}+`;
+  const yearsEl = document.getElementById("years");
+  if (yearsEl) yearsEl.textContent = `${yearDifference}+`;
 }
 window.onload = TotalYears;
 

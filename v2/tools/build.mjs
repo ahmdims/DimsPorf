@@ -501,6 +501,7 @@ ${p.gallery
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(p.short)}">
   <meta property="og:image" content="${abs(p.cover)}">
+  <meta property="og:image:alt" content="${esc(p.title)} case study cover">
   <meta property="og:url" content="${url}">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
@@ -635,6 +636,7 @@ function workIndexPage() {
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(desc)}">
   <meta property="og:image" content="${abs('img/ahmad-dimas-ux-researcher-ui-designer-og.jpg')}">
+  <meta property="og:image:alt" content="Ahmad Dimas, UX researcher and UI designer">
   <meta property="og:url" content="${url}">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
@@ -792,6 +794,7 @@ inject(path.join(V2, 'index.html'), 'work-cards', indent(cards(projects.filter((
 const smap = path.join(ROOT, 'sitemap.xml');
 const today = new Date().toISOString().slice(0, 10);
 const imgXml = (list) => list.map((src) => `\n    <image:image>\n      <image:loc>${imgAbs(src)}</image:loc>\n    </image:image>`).join('');
+const entryAt = (loc, lastmod, freq, prio, images = []) => `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${prio}</priority>${imgXml(images)}\n  </url>`;
 const entry = (loc, freq, prio, images = []) => `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${prio}</priority>${imgXml(images)}\n  </url>`;
 const urls = [
   entry(site.url, 'weekly', '0.9', ['img/backgrounds/ahmad-dimas-ux-researcher-ui-designer-portrait.webp', ...projects.map((p) => p.cover)]),
@@ -804,6 +807,40 @@ const block = `  <!-- build:v2 -->\n${urls}\n  <!-- /build:v2 -->`;
 sm = /<!-- build:v2 -->/.test(sm)
   ? sm.replace(/ *<!-- build:v2 -->[\s\S]*?<!-- \/build:v2 -->/, block)
   : sm.replace('</urlset>', `${block}\n</urlset>`);
+fs.writeFileSync(smap, sm);
+
+// Stand-alone pages (sub-brand projects and archive pages) get their own sitemap entries with images.
+const ORIGIN_URL = new URL(site.url).origin;
+function standaloneImages(file) {
+  const html = fs.readFileSync(path.join(ROOT, file), 'utf8');
+  const baseHref = (html.match(/<base href="([^"]+)"/i) || [])[1] || '/' + path.dirname(file).split(path.sep).join('/') + '/';
+  const out = new Set();
+  for (const m of html.matchAll(/<img\b[^>]*>/gi)) {
+    const src = (m[0].match(/\ssrc="([^"]+)"/) || [])[1];
+    const alt = (m[0].match(/\salt="([^"]*)"/) || [])[1];
+    if (!src || !alt || /^https?:/.test(src)) continue;
+    out.add(new URL(src, ORIGIN_URL + baseHref).href);
+  }
+  const og = (html.match(/property="og:image"\s+content="([^"]+)"/) || [])[1];
+  if (og && og.startsWith(ORIGIN_URL)) out.add(og);
+  return [...out];
+}
+const standaloneUrls = (site.standalone || [])
+  .filter((s) => s.index !== false)
+  .map((s) => {
+    const mtime = fs.statSync(path.join(ROOT, s.file)).mtime.toISOString().slice(0, 10);
+    return entryAt(ORIGIN_URL + '/' + s.url, mtime, 'monthly', '0.6', standaloneImages(s.file));
+  })
+  .join('\n');
+const sb = '  <!-- build:standalone -->\n' + standaloneUrls + '\n  <!-- /build:standalone -->';
+sm = fs.readFileSync(smap, 'utf8');
+if (/<!-- build:standalone -->/.test(sm)) {
+  sm = sm.replace(/ *<!-- build:standalone -->[\s\S]*?<!-- \/build:standalone -->/, sb);
+} else {
+  // first run: replace the hand-written entries that followed the v2 block
+  const i = sm.indexOf('<!-- /build:v2 -->') + '<!-- /build:v2 -->'.length;
+  sm = sm.slice(0, i) + '\n\n' + sb + '\n</urlset>\n';
+}
 fs.writeFileSync(smap, sm);
 console.log(`built ${projects.length} project pages`);
 
