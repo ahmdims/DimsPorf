@@ -95,7 +95,7 @@
   color: var(--t-bright);
 }
 .work-card__media {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   background: var(--base-shade);
   border: 1px solid var(--stroke-elements);
@@ -1024,13 +1024,6 @@ blockquote {
     display: inline-block;
     padding: 0.9rem 0;
   }
-}
-
-.slide-stack__item figcaption {
-  padding: 1.2rem 2rem 1.4rem;
-  font: normal var(--font-weight-base) 1.5rem/1.3 var(--_font-default);
-  color: var(--t-medium);
-  border-top: 1px solid var(--stroke-elements);
 }
 
 /* Hero marquee (D-I-M-A-S strip) is hidden for now. Remove this block to bring it back. */
