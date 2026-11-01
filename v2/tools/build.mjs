@@ -285,7 +285,6 @@ function slideFigure(p, s, i) {
   const srcset = imgExists(small(s.src)) ? ` srcset="${small(s.src)} 800w, ${s.src} 1600w" sizes="(min-width: 1200px) 70vw, 100vw"` : '';
   return `    <figure class="slide-stack__item animate-in-up">
       <img src="${s.src}"${srcset} alt="${esc(slideAlt(p, s, i))}" width="1600" height="900"${i > 1 ? ' loading="lazy" decoding="async"' : ''}>
-      ${s.caption ? `<figcaption>${esc(s.caption)}</figcaption>` : ''}
     </figure>`;
 }
 
@@ -561,13 +560,6 @@ ${projects.length > 1 ? `                <div class="content__block case-block">
                   </a>
                 </div>
 ` : ''}
-                <div class="content__block case-block case-back">
-                  <a class="btn btn-line-small icon-left animate-in-up" href="work/">
-                    <i class="ph ph-arrow-left"></i>
-                    <span class="btn-caption">All work</span>
-                  </a>
-                </div>
-
               </div>
             </div>
 
