@@ -67,7 +67,7 @@ Google menemukan gambar dari: `<img>` di HTML (bukan CSS background), image site
 
 1. **Nama file = slug deskriptif**, huruf kecil, kata dipisah `-`, minimal 3 kata, memuat topik: `redesign-litabmas-07-keputusan-01-alur-dana.webp`. Dilarang: `1.webp`, `banner.webp`, `IMG_0042`, `image-final-2`. Ganti nama file sebelum dipublish, bukan sesudahnya (URL gambar yang berubah membuang peringkat).
 2. **Alt text** menjelaskan isi gambar dalam satu kalimat, memuat nama project. Rumus slide: `{Judul Project} case study, slide {nn}: {caption}`. Cover: `{Judul Project} cover`. Dilarang: kosong untuk gambar konten, nama file, "image of", daftar kata kunci. `alt=""` hanya untuk gambar dekoratif (marquee, ikon, latar).
-3. **Gambar konten harus berupa `<img>`** di dalam `<figure>`, dengan `<figcaption>` yang terlihat bila relevan. Jangan memakai CSS `background-image` untuk gambar yang ingin diindeks.
+3. **Gambar konten harus berupa `<img>`** di dalam `<figure>`, dengan `<figcaption>` yang terlihat bila relevan (slide deck tidak memakai caption terlihat; alt text-nya sudah cukup). Jangan memakai CSS `background-image` untuk gambar yang ingin diindeks.
 4. **Format dan ukuran**: WebP. Lebar penuh 1600 px (atau lebih bila perlu detail) dan versi `-800.webp` untuk `srcset`. Cover dan gambar OG minimal 1200 px lebar. Kompres sampai kualitas 80, target < 150 KB per gambar.
 5. **`width` dan `height` wajib** di setiap `<img>` konten (mencegah layout shift).
 6. **Lazy loading**: gambar di atas lipatan (hero, cover, dua slide pertama) tanpa `loading="lazy"`, dengan `fetchpriority="high"` untuk elemen LCP. Sisanya `loading="lazy" decoding="async"`.

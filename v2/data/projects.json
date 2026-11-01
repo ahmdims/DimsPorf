@@ -65,6 +65,10 @@
     {
       "id": "web",
       "label": "Web"
+    },
+    {
+      "id": "brand",
+      "label": "Brand"
     }
   ],
   "projects": [
@@ -153,6 +157,96 @@
             {
               "src": "img/works/litabmas/redesign-litabmas-13-refleksi-penutup.webp",
               "caption": "Refleksi & Penutup"
+            }
+          ]
+        }
+      ],
+      "gallery": []
+    },
+    {
+      "slug": "cappu",
+      "title": "Cappu Mascot Guideline",
+      "short": "Mascot guideline for Cappu, a calm and friendly purple capybara: character, colour, expressions, poses, motion and use in real products.",
+      "categories": [
+        "brand",
+        "ui"
+      ],
+      "featured": true,
+      "type": "Mascot guideline",
+      "role": "Character Designer",
+      "tools": [
+        "Figma"
+      ],
+      "cover": "img/works/cappu/cappu-mascot-guideline-01-cover.webp",
+      "sections": {
+        "overview": "Cappu is a purple capybara (Capybara + Purple), a mascot designed to be relaxed and easy to befriend. It greets users, guides them and celebrates small moments with them, and a diamond on its head acts as the DIMAS signature. This guideline documents the character from personality to anatomy, construction, colour, expressions, poses, mouth and teeth detail and motion, then shows the do and don't rules and how Cappu is applied in real products as notifications, empty states and social stickers.",
+        "approach": [
+          {
+            "title": "Relaxed, friendly, curious",
+            "text": "Cappu never panics: the tone is calm and clear, it greets first in simple warm language, and it likes to invite users to try something new."
+          },
+          {
+            "title": "A system, not a single drawing",
+            "text": "Anatomy, construction and colour are documented so the character stays consistent in every expression and pose."
+          },
+          {
+            "title": "Ready to use",
+            "text": "All expressions, poses and animations are available as Figma components: pick a variant, then scale."
+          }
+        ]
+      },
+      "decks": [
+        {
+          "title": "Cappu mascot guideline",
+          "label": "Case study",
+          "slides": [
+            {
+              "src": "img/works/cappu/cappu-mascot-guideline-01-cover.webp",
+              "caption": "Cover"
+            },
+            {
+              "src": "img/works/cappu/cappu-mascot-guideline-02-karakter-siapa-cappu.webp",
+              "caption": "Karakter: Siapa Cappu"
+            },
+            {
+              "src": "img/works/cappu/cappu-mascot-guideline-03-anatomi.webp",
+              "caption": "Anatomi"
+            },
+            {
+              "src": "img/works/cappu/cappu-mascot-guideline-04-konstruksi.webp",
+              "caption": "Konstruksi"
+            },
+            {
+              "src": "img/works/cappu/cappu-mascot-guideline-05-warna.webp",
+              "caption": "Warna"
+            },
+            {
+              "src": "img/works/cappu/cappu-mascot-guideline-06-ekspresi.webp",
+              "caption": "Ekspresi"
+            },
+            {
+              "src": "img/works/cappu/cappu-mascot-guideline-07-pose.webp",
+              "caption": "Pose"
+            },
+            {
+              "src": "img/works/cappu/cappu-mascot-guideline-08-detail-mulut-dan-gigi.webp",
+              "caption": "Detail: Mulut & Gigi"
+            },
+            {
+              "src": "img/works/cappu/cappu-mascot-guideline-09-gerak.webp",
+              "caption": "Gerak"
+            },
+            {
+              "src": "img/works/cappu/cappu-mascot-guideline-10-do-and-dont.webp",
+              "caption": "Do & Don't"
+            },
+            {
+              "src": "img/works/cappu/cappu-mascot-guideline-11-penerapan.webp",
+              "caption": "Penerapan"
+            },
+            {
+              "src": "img/works/cappu/cappu-mascot-guideline-12-penutup.webp",
+              "caption": "Penutup"
             }
           ]
         }
