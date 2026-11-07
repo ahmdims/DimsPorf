@@ -13,6 +13,11 @@
   <meta name="author" content="Ahmad Dimas">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <link rel="canonical" href="https://dimsporf.vercel.app/v2/">
+  <!-- build:hreflang -->
+  <link rel="alternate" hreflang="en" href="https://dimsporf.vercel.app/v2/">
+  <link rel="alternate" hreflang="id" href="https://dimsporf.vercel.app/v2/id/">
+  <link rel="alternate" hreflang="x-default" href="https://dimsporf.vercel.app/v2/">
+<!-- /build:hreflang -->
 
   <!-- Viewport & Compatibility -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,6 +36,7 @@
   <meta property="og:description"
     content="Portfolio of Ahmad Dimas, a UX researcher, UI designer and web developer. Case studies with research, pitch decks and the process behind each project.">
   <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="id_ID">
   <meta property="og:image:alt" content="Ahmad Dimas, UX researcher and UI designer">
   <meta property="og:image" content="https://dimsporf.vercel.app/v2/img/ahmad-dimas-ux-researcher-ui-designer-og.jpg">
   <meta property="og:image:width" content="1200">
@@ -221,6 +227,11 @@
 
   <!-- Fixed Color Switch Start -->
   <div class="color loading__fade">
+    <!-- build:lang-switch -->
+    <a class="lang__link" href="id/" hreflang="id" lang="id" aria-label="Switch language to Bahasa Indonesia" title="Switch language to Bahasa Indonesia">
+      <i class="ph ph-translate" aria-hidden="true"></i>
+    </a>
+<!-- /build:lang-switch -->
     <button id="color-switcher" class="color-switcher" type="button" role="switch" aria-label="light/dark mode"
       aria-checked="true"></button>
   </div>
@@ -404,6 +415,21 @@
 
                     <!-- build:work-cards -->
               <div class="work-grid work-list" role="tabpanel">
+                <a class="work-card animate-in-up" href="work/sdgs-litabmas/" data-cats="research ux ui">
+                  <div class="work-card__media">
+                    <img src="img/works/sdgs-litabmas/sdgs-litabmas-en-01-cover.webp" alt="SDGs in LITABMAS" width="1920" height="1080" loading="lazy">
+                  </div>
+                  <div class="work-card__body">
+                    <div class="work-card__meta">
+                      <span class="work-card__type">Feature design</span>
+                      <span class="work-card__chip">Research</span>
+                      <span class="work-card__chip">UX</span>
+                      <span class="work-card__chip">UI</span>
+                    </div>
+                    <h3 class="work-card__title">SDGs in LITABMAS</h3>
+                    <p class="work-card__text">Designing how SDG contributions are recorded in LITABMAS, from the proposal form and funding clusters to the admin dashboard and lecturer badges.</p>
+                  </div>
+                </a>
                 <a class="work-card animate-in-up" href="work/litabmas/" data-cats="ux ui">
                   <div class="work-card__media">
                     <img src="img/works/litabmas/redesign-litabmas-01-cover.webp" alt="Redesign LITABMAS" width="1920" height="1080" loading="lazy">

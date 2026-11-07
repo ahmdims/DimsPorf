@@ -8,6 +8,9 @@
   <meta name="description" content="All case studies by Ahmad Dimas: UX research, UI design and web projects, with pitch decks, prototypes and process.">
   <meta name="author" content="Ahmad Dimas">
   <link rel="canonical" href="https://dimsporf.vercel.app/v2/work/">
+  <link rel="alternate" hreflang="en" href="https://dimsporf.vercel.app/v2/work/">
+  <link rel="alternate" hreflang="id" href="https://dimsporf.vercel.app/v2/id/work/">
+  <link rel="alternate" hreflang="x-default" href="https://dimsporf.vercel.app/v2/work/">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -24,6 +27,7 @@
   <meta property="og:image:alt" content="Ahmad Dimas, UX researcher and UI designer">
   <meta property="og:url" content="https://dimsporf.vercel.app/v2/work/">
   <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="id_ID">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="All Work — UX, UI &amp; Research Case Studies | DimsPorf">
   <meta name="twitter:description" content="All case studies by Ahmad Dimas: UX research, UI design and web projects, with pitch decks, prototypes and process.">
@@ -179,6 +183,9 @@
 
   <!-- Fixed Color Switch Start -->
   <div class="color loading__fade">
+    <a class="lang__link" href="id/work/" hreflang="id" lang="id" aria-label="Switch language to Bahasa Indonesia" title="Switch language to Bahasa Indonesia">
+      <i class="ph ph-translate" aria-hidden="true"></i>
+    </a>
     <button id="color-switcher" class="color-switcher" type="button" role="switch" aria-label="light/dark mode"
       aria-checked="true"></button>
   </div>
@@ -211,12 +218,28 @@
                 <div class="content__block case-block">
                   <div class="work-tabs animate-in-up" role="tablist" aria-label="Filter projects by category">
                     <button class="work-tabs__tab is-active" type="button" role="tab" id="tab-all" aria-selected="true" tabindex="0" data-filter="all"><span>All</span></button>
+                    <button class="work-tabs__tab" type="button" role="tab" id="tab-research" aria-selected="false" tabindex="-1" data-filter="research"><span>Research</span></button>
                     <button class="work-tabs__tab" type="button" role="tab" id="tab-ux" aria-selected="false" tabindex="-1" data-filter="ux"><span>UX</span></button>
                     <button class="work-tabs__tab" type="button" role="tab" id="tab-ui" aria-selected="false" tabindex="-1" data-filter="ui"><span>UI</span></button>
                     <button class="work-tabs__tab" type="button" role="tab" id="tab-brand" aria-selected="false" tabindex="-1" data-filter="brand"><span>Brand</span></button>
                     <span class="work-tabs__bar" aria-hidden="true"></span>
                   </div>
                   <div class="work-grid work-list" role="tabpanel">
+                    <a class="work-card animate-in-up" href="work/sdgs-litabmas/" data-cats="research ux ui">
+                      <div class="work-card__media">
+                        <img src="img/works/sdgs-litabmas/sdgs-litabmas-en-01-cover.webp" alt="SDGs in LITABMAS" width="1920" height="1080" loading="lazy">
+                      </div>
+                      <div class="work-card__body">
+                        <div class="work-card__meta">
+                          <span class="work-card__type">Feature design</span>
+                          <span class="work-card__chip">Research</span>
+                          <span class="work-card__chip">UX</span>
+                          <span class="work-card__chip">UI</span>
+                        </div>
+                        <h3 class="work-card__title">SDGs in LITABMAS</h3>
+                        <p class="work-card__text">Designing how SDG contributions are recorded in LITABMAS, from the proposal form and funding clusters to the admin dashboard and lecturer badges.</p>
+                      </div>
+                    </a>
                     <a class="work-card animate-in-up" href="work/litabmas/" data-cats="ux ui">
                       <div class="work-card__media">
                         <img src="img/works/litabmas/redesign-litabmas-01-cover.webp" alt="Redesign LITABMAS" width="1920" height="1080" loading="lazy">
