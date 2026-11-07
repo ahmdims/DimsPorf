@@ -4,7 +4,7 @@
   <!-- build:v2 -->
   <url>
     <loc>https://dimsporf.vercel.app/v2/</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -19,7 +19,7 @@
   </url>
   <url>
     <loc>https://dimsporf.vercel.app/v2/work/</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -31,7 +31,7 @@
   </url>
   <url>
     <loc>https://dimsporf.vercel.app/v2/work/litabmas/</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -76,7 +76,7 @@
   </url>
   <url>
     <loc>https://dimsporf.vercel.app/v2/work/cappu/</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -119,6 +119,24 @@
   <!-- /build:v2 -->
 
   <!-- build:standalone -->
+  <url>
+    <loc>https://dimsporf.vercel.app/</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/v2/img/backgrounds/ahmad-dimas-ux-researcher-ui-designer-portrait.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/v2/img/works/litabmas/redesign-litabmas-01-cover.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/v2/img/works/cappu/cappu-mascot-guideline-01-cover.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://dimsporf.vercel.app/v2/img/ahmad-dimas-ux-researcher-ui-designer-og.jpg</image:loc>
+    </image:image>
+  </url>
   <url>
     <loc>https://dimsporf.vercel.app/jejak/</loc>
     <lastmod>2026-10-31</lastmod>

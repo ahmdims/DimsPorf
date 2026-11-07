@@ -8,6 +8,11 @@
     ],
     "standalone": [
       {
+        "file": "index.html",
+        "url": "",
+        "index": true
+      },
+      {
         "file": "jejak/index.html",
         "url": "jejak/",
         "index": true
