@@ -13,7 +13,7 @@ const catLabel = Object.fromEntries(categories.map((c) => [c.id, c.label]));
 const partial = (n) => fs.readFileSync(path.join(V2, 'tools/partials', n), 'utf8');
 const LOGO = partial('logo.svg.html');
 const PSWP = partial('pswp.html');
-const EMAIL = 'ahmaddimas1945@gmail.com';
+const EMAIL = 'ahmaddimas.me@gmail.com';
 
 const esc = (s = '') =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
