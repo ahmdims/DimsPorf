@@ -13,7 +13,7 @@ Tujuan: setiap halaman, project, dan gambar di portfolio bisa ditemukan di Googl
 |---|---|
 | Domain utama (canonical) | `https://dimsporf.vercel.app` |
 | Domain alias | `ahmdims.vercel.app`, selalu 301 ke domain utama (`vercel.json`) |
-| Situs utama | `/v2/` (root `/` di-301 ke `/v2/`). Brand pribadi: "Ahmad Dimas" |
+| Situs utama | `/v2/` (root `/` adalah beranda situs yang memuat JSON-LD `WebSite`, lalu mengalihkan pengunjung ke `/v2/` lewat JavaScript). Brand pribadi: "Ahmad Dimas" |
 | Sub-brand mandiri | `/jejak/`, `/pemberdayaan/`, `/tanam-harapan/` (diindeks, berdiri sendiri) |
 | Arsip | `/v1/bem-dcc.html`, `/v1/dreamjourney.html`, `/v1/puspresnas.html` diindeks. `/v1/` dan `/v1/terrago.html` `noindex`. v3 selalu `noindex` |
 | Daftar halaman mandiri | `site.standalone` di `v2/data/projects.json` (sumber sitemap dan audit) |
@@ -93,15 +93,30 @@ Lalu jalankan `node v2/tools/build.mjs` dan pastikan audit lulus. Project baru o
 ## 5. Dua domain dan redirect
 
 - Semua canonical, sitemap, JSON-LD, dan og:url memakai domain utama. Alias hanya boleh muncul di `site.aliases` dan `vercel.json`.
-- `vercel.json` memuat 301 dari alias ke domain utama (`has: host`), root `/` ke `/v2/`, dan `/index.html`, `/v2`, `/v2/index.html` ke `/v2/`. Redirect dengan host hanya jalan kalau **kedua domain terpasang di satu project Vercel**. Kalau alias adalah project terpisah, salin `vercel.json` yang sama ke project itu.
+- `vercel.json` memuat 301 dari alias ke domain utama (`has: host`), `/index.html` ke `/`, dan `/v2`, `/v2/index.html` ke `/v2/`. Root `/` sengaja tidak di-redirect: Google membaca nama situs dari beranda, jadi `/` harus 200 dengan `WebSite` JSON-LD (`url` = `https://dimsporf.vercel.app/`), dan JSON-LD `WebSite` di `/v2/` memakai `url` yang sama. Redirect dengan host hanya jalan kalau **kedua domain terpasang di satu project Vercel**. Kalau alias adalah project terpisah, salin `vercel.json` yang sama ke project itu.
 - Search Console: daftarkan kedua domain sebagai properti. Kirim sitemap hanya untuk domain utama. Jangan memakai "Change of address" (tidak tersedia untuk subdomain vercel.app).
 - Mengganti domain utama: ubah `site.url` dan `site.aliases` di `projects.json`, jalankan build, lalu perbarui canonical statis di `v2/index.html`, `robots.txt`, dan `vercel.json`. Audit akan menunjukkan semua yang tertinggal.
+
+### Root `/` setara dengan `/v2/`
+
+Root adalah beranda situs di mata Google (nama situs "DimsPorf" dibaca dari sini), jadi SEO-nya tidak boleh lebih tipis dari `/v2/`. Pengunjung tetap diarahkan ke `/v2/` lewat `location.replace`, tetapi crawler membaca halaman penuhnya.
+
+Root wajib memiliki, sama seperti beranda `/v2/`:
+- title, description, `author`, canonical ke dirinya sendiri (`https://dimsporf.vercel.app/`), `robots` `index, follow, max-image-preview:large, max-snippet:-1`.
+- Open Graph lengkap (`og:image` 1200x630 + alt, `og:site_name`, `og:url` = canonical) dan Twitter `summary_large_image`.
+- ikon yang sama (`favicon.ico`, `icon.svg`, `apple-touch-icon`, `manifest`) dan `theme-color`. Path memakai `/v2/...` absolut karena root tidak punya `<base>`.
+- JSON-LD `WebSite` (`url` = root), `ProfilePage` dengan `Person`, dan `ItemList` semua project.
+- konten terlihat (minimal 150 kata): satu `<h1>`, ringkasan "about", daftar layanan, foto dengan alt deskriptif + width/height.
+- link HTML biasa ke `/v2/`, `/v2/work/`, dan **setiap** project (`/v2/work/<slug>/`), plus tautan profil (`rel="me"`).
+- entri di `sitemap.xml` beserta gambarnya (otomatis lewat `site.standalone`).
+
+Daftar project dan `ItemList` di root dibuat otomatis oleh `build.mjs` (penanda `build:root-cases` dan `build:root-itemlist`). Jangan diedit tangan. Setiap menambah project, jalankan build. `seo-audit.mjs` menggagalkan build kalau root kehilangan salah satu poin di atas atau lupa mencantumkan project.
 
 ## 6. Sitemap, robots, redirect
 
 - `sitemap.xml` hanya berisi URL kanonik (200, indexable) di domain utama: home, daftar, tiap project, dan halaman mandiri yang memang ingin diindeks. Tidak ada URL yang di-redirect atau `noindex`.
 - `robots.txt`: `User-agent: *`, `Allow: /`, dan baris `Sitemap:` ke domain utama.
-- Jangan memakai redirect JavaScript atau meta refresh sebagai satu-satunya cara memindahkan halaman. Pakai 301 di `vercel.json`.
+- Jangan memakai redirect JavaScript atau meta refresh sebagai satu-satunya cara memindahkan halaman. Pakai 301 di `vercel.json`. Satu-satunya pengecualian adalah root `/` (lihat bagian 5).
 - Halaman `noindex` (v1 home, TerraGo, v3) tidak boleh ada di sitemap. v3 tetap `noindex` sampai resmi menggantikan v2.
 
 ## 7. Performa (Core Web Vitals ikut menentukan peringkat)
