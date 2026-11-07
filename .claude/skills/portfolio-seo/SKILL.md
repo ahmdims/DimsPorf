@@ -80,6 +80,7 @@ Google menemukan gambar dari: `<img>` di HTML (bukan CSS background), image site
 ## 4. Menambah project baru (checklist)
 
 Isi di `v2/data/projects.json`:
+- Situs ini dua bahasa (en default, id di `/v2/id/`). Bidang yang tampil di halaman (`title`, `short`, `type`, `sections`, caption, dll.) diisi `{ "en": ..., "id": ... }`. Aturan lengkap, hreflang, dan deck per bahasa ada di skill `portfolio-i18n`.
 - `slug` huruf kecil dengan `-`, mengandung nama project. URL jadi `/v2/work/{slug}/`.
 - `title` jelas dan spesifik (bukan "Project 1").
 - `short`: satu kalimat 80 sampai 155 karakter berisi apa, untuk siapa, hasil.
@@ -96,6 +97,10 @@ Lalu jalankan `node v2/tools/build.mjs` dan pastikan audit lulus. Project baru o
 - `vercel.json` memuat 301 dari alias ke domain utama (`has: host`), `/index.html` ke `/`, dan `/v2`, `/v2/index.html` ke `/v2/`. Root `/` sengaja tidak di-redirect: Google membaca nama situs dari beranda, jadi `/` harus 200 dengan `WebSite` JSON-LD (`url` = `https://dimsporf.vercel.app/`), dan JSON-LD `WebSite` di `/v2/` memakai `url` yang sama. Redirect dengan host hanya jalan kalau **kedua domain terpasang di satu project Vercel**. Kalau alias adalah project terpisah, salin `vercel.json` yang sama ke project itu.
 - Search Console: daftarkan kedua domain sebagai properti. Kirim sitemap hanya untuk domain utama. Jangan memakai "Change of address" (tidak tersedia untuk subdomain vercel.app).
 - Mengganti domain utama: ubah `site.url` dan `site.aliases` di `projects.json`, jalankan build, lalu perbarui canonical statis di `v2/index.html`, `robots.txt`, dan `vercel.json`. Audit akan menunjukkan semua yang tertinggal.
+
+### Multi bahasa
+
+Setiap halaman v2 ada untuk setiap bahasa dengan `hreflang` timbal balik (termasuk dirinya dan `x-default`), `<html lang>`, `og:locale`, dan alternatif `xhtml:link` di sitemap. Title dan description harus unik antar bahasa. `seo-audit.mjs` menggagalkan build kalau salah satunya hilang atau salah. Detail ada di skill `portfolio-i18n`.
 
 ### Root `/` setara dengan `/v2/`
 

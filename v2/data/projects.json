@@ -52,12 +52,30 @@
         "url": "v1/terrago.html",
         "index": false
       }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "label": "English",
+        "short": "EN",
+        "locale": "en_US",
+        "default": true
+      },
+      {
+        "code": "id",
+        "label": "Bahasa Indonesia",
+        "short": "ID",
+        "locale": "id_ID"
+      }
     ]
   },
   "categories": [
     {
       "id": "research",
-      "label": "Research"
+      "label": {
+        "en": "Research",
+        "id": "Riset"
+      }
     },
     {
       "id": "ux",
@@ -78,182 +96,554 @@
   ],
   "projects": [
     {
-      "slug": "litabmas",
-      "title": "Redesign LITABMAS",
-      "short": "Redesigning LITABMAS's home page so an LPPM admin can read funding, proposal pipeline and outcomes on one screen.",
+      "slug": "sdgs-litabmas",
+      "title": {
+        "en": "SDGs in LITABMAS",
+        "id": "SDGs di LITABMAS"
+      },
+      "short": {
+        "en": "Designing how SDG contributions are recorded in LITABMAS, from the proposal form and funding clusters to the admin dashboard and lecturer badges.",
+        "id": "Merancang pencatatan kontribusi SDGs di LITABMAS, dari form proposal dan klaster pendanaan hingga dashboard admin dan lencana dosen."
+      },
       "categories": [
+        "research",
         "ux",
         "ui"
       ],
       "featured": true,
-      "type": "Dashboard redesign",
+      "type": {
+        "en": "Feature design",
+        "id": "Desain fitur"
+      },
       "role": "Product Designer",
-      "cover": "img/works/litabmas/redesign-litabmas-01-cover.webp",
+      "cover": {
+        "en": "img/works/sdgs-litabmas/sdgs-litabmas-en-01-cover.webp",
+        "id": "img/works/sdgs-litabmas/sdgs-litabmas-id-01-cover.webp"
+      },
       "sections": {
-        "overview": "LITABMAS is the research and community service module of SEVIMA Platform, where universities manage research grants from application to publication. Its home page is the first screen an LPPM admin opens every time they start work, yet answering simple questions meant opening several menus and calculating the numbers by hand. This redesign puts funding status, the proposal pipeline and outcomes on a single screen, with a clear state for every condition: full data, empty, zero and filtered results.",
+        "overview": {
+          "en": "The 2026 Litabmas Guidelines require researchers to select SDG Achievement Indicators when they submit a proposal, and that data becomes the basis of the university's SDG contribution report (IKU 7). The proposal form could not record SDGs yet, so nothing could be tracked, let alone reported. This case study designs one SDG dataset, recorded once in the funding cluster and the proposal, then read two ways: aggregation for the LPPM Admin and badges for lecturers.",
+          "id": "Panduan Litabmas 2026 mewajibkan peneliti memilih Indikator Capaian SDGs saat mengajukan proposal, dan data itu menjadi dasar laporan kontribusi SDGs perguruan tinggi (IKU 7). Form proposal belum bisa mencatat SDGs, sehingga tidak ada yang bisa dilacak, apalagi dilaporkan. Studi kasus ini merancang satu dataset SDGs yang dicatat sekali di klaster pendanaan dan proposal, lalu dibaca dengan dua cara: agregasi untuk Admin LPPM dan lencana untuk dosen."
+        },
         "approach": [
           {
-            "title": "Follow the money",
-            "text": "Funds move from source to cluster to researcher. The screen mirrors that journey instead of showing a single total."
+            "title": {
+              "en": "Required for researchers, optional for institutions",
+              "id": "Wajib bagi peneliti, opsional bagi institusi"
+            },
+            "text": {
+              "en": "Lecturers must select at least one SDG. Admins may leave a cluster's SDG focus empty, shown as “Not specified”, not as an error.",
+              "id": "Dosen wajib memilih minimal satu SDG. Admin boleh mengosongkan fokus SDG sebuah klaster, ditampilkan sebagai “Tidak ditentukan”, bukan sebagai kesalahan."
+            }
           },
           {
-            "title": "Numbers must be trustworthy",
-            "text": "Every number has a clear, consistent formula: remaining funds are the total minus what has been given, and percentages come from the same figures."
+            "title": {
+              "en": "Guide, don't lock",
+              "id": "Memandu, bukan mengunci"
+            },
+            "text": {
+              "en": "Changing the SDG focus of a cluster that already has proposals triggers a warning: existing proposals remain valid and the new rule applies only to new proposals.",
+              "id": "Mengubah fokus SDG klaster yang sudah punya proposal memunculkan peringatan: proposal yang ada tetap sah dan aturan baru hanya berlaku untuk proposal baru."
+            }
           },
           {
-            "title": "Design for the non-ideal day",
-            "text": "Empty data, zero totals and filters without results each get a clear display, not a confusing screen."
+            "title": {
+              "en": "Count once, always explain",
+              "id": "Hitung sekali, selalu jelaskan"
+            },
+            "text": {
+              "en": "One proposal can carry several SDGs, but its stage is counted only once. The explanatory note is always visible, not just a tooltip.",
+              "id": "Satu proposal bisa membawa beberapa SDG, tetapi tahapnya hanya dihitung sekali. Catatan penjelasnya selalu terlihat, bukan sekadar tooltip."
+            }
+          },
+          {
+            "title": {
+              "en": "Badges are earned, not given",
+              "id": "Lencana diraih, bukan dibagikan"
+            },
+            "text": {
+              "en": "A badge only lights up when a proposal passes funding, including completed ones. Submitting alone is not enough.",
+              "id": "Lencana hanya menyala saat proposal lolos pendanaan, termasuk yang sudah selesai. Mengajukan saja belum cukup."
+            }
           }
         ]
       },
       "decks": [
         {
-          "title": "LITABMAS portfolio deck",
-          "label": "Case study",
-          "slides": [
-            {
-              "src": "img/works/litabmas/redesign-litabmas-01-cover.webp",
-              "caption": "Cover"
+          "title": {
+            "en": "SDGs are not just a checklist",
+            "id": "SDGs bukan sekadar checklist"
+          },
+          "label": {
+            "en": "Case study",
+            "id": "Studi kasus"
+          },
+          "slides": {
+            "en": [
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-en-01-cover.webp",
+                "caption": "Cover: SDGs are not just a checklist"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-en-02-prologue.webp",
+                "caption": "Prologue: one required field, and no one asks what for"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-en-03-research-context.webp",
+                "caption": "Research, context: regulation asks for SDGs, campuses need proof"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-en-04-research-users.webp",
+                "caption": "Research, users: a lecturer and an LPPM admin, two needs"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-en-05-research-findings.webp",
+                "caption": "Research, findings: the data is saved but gives no value back"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-en-06-research-design-questions.webp",
+                "caption": "Research, design questions: three questions that guide the design"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-en-07-design-data-flow.webp",
+                "caption": "Design, data flow: one dataset, two stories"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-en-08-design-ground-rules.webp",
+                "caption": "Design, ground rules: four rules that protect trust"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-en-09-design-visual-language.webp",
+                "caption": "Design, visual language: official SDG colors as one visual language"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-en-10-ui-proposal-form.webp",
+                "caption": "UI/UX, proposal form: choosing SDGs with a real-time counter and validation"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-en-11-ui-sdg-focus-cluster.webp",
+                "caption": "UI/UX, funding cluster: optional SDG focus, made visible"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-en-12-ui-change-warning.webp",
+                "caption": "UI/UX, change warning: changing SDG focus without breaking existing proposals"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-en-13-ui-dashboard-admin-top.webp",
+                "caption": "UI/UX, LPPM admin dashboard: SDG contribution readable on a single screen"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-en-14-ui-dashboard-admin-bottom.webp",
+                "caption": "UI/UX, LPPM admin dashboard: two SDG panels on the same Home"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-en-15-impact-before-after.webp",
+                "caption": "Impact: what changed from the user's side, before and after"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-en-16-reflection-and-closing.webp",
+                "caption": "Reflection: what I take from this project"
+              }
+            ],
+            "id": [
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-id-01-cover.webp",
+                "caption": "Cover: SDGs bukan sekadar checklist"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-id-02-prologue.webp",
+                "caption": "Prolog: satu kolom wajib, tetapi tak ada yang bertanya untuk apa"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-id-03-research-context.webp",
+                "caption": "Riset, konteks: regulasi meminta SDGs, kampus butuh bukti"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-id-04-research-users.webp",
+                "caption": "Riset, pengguna: dosen dan admin LPPM, dua kebutuhan"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-id-05-research-findings.webp",
+                "caption": "Riset, temuan: data sudah tersimpan tetapi belum memberi nilai balik"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-id-06-research-design-questions.webp",
+                "caption": "Riset, pertanyaan desain: tiga pertanyaan yang memandu desain"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-id-07-design-data-flow.webp",
+                "caption": "Desain, alur data: satu dataset, dua cerita"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-id-08-design-ground-rules.webp",
+                "caption": "Desain, aturan main: empat aturan yang menjaga kepercayaan"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-id-09-design-visual-language.webp",
+                "caption": "Desain, bahasa visual: warna resmi SDGs sebagai satu bahasa visual"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-id-10-ui-proposal-form.webp",
+                "caption": "UI/UX, form proposal: memilih SDGs dengan penghitung real-time dan validasi"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-id-11-ui-sdg-focus-cluster.webp",
+                "caption": "UI/UX, klaster pendanaan: fokus SDG opsional tetapi terlihat"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-id-12-ui-change-warning.webp",
+                "caption": "UI/UX, peringatan perubahan: mengubah fokus SDG tanpa merusak proposal yang ada"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-id-13-ui-dashboard-admin-top.webp",
+                "caption": "UI/UX, dashboard admin LPPM: kontribusi SDG terbaca dalam satu layar"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-id-14-ui-dashboard-admin-bottom.webp",
+                "caption": "UI/UX, dashboard admin LPPM: dua panel SDG di Home yang sama"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-id-15-impact-before-after.webp",
+                "caption": "Dampak: apa yang berubah dari sisi pengguna, sebelum dan sesudah"
+              },
+              {
+                "src": "img/works/sdgs-litabmas/sdgs-litabmas-id-16-reflection-and-closing.webp",
+                "caption": "Refleksi: yang saya bawa dari project ini"
+              }
+            ]
+          }
+        }
+      ],
+      "gallery": []
+    },
+    {
+      "slug": "litabmas",
+      "title": {
+        "en": "Redesign LITABMAS",
+        "id": "Redesain LITABMAS"
+      },
+      "short": {
+        "en": "Redesigning LITABMAS's home page so an LPPM admin can read funding, proposal pipeline and outcomes on one screen.",
+        "id": "Mendesain ulang halaman utama LITABMAS agar admin LPPM bisa membaca dana, alur proposal, dan luaran dalam satu layar."
+      },
+      "categories": [
+        "ux",
+        "ui"
+      ],
+      "featured": true,
+      "type": {
+        "en": "Dashboard redesign",
+        "id": "Redesain dashboard"
+      },
+      "role": "Product Designer",
+      "cover": "img/works/litabmas/redesign-litabmas-01-cover.webp",
+      "sections": {
+        "overview": {
+          "en": "LITABMAS is the research and community service module of SEVIMA Platform, where universities manage research grants from application to publication. Its home page is the first screen an LPPM admin opens every time they start work, yet answering simple questions meant opening several menus and calculating the numbers by hand. This redesign puts funding status, the proposal pipeline and outcomes on a single screen, with a clear state for every condition: full data, empty, zero and filtered results.",
+          "id": "LITABMAS adalah modul penelitian dan pengabdian masyarakat di SEVIMA Platform, tempat perguruan tinggi mengelola hibah penelitian dari pengajuan hingga publikasi. Halaman utamanya adalah layar pertama yang dibuka admin LPPM setiap mulai bekerja, tetapi menjawab pertanyaan sederhana berarti membuka beberapa menu dan menghitung angkanya secara manual. Redesain ini menempatkan status dana, alur proposal, dan luaran dalam satu layar, dengan tampilan yang jelas untuk setiap kondisi: data lengkap, kosong, nol, dan hasil filter."
+        },
+        "approach": [
+          {
+            "title": {
+              "en": "Follow the money",
+              "id": "Ikuti uangnya"
             },
-            {
-              "src": "img/works/litabmas/redesign-litabmas-02-sekilas-proyek.webp",
-              "caption": "Sekilas Proyek"
-            },
-            {
-              "src": "img/works/litabmas/redesign-litabmas-03-konteks-pengguna.webp",
-              "caption": "Konteks & Pengguna"
-            },
-            {
-              "src": "img/works/litabmas/redesign-litabmas-04-masalah.webp",
-              "caption": "Masalah"
-            },
-            {
-              "src": "img/works/litabmas/redesign-litabmas-05-titik-awal-before.webp",
-              "caption": "Titik Awal (Before)"
-            },
-            {
-              "src": "img/works/litabmas/redesign-litabmas-06-prinsip.webp",
-              "caption": "Prinsip"
-            },
-            {
-              "src": "img/works/litabmas/redesign-litabmas-07-keputusan-01-alur-dana.webp",
-              "caption": "Keputusan 01: Alur Dana"
-            },
-            {
-              "src": "img/works/litabmas/redesign-litabmas-08-keputusan-02-alokasi-per-sumber.webp",
-              "caption": "Keputusan 02: Alokasi per Sumber"
-            },
-            {
-              "src": "img/works/litabmas/redesign-litabmas-09-keputusan-03-pipeline-proposal.webp",
-              "caption": "Keputusan 03: Pipeline Proposal"
-            },
-            {
-              "src": "img/works/litabmas/redesign-litabmas-10-keputusan-04-filter.webp",
-              "caption": "Keputusan 04: Filter"
-            },
-            {
-              "src": "img/works/litabmas/redesign-litabmas-11-keputusan-05-kondisi-tepi.webp",
-              "caption": "Keputusan 05: Kondisi Tepi"
-            },
-            {
-              "src": "img/works/litabmas/redesign-litabmas-12-hasil-before-vs-after.webp",
-              "caption": "Hasil: Before vs After"
-            },
-            {
-              "src": "img/works/litabmas/redesign-litabmas-13-refleksi-penutup.webp",
-              "caption": "Refleksi & Penutup"
+            "text": {
+              "en": "Funds move from source to cluster to researcher. The screen mirrors that journey instead of showing a single total.",
+              "id": "Dana bergerak dari sumber ke klaster lalu ke peneliti. Layar ini mengikuti perjalanan itu, bukan menampilkan satu angka total."
             }
-          ]
+          },
+          {
+            "title": {
+              "en": "Numbers must be trustworthy",
+              "id": "Angka harus bisa dipercaya"
+            },
+            "text": {
+              "en": "Every number has a clear, consistent formula: remaining funds are the total minus what has been given, and percentages come from the same figures.",
+              "id": "Setiap angka punya rumus yang jelas dan konsisten: sisa dana adalah total dikurangi yang sudah diberikan, dan persentase dihitung dari angka yang sama."
+            }
+          },
+          {
+            "title": {
+              "en": "Design for the non-ideal day",
+              "id": "Rancang untuk hari yang tidak ideal"
+            },
+            "text": {
+              "en": "Empty data, zero totals and filters without results each get a clear display, not a confusing screen.",
+              "id": "Data kosong, total nol, dan filter tanpa hasil masing-masing punya tampilan yang jelas, bukan layar yang membingungkan."
+            }
+          }
+        ]
+      },
+      "decks": [
+        {
+          "title": {
+            "en": "LITABMAS portfolio deck",
+            "id": "Deck portofolio LITABMAS"
+          },
+          "label": {
+            "en": "Case study",
+            "id": "Studi kasus"
+          },
+          "slides": {
+            "id": [
+              {
+                "src": "img/works/litabmas/redesign-litabmas-01-cover.webp",
+                "caption": {
+                  "en": "Cover",
+                  "id": "Cover"
+                }
+              },
+              {
+                "src": "img/works/litabmas/redesign-litabmas-02-sekilas-proyek.webp",
+                "caption": {
+                  "en": "Project overview",
+                  "id": "Sekilas Proyek"
+                }
+              },
+              {
+                "src": "img/works/litabmas/redesign-litabmas-03-konteks-pengguna.webp",
+                "caption": {
+                  "en": "Context and users",
+                  "id": "Konteks & Pengguna"
+                }
+              },
+              {
+                "src": "img/works/litabmas/redesign-litabmas-04-masalah.webp",
+                "caption": {
+                  "en": "The problem",
+                  "id": "Masalah"
+                }
+              },
+              {
+                "src": "img/works/litabmas/redesign-litabmas-05-titik-awal-before.webp",
+                "caption": {
+                  "en": "Starting point (before)",
+                  "id": "Titik Awal (Before)"
+                }
+              },
+              {
+                "src": "img/works/litabmas/redesign-litabmas-06-prinsip.webp",
+                "caption": {
+                  "en": "Principles",
+                  "id": "Prinsip"
+                }
+              },
+              {
+                "src": "img/works/litabmas/redesign-litabmas-07-keputusan-01-alur-dana.webp",
+                "caption": {
+                  "en": "Decision 01: money flow",
+                  "id": "Keputusan 01: Alur Dana"
+                }
+              },
+              {
+                "src": "img/works/litabmas/redesign-litabmas-08-keputusan-02-alokasi-per-sumber.webp",
+                "caption": {
+                  "en": "Decision 02: allocation per source",
+                  "id": "Keputusan 02: Alokasi per Sumber"
+                }
+              },
+              {
+                "src": "img/works/litabmas/redesign-litabmas-09-keputusan-03-pipeline-proposal.webp",
+                "caption": {
+                  "en": "Decision 03: proposal pipeline",
+                  "id": "Keputusan 03: Pipeline Proposal"
+                }
+              },
+              {
+                "src": "img/works/litabmas/redesign-litabmas-10-keputusan-04-filter.webp",
+                "caption": {
+                  "en": "Decision 04: filter",
+                  "id": "Keputusan 04: Filter"
+                }
+              },
+              {
+                "src": "img/works/litabmas/redesign-litabmas-11-keputusan-05-kondisi-tepi.webp",
+                "caption": {
+                  "en": "Decision 05: edge states",
+                  "id": "Keputusan 05: Kondisi Tepi"
+                }
+              },
+              {
+                "src": "img/works/litabmas/redesign-litabmas-12-hasil-before-vs-after.webp",
+                "caption": {
+                  "en": "Result: before vs after",
+                  "id": "Hasil: Before vs After"
+                }
+              },
+              {
+                "src": "img/works/litabmas/redesign-litabmas-13-refleksi-penutup.webp",
+                "caption": {
+                  "en": "Reflection and closing",
+                  "id": "Refleksi & Penutup"
+                }
+              }
+            ]
+          }
         }
       ],
       "gallery": []
     },
     {
       "slug": "cappu",
-      "title": "Cappu Mascot Guideline",
-      "short": "Mascot guideline for Cappu, a calm and friendly purple capybara: character, colour, expressions, poses, motion and use in real products.",
+      "title": {
+        "en": "Cappu Mascot Guideline",
+        "id": "Panduan Maskot Cappu"
+      },
+      "short": {
+        "en": "Mascot guideline for Cappu, a calm and friendly purple capybara: character, colour, expressions, poses, motion and use in real products.",
+        "id": "Panduan maskot Cappu, kapibara ungu yang tenang dan ramah: karakter, warna, ekspresi, pose, gerak, dan penerapannya di produk nyata."
+      },
       "categories": [
         "brand",
         "ui"
       ],
       "featured": true,
-      "type": "Mascot guideline",
+      "type": {
+        "en": "Mascot guideline",
+        "id": "Panduan maskot"
+      },
       "role": "Character Designer",
       "tools": [
         "Figma"
       ],
       "cover": "img/works/cappu/cappu-mascot-guideline-01-cover.webp",
       "sections": {
-        "overview": "Cappu is a purple capybara (Capybara + Purple), a mascot designed to be relaxed and easy to befriend. It greets users, guides them and celebrates small moments with them, and a diamond on its head acts as the DIMAS signature. This guideline documents the character from personality to anatomy, construction, colour, expressions, poses, mouth and teeth detail and motion, then shows the do and don't rules and how Cappu is applied in real products as notifications, empty states and social stickers.",
+        "overview": {
+          "en": "Cappu is a purple capybara (Capybara + Purple), a mascot designed to be relaxed and easy to befriend. It greets users, guides them and celebrates small moments with them, and a diamond on its head acts as the DIMAS signature. This guideline documents the character from personality to anatomy, construction, colour, expressions, poses, mouth and teeth detail and motion, then shows the do and don't rules and how Cappu is applied in real products as notifications, empty states and social stickers.",
+          "id": "Cappu adalah kapibara ungu (Capybara + Purple), maskot yang dirancang santai dan mudah diajak berteman. Cappu menyapa pengguna, memandu mereka, dan merayakan momen-momen kecil bersama, dengan berlian di kepalanya sebagai tanda tangan DIMAS. Panduan ini mendokumentasikan karakter dari kepribadian hingga anatomi, konstruksi, warna, ekspresi, pose, detail mulut dan gigi, serta gerak, lalu menunjukkan aturan do and don't dan penerapan Cappu di produk nyata sebagai notifikasi, empty state, dan stiker media sosial."
+        },
         "approach": [
           {
-            "title": "Relaxed, friendly, curious",
-            "text": "Cappu never panics: the tone is calm and clear, it greets first in simple warm language, and it likes to invite users to try something new."
+            "title": {
+              "en": "Relaxed, friendly, curious",
+              "id": "Santai, ramah, penasaran"
+            },
+            "text": {
+              "en": "Cappu never panics: the tone is calm and clear, it greets first in simple warm language, and it likes to invite users to try something new.",
+              "id": "Cappu tidak pernah panik: nadanya tenang dan jelas, menyapa lebih dulu dengan bahasa sederhana yang hangat, dan suka mengajak pengguna mencoba hal baru."
+            }
           },
           {
-            "title": "A system, not a single drawing",
-            "text": "Anatomy, construction and colour are documented so the character stays consistent in every expression and pose."
+            "title": {
+              "en": "A system, not a single drawing",
+              "id": "Sebuah sistem, bukan satu gambar"
+            },
+            "text": {
+              "en": "Anatomy, construction and colour are documented so the character stays consistent in every expression and pose.",
+              "id": "Anatomi, konstruksi, dan warna didokumentasikan agar karakter tetap konsisten di setiap ekspresi dan pose."
+            }
           },
           {
-            "title": "Ready to use",
-            "text": "All expressions, poses and animations are available as Figma components: pick a variant, then scale."
+            "title": {
+              "en": "Ready to use",
+              "id": "Siap pakai"
+            },
+            "text": {
+              "en": "All expressions, poses and animations are available as Figma components: pick a variant, then scale.",
+              "id": "Semua ekspresi, pose, dan animasi tersedia sebagai komponen Figma: pilih varian, lalu skalakan."
+            }
           }
         ]
       },
       "decks": [
         {
-          "title": "Cappu mascot guideline",
-          "label": "Case study",
-          "slides": [
-            {
-              "src": "img/works/cappu/cappu-mascot-guideline-01-cover.webp",
-              "caption": "Cover"
-            },
-            {
-              "src": "img/works/cappu/cappu-mascot-guideline-02-karakter-siapa-cappu.webp",
-              "caption": "Karakter: Siapa Cappu"
-            },
-            {
-              "src": "img/works/cappu/cappu-mascot-guideline-03-anatomi.webp",
-              "caption": "Anatomi"
-            },
-            {
-              "src": "img/works/cappu/cappu-mascot-guideline-04-konstruksi.webp",
-              "caption": "Konstruksi"
-            },
-            {
-              "src": "img/works/cappu/cappu-mascot-guideline-05-warna.webp",
-              "caption": "Warna"
-            },
-            {
-              "src": "img/works/cappu/cappu-mascot-guideline-06-ekspresi.webp",
-              "caption": "Ekspresi"
-            },
-            {
-              "src": "img/works/cappu/cappu-mascot-guideline-07-pose.webp",
-              "caption": "Pose"
-            },
-            {
-              "src": "img/works/cappu/cappu-mascot-guideline-08-detail-mulut-dan-gigi.webp",
-              "caption": "Detail: Mulut & Gigi"
-            },
-            {
-              "src": "img/works/cappu/cappu-mascot-guideline-09-gerak.webp",
-              "caption": "Gerak"
-            },
-            {
-              "src": "img/works/cappu/cappu-mascot-guideline-10-do-and-dont.webp",
-              "caption": "Do & Don't"
-            },
-            {
-              "src": "img/works/cappu/cappu-mascot-guideline-11-penerapan.webp",
-              "caption": "Penerapan"
-            },
-            {
-              "src": "img/works/cappu/cappu-mascot-guideline-12-penutup.webp",
-              "caption": "Penutup"
-            }
-          ]
+          "title": {
+            "en": "Cappu mascot guideline",
+            "id": "Panduan maskot Cappu"
+          },
+          "label": {
+            "en": "Case study",
+            "id": "Studi kasus"
+          },
+          "slides": {
+            "id": [
+              {
+                "src": "img/works/cappu/cappu-mascot-guideline-01-cover.webp",
+                "caption": {
+                  "en": "Cover",
+                  "id": "Cover"
+                }
+              },
+              {
+                "src": "img/works/cappu/cappu-mascot-guideline-02-karakter-siapa-cappu.webp",
+                "caption": {
+                  "en": "Character: who is Cappu",
+                  "id": "Karakter: Siapa Cappu"
+                }
+              },
+              {
+                "src": "img/works/cappu/cappu-mascot-guideline-03-anatomi.webp",
+                "caption": {
+                  "en": "Anatomy",
+                  "id": "Anatomi"
+                }
+              },
+              {
+                "src": "img/works/cappu/cappu-mascot-guideline-04-konstruksi.webp",
+                "caption": {
+                  "en": "Construction",
+                  "id": "Konstruksi"
+                }
+              },
+              {
+                "src": "img/works/cappu/cappu-mascot-guideline-05-warna.webp",
+                "caption": {
+                  "en": "Colour",
+                  "id": "Warna"
+                }
+              },
+              {
+                "src": "img/works/cappu/cappu-mascot-guideline-06-ekspresi.webp",
+                "caption": {
+                  "en": "Expressions",
+                  "id": "Ekspresi"
+                }
+              },
+              {
+                "src": "img/works/cappu/cappu-mascot-guideline-07-pose.webp",
+                "caption": {
+                  "en": "Poses",
+                  "id": "Pose"
+                }
+              },
+              {
+                "src": "img/works/cappu/cappu-mascot-guideline-08-detail-mulut-dan-gigi.webp",
+                "caption": {
+                  "en": "Detail: mouth and teeth",
+                  "id": "Detail: Mulut & Gigi"
+                }
+              },
+              {
+                "src": "img/works/cappu/cappu-mascot-guideline-09-gerak.webp",
+                "caption": {
+                  "en": "Motion",
+                  "id": "Gerak"
+                }
+              },
+              {
+                "src": "img/works/cappu/cappu-mascot-guideline-10-do-and-dont.webp",
+                "caption": {
+                  "en": "Dos and don'ts",
+                  "id": "Do & Don't"
+                }
+              },
+              {
+                "src": "img/works/cappu/cappu-mascot-guideline-11-penerapan.webp",
+                "caption": {
+                  "en": "Application",
+                  "id": "Penerapan"
+                }
+              },
+              {
+                "src": "img/works/cappu/cappu-mascot-guideline-12-penutup.webp",
+                "caption": {
+                  "en": "Closing",
+                  "id": "Penutup"
+                }
+              }
+            ]
+          }
         }
       ],
       "gallery": []
