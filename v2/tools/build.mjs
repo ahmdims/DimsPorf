@@ -667,6 +667,7 @@ ${PSWP}
   <script src="js/libs.min.js"></script>
   <script src="js/gallery-init.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/cappu.js" defer></script>
 ${p.locked ? '  <script src="js/unlock.js"></script>\n' : ''}</body>
 
 </html>
@@ -788,6 +789,7 @@ ${footer()}
 
   <script src="js/libs.min.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/cappu.js" defer></script>
   <script src="js/work-filter.js"></script>
 </body>
 
