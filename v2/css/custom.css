@@ -1034,3 +1034,62 @@ blockquote {
 .hero2 {
   margin-bottom: 0;
 }
+
+/* ---------- Language switch: an icon button inside the colour switch box (.color), one glass bar ---------- */
+.color {
+  width: auto;
+  gap: 0.4rem;
+}
+.color .lang__link {
+  margin-left: 0.8rem; /* same as the space above and below it: (4rem box - 2.4rem button) / 2 */
+}
+.color .color-switcher {
+  margin: 0 1.1rem 0 0.7rem; /* the circle keeps the breathing room it had in its own square box */
+}
+.lang__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: calc(var(--_radius-s) - 0.2rem);
+  background: var(--neutral-bright); /* same fill as the colour switch circle */
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--base);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+.lang__link:hover {
+  color: var(--base);
+  opacity: 0.75;
+}
+@media only screen and (min-width: 768px) {
+  .color .color-switcher {
+    margin: 0 0.9rem 0 0.5rem;
+  }
+}
+@media only screen and (min-width: 1400px) {
+  .color .lang__link {
+    margin-left: 1.1rem; /* (5rem box - 2.8rem button) / 2 */
+  }
+  .color .color-switcher {
+    margin: 0 1.2rem 0 0.8rem;
+  }
+  .lang__link {
+    width: 2.8rem;
+    height: 2.8rem;
+    font-size: 1.7rem;
+  }
+}
+
+/* ---------- Note under a deck label when the deck exists in another language only ---------- */
+.deck-note {
+  margin: 1.2rem 0 0;
+  font: normal var(--font-weight-base) 1.4rem/1.5 var(--_font-default);
+  color: var(--t-muted);
+}
+.deck-note + .slide-stack {
+  margin-top: 2.4rem;
+}

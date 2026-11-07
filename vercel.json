@@ -36,6 +36,16 @@
       "source": "/v2/index.html",
       "destination": "/v2/",
       "permanent": true
+    },
+    {
+      "source": "/v2/id",
+      "destination": "/v2/id/",
+      "permanent": true
+    },
+    {
+      "source": "/v2/id/index.html",
+      "destination": "/v2/id/",
+      "permanent": true
     }
   ],
   "headers": [

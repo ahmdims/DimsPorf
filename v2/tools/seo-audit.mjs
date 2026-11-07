@@ -14,6 +14,10 @@ const SITE_URL = site.url; // https://primary-host/v2/
 const ORIGIN = new URL(SITE_URL).origin;
 const ALIASES = site.aliases || [];
 const STANDALONE = site.standalone || [];
+const LANGS = site.languages || [{ code: 'en', locale: 'en_US', default: true }];
+const DEF = LANGS.find((l) => l.default).code;
+const langOfPath = (rel) => (LANGS.find((l) => !l.default && rel.startsWith(l.code + '/')) || LANGS.find((l) => l.default)).code;
+const pageUrlOf = (code, page) => SITE_URL + (code === DEF ? '' : code + '/') + page;
 
 const errors = [];
 const warns = [];
@@ -30,7 +34,9 @@ const walk = (dir) => {
       walk(f);
     } else if (e.name === 'index.html') {
       const r = path.relative(V2, f).replace(/\\/g, '/');
-      entries.push({ file: f, name: 'v2/' + r, url: SITE_URL + r.replace(/index\.html$/, ''), indexable: true, kind: 'v2' });
+      const lang = langOfPath(r);
+      const page = (lang === DEF ? r : r.slice(lang.length + 1)).replace(/index\.html$/, '');
+      entries.push({ file: f, name: 'v2/' + r, url: SITE_URL + r.replace(/index\.html$/, ''), indexable: true, kind: 'v2', lang, page });
     }
   }
 };
@@ -63,7 +69,7 @@ for (const entry of entries) {
   if (!fs.existsSync(file)) { err(name, 'file listed in site.standalone does not exist'); continue; }
   const html = read(file);
   const head = html.slice(0, html.indexOf('</head>'));
-  const isHome = name === 'v2/index.html';
+  const isHome = /^v2\/(?:[a-z]{2}\/)?index\.html$/.test(name);
   const robotsMeta = meta(head, 'robots') || '';
   const canonicalHref = attr((head.match(/<link[^>]*rel="canonical"[^>]*>/i) || [''])[0], 'href');
 
@@ -118,6 +124,28 @@ for (const entry of entries) {
     if (!ogImage.startsWith(ORIGIN + '/')) err(name, `og:image must be absolute on ${ORIGIN}: ${ogImage}`);
     else if (!fs.existsSync(path.join(ROOT, decodeURIComponent(ogImage.replace(ORIGIN + '/', ''))))) err(name, `og:image file not found: ${ogImage}`);
     if (!meta(head, 'og:image:alt', 'property')) warn(name, 'missing og:image:alt');
+  }
+
+  // multi language: lang attribute, og:locale, hreflang alternates (self + every translation + x-default)
+  if (kind === 'v2') {
+    const L = LANGS.find((l) => l.code === entry.lang);
+    const htmlLang = (html.match(/<html[^>]*\blang="([^"]+)"/i) || [])[1];
+    if (htmlLang !== entry.lang) err(name, `<html lang="${htmlLang}"> must be "${entry.lang}"`);
+    if (meta(head, 'og:locale', 'property') !== L.locale) err(name, `og:locale must be ${L.locale}`);
+    const alts = Object.fromEntries([...head.matchAll(/<link[^>]*rel="alternate"[^>]*hreflang="([^"]+)"[^>]*>/gi)].map((m) => [m[1], attr(m[0], 'href')]));
+    for (const l of LANGS) {
+      const want = pageUrlOf(l.code, entry.page);
+      if (alts[l.code] !== want) err(name, `hreflang="${l.code}" must be ${want} (found ${alts[l.code]})`);
+      if (!entries.some((e) => e.url === want)) err(name, `translation page does not exist: ${want}`);
+    }
+    if (alts['x-default'] !== pageUrlOf(DEF, entry.page)) err(name, 'hreflang="x-default" must point at the default language page');
+    for (const l of LANGS.filter((x) => x.code !== entry.lang)) {
+      if (!new RegExp(`<meta[^>]*property="og:locale:alternate"[^>]*content="${l.locale}"`).test(head)) warn(name, `missing og:locale:alternate ${l.locale}`);
+    }
+    const sw = [...html.matchAll(/<a class="lang__link"[^>]*\bhreflang="([^"]+)"[^>]*\bhref="([^"]*)"|<a class="lang__link"[^>]*\bhref="([^"]*)"[^>]*\bhreflang="([^"]+)"/g)];
+    const swLangs = sw.map((m) => m[1] || m[4]).sort().join(',');
+    const wantLangs = LANGS.filter((l) => l.code !== entry.lang).map((l) => l.code).sort().join(',');
+    if (swLangs !== wantLangs) err(name, `language switch must link to every other language (${wantLangs}), found: ${swLangs || 'none'}`);
   }
 
   // structured data
@@ -208,6 +236,9 @@ for (const entry of entries) {
   const block = sitemapBlock(url);
   if (!block) err(name, 'page missing from sitemap.xml');
   else {
+    if (kind === 'v2') {
+      for (const l of LANGS) if (!block.includes(`hreflang="${l.code}" href="${pageUrlOf(l.code, entry.page)}"`)) err(name, `sitemap entry has no hreflang alternate for ${l.code}`);
+    }
     for (const abs of new Set(contentImgs)) {
       if (!block.includes(`<image:loc>${abs}</image:loc>`) && !/img\/(marquee|icons|services|backgrounds\/1200x1200)/.test(abs) && !/-800\./.test(abs)) {
         warn(name, `content image missing from the image sitemap: ${abs.replace(ORIGIN, '')}`);
