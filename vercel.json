@@ -23,13 +23,8 @@
       "permanent": true
     },
     {
-      "source": "/",
-      "destination": "/v2/",
-      "permanent": true
-    },
-    {
       "source": "/index.html",
-      "destination": "/v2/",
+      "destination": "/",
       "permanent": true
     },
     {

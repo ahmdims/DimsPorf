@@ -36,7 +36,7 @@ const walk = (dir) => {
 };
 walk(V2);
 for (const s of STANDALONE) {
-  entries.push({ file: path.join(ROOT, s.file), name: s.file, url: `${ORIGIN}/${s.url}`, indexable: s.index !== false, kind: s.file.startsWith('v1/') ? 'archive' : 'subbrand' });
+  entries.push({ file: path.join(ROOT, s.file), name: s.file, url: `${ORIGIN}/${s.url}`, indexable: s.index !== false, kind: s.file === 'index.html' ? 'root' : s.file.startsWith('v1/') ? 'archive' : 'subbrand' });
 }
 
 const read = (f) => fs.readFileSync(f, 'utf8').replace(/\r\n/g, '\n');
@@ -140,6 +140,26 @@ for (const entry of entries) {
   if (kind === 'v2' && !isHome && !types.includes('BreadcrumbList')) err(name, 'inner page needs BreadcrumbList JSON-LD');
   if (/^v2\/work\/[^/]+\/index\.html$/.test(name) && !types.includes('CreativeWork')) err(name, 'project page needs CreativeWork JSON-LD with ImageObjects');
   if (kind === 'subbrand' && !types.includes('CreativeWork')) err(name, 'stand-alone project needs CreativeWork JSON-LD with its own ImageObject');
+  if (kind === 'root') {
+    // Google reads the site name from the homepage: WebSite markup must live on "/" and point at it
+    if (!types.includes('WebSite')) err(name, 'root needs WebSite JSON-LD (Google reads the site name from the homepage)');
+    if (!lds.some((raw) => raw.includes(`"url": "${ORIGIN}/"`))) err(name, `root WebSite JSON-LD must have "url": "${ORIGIN}/"`);
+    if (!html.includes("location.replace('/v2/')")) err(name, 'root must send visitors on to /v2/');
+    if (!types.includes('ProfilePage')) err(name, 'root needs ProfilePage JSON-LD (same as the v2 home)');
+    if (!types.includes('ItemList')) err(name, 'root needs ItemList JSON-LD listing the case studies');
+    if (!meta(head, 'author')) err(name, 'root missing <meta name="author">');
+    if (!/rel="apple-touch-icon"/.test(head) || !/rel="manifest"/.test(head)) err(name, 'root missing apple-touch-icon / manifest (icons must match the v2 home)');
+    if (!/name="theme-color"/.test(head)) err(name, 'root missing theme-color');
+    const words = html.slice(html.indexOf('<body')).replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+    if (words < 150) err(name, `root has too little visible text for a homepage (${words} < 150 words)`);
+    if (!/<img\b[^>]*\balt="[^"]{10,}"/.test(html)) err(name, 'root needs a content image with descriptive alt');
+    const rootLinks = [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/gi)].map((m) => m[1]);
+    for (const must of ['/v2/', '/v2/work/']) if (!rootLinks.includes(must)) err(name, `root must link to ${must}`);
+    for (const p of JSON.parse(fs.readFileSync(path.join(V2, 'data/projects.json'), 'utf8')).projects) {
+      if (!rootLinks.includes(`/v2/work/${p.slug}/`)) err(name, `root must link to every project, missing: ${p.slug}`);
+    }
+  }
+  if (isHome && !lds.some((raw) => raw.includes(`"url": "${ORIGIN}/"`))) err(name, `home WebSite JSON-LD must use the homepage url "${ORIGIN}/"`);
   if (kind === 'archive' && !types.includes('BreadcrumbList')) err(name, 'archive project page needs BreadcrumbList JSON-LD');
 
   // images
@@ -207,7 +227,7 @@ if (!/xmlns:image=/.test(sitemap)) err('sitemap.xml', 'missing image sitemap nam
 if (fs.existsSync(path.join(ROOT, 'vercel.json'))) {
   const vj = fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8');
   for (const a of ALIASES) if (!vj.includes(a)) err('vercel.json', `no 301 redirect from alias domain ${a}`);
-  if (!/"destination":\s*"\/v2\/"/.test(vj) && !vj.includes(ORIGIN + '/v2/')) err('vercel.json', 'root is not redirected to /v2/');
+  if (/"source":\s*"\/",\s*"destination":\s*"\/v2\/"/.test(vj)) err('vercel.json', 'root "/" must be served, not 301-redirected: Google reads the site name from the homepage');
 } else err('vercel.json', 'missing (needed for the 301 redirects)');
 
 // ---- report ---------------------------------------------------------------------------------

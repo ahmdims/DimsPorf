@@ -781,6 +781,41 @@ projects.forEach((p, i) => {
 });
 fs.writeFileSync(path.join(V2, 'work/index.html'), workIndexPage());
 inject(path.join(V2, 'index.html'), 'work-cards', indent(cards(projects.filter((p) => p.featured), false), 14));
+// root "/" is the site homepage Google reads the site name from: it lists every project with plain links
+const SITE_ORIGIN = new URL(site.url).origin;
+inject(
+  path.join(ROOT, 'index.html'),
+  'root-cases',
+  projects
+    .map(
+      (p) => `        <li>
+          <a class="card" href="/v2/work/${p.slug}/">
+            <img src="/v2/${p.cover}" alt="${esc(p.title)}" width="1920" height="1080" loading="lazy" decoding="async">
+            <h3>${esc(p.title)}</h3>
+            <p>${esc(p.short)}</p>
+          </a>
+        </li>`
+    )
+    .join('\n')
+);
+inject(
+  path.join(ROOT, 'index.html'),
+  'root-itemlist',
+  `  <script type="application/ld+json">
+  ${JSON.stringify(
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Case studies by Ahmad Dimas',
+      itemListElement: projects.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.title, url: `${SITE_ORIGIN}/v2/work/${p.slug}/` })),
+    },
+    null,
+    2
+  )
+    .split('\n')
+    .join('\n  ')}
+  </script>`
+);
 
 // sitemap: keep everything outside the v2 markers untouched. Pages carry their images (image sitemap).
 const smap = path.join(ROOT, 'sitemap.xml');
