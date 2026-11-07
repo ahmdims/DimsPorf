@@ -370,6 +370,7 @@
 
 /* ---------- Spacing between a section's divider line and its content ---------- */
 .case-block .resume-divider + .deck,
+.case-block .resume-divider + .slide-stack,
 .case-block .resume-divider + .case-steps {
   margin-top: 2.4rem;
 }
