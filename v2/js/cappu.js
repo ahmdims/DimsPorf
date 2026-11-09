@@ -1,15 +1,11 @@
-// Cappu peeks in from the bottom of the screen every now and then, plays its Lottie animation and slides away.
-// Decorative only: it never blocks clicks, never holds focus and is hidden from assistive tech.
-// Loaded with `defer` on every page; the player (js/lottie_light.min.js) and the animation (lottie/cappu-thinking.json)
-// are fetched only when the first visit is about to happen, so they never compete with the page for bandwidth.
+// Cappu, the mascot: it is simply there, full body at the bottom of every page, idling in a loop.
+// Decorative only: it never blocks clicks, never holds focus and is hidden from assistive tech. Loaded with `defer`.
+//
+// The player (js/lottie_light.min.js) and the animation (lottie/cappu-happy.json) are fetched in the first idle
+// moment after the HTML is ready, so the page paints first. Cappu fades in as soon as the animation is ready
+// and then stays, with no entrance delay and no leaving.
 (function () {
   'use strict';
-
-  // ---- settings ------------------------------------------------------------------------------
-  var FIRST_DELAY = 7000; // ms after the page has loaded until the first visit
-  var STAY = 30000; // ms Cappu stays up, idling in a loop, before it slides back down
-  var EVERY = 10000; // ms between sliding down and the next visit
-  var SLIDE = 700; // ms, must match the transition in css/custom.css (.cappu)
 
   // ---- guards ----------------------------------------------------------------------------------
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -22,14 +18,6 @@
 
   var box = null;
   var anim = null;
-  var timer = null;
-  var stayTimer = null;
-  var ready = false;
-
-  function schedule(ms) {
-    clearTimeout(timer);
-    timer = setTimeout(visit, ms);
-  }
 
   function loadPlayer(done) {
     if (window.lottie) return done();
@@ -41,7 +29,7 @@
     document.head.appendChild(s);
   }
 
-  function build(done) {
+  function build() {
     box = document.createElement('div');
     box.className = 'cappu';
     box.setAttribute('aria-hidden', 'true');
@@ -49,57 +37,36 @@
     anim = window.lottie.loadAnimation({
       container: box,
       renderer: 'svg',
-      loop: true, // the idle animation repeats for as long as Cappu is up
-      autoplay: false,
-      path: siteBase + 'lottie/cappu-thinking.json',
+      loop: true,
+      autoplay: true,
+      path: siteBase + 'lottie/cappu-happy.json',
       rendererSettings: { preserveAspectRatio: 'xMidYMax meet', progressiveLoad: true },
     });
     anim.addEventListener('DOMLoaded', function () {
-      ready = true;
-      done();
-    });
-  }
-
-  function enter() {
-    anim.goToAndStop(0, true);
-    box.classList.add('is-in');
-    anim.play(); // idles while it slides up and for the whole stay
-    clearTimeout(stayTimer);
-    stayTimer = setTimeout(leave, SLIDE + STAY);
-  }
-
-  function leave() {
-    if (!box) return;
-    box.classList.remove('is-in');
-    setTimeout(function () {
-      if (anim) anim.goToAndStop(0, true); // rest the animation while it is out of sight
-    }, SLIDE);
-    schedule(EVERY + SLIDE);
-  }
-
-  function visit() {
-    // never while the tab is in the background; wait until it is back
-    if (document.hidden) {
-      schedule(2000);
-      return;
-    }
-    if (ready) return enter();
-    loadPlayer(function () {
-      if (!window.lottie) return;
-      build(enter);
+      requestAnimationFrame(function () {
+        box.classList.add('is-in');
+      });
     });
   }
 
   function start() {
-    schedule(FIRST_DELAY);
+    loadPlayer(function () {
+      if (window.lottie) build();
+    });
   }
 
-  if (document.readyState === 'complete') start();
-  else window.addEventListener('load', start, { once: true });
+  // an endless animation should not burn battery while nobody is looking
+  document.addEventListener('visibilitychange', function () {
+    if (!anim) return;
+    if (document.hidden) anim.pause();
+    else anim.play();
+  });
 
   window.addEventListener('pagehide', function () {
-    clearTimeout(timer);
-    clearTimeout(stayTimer);
     if (anim) anim.destroy();
   });
+
+  // start as soon as the HTML is ready (this script is deferred), in an idle moment so the page paints first
+  if (window.requestIdleCallback) window.requestIdleCallback(start, { timeout: 1000 });
+  else setTimeout(start, 0);
 })();

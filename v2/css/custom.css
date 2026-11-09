@@ -1094,7 +1094,7 @@ blockquote {
   margin-top: 2.4rem;
 }
 
-/* ---------- Cappu: the mascot peeks in from the bottom edge (js/cappu.js) ---------- */
+/* ---------- Cappu: the mascot sits at the bottom edge of the screen, three quarters showing (js/cappu.js) ---------- */
 .cappu {
   position: fixed;
   right: 12rem;
@@ -1103,11 +1103,12 @@ blockquote {
   height: 18rem;
   z-index: 8; /* under the to-top button (9) and the menu (11) */
   pointer-events: none;
-  transform: translateY(105%);
-  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(25%); /* the lower quarter stays below the screen edge */
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 .cappu.is-in {
-  transform: translateY(25%); /* three quarters of Cappu show, the lower quarter stays below the screen edge */
+  opacity: 1;
 }
 .cappu svg {
   display: block;
